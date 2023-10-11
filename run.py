@@ -12,8 +12,19 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pizza_ordering_system_data')
 
-prices = SHEET.worksheet('prices')
+# link to order sheet
+order = SHEET.worksheet('order')
+# all the order sheet data
+data = order.get_all_values()
 
-data = prices.get_all_values()
-
-print(data)
+def get_order_data():
+    """Get order figures input from the user
+    """
+    print('Please enter your order')
+    print('Order should be a number less than 20')
+    print('Example: 2 Pony Sopranos\n')
+    
+    user_input_data = input('Enter your order here:')
+    print(f'The order is {user_input_data}')
+    
+get_order_data()
