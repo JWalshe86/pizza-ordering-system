@@ -71,6 +71,10 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 <hr>
 
 ## TOOLS
-[GitHub](https://github.com/) - used for hosting the source code of the program<br>
+[GitHub](https://github.com/) - used for hosting the source code of the program
+[Google Drive API](https://developers.google.com/drive/api)- to develop apps that integrate with Drive
+[Google Sheets API](https://developers.google.com/sheets/api/guides/concepts) - to read and modify google sheets data
+[Google Auth](https://developers.google.com/identity/protocols/oauth2) - allows access to google APIs
+[gspread](https://docs.gspread.org/en/v5.10.0/) - Python API for google sheets
 
 ## ACKNOWLEDGEMENTS
