@@ -17,14 +17,14 @@ order = SHEET.worksheet('order')
 # all the order sheet data
 data = order.get_all_values()
 
-def get_order_data():
-    """Get order figures input from the user
+def get_order_request():
+    """Get order request input from the user
     """
-    print('Please enter your order')
-    print('Order should be a number less than 20')
-    print('Example: 2 Pony Sopranos\n')
+    print('Do you want to order?')
+    print("Please answer 'yes' or 'no'")
+    print('Example: yes')
     
-    user_input_data = input('Enter your order here:')
-    print(f'The order is {user_input_data}')
+    user_input_data = input("Enter 'yes' or 'no' here:")
+    print(f'You said {user_input_data}')
     
-get_order_data()
+get_order_request()
