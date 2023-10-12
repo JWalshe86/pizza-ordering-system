@@ -58,6 +58,15 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 
   
 ### DEPLOYING ON HEROKU
+- Install gspread using pip install gspread in the terminal
+- Ensure the requirement.txt file in virtual working environment contains gspread
+- Enter Heroku and click create new App
+- Store sensitive data contained in the creds.json file in the config/Environment Vars
+- Add both python and nodejs buildpacks
+- Click deploy and then connect to github
+- Search and connect to github respository name
+- Click deploy branch
+- When project has succesfully deployed, click view
 
 ### FORK THE REPOSITORY 
 
