@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import pprint
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -13,9 +14,9 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("pizza_ordering_system_data")
 
 # link to order sheet
-order = SHEET.worksheet("order")
+menu = SHEET.worksheet("menu")
 # all the order sheet data
-data = order.get_all_values()
+menu_data = menu.get_all_values()
 
 
 def get_order_request():
@@ -29,6 +30,14 @@ def get_order_request():
     validate_user_input_data(user_input_data)
 
 
+def display_menu():
+    """
+    displays the menu as per the google sheet menu page
+    """
+    for new_menu in menu_data:
+        print(new_menu, end=",")
+
+
 def validate_user_input_data(input_data):
     """
     validate if user has inputted yes or no string and if not they are informed they need to do so
@@ -36,11 +45,14 @@ def validate_user_input_data(input_data):
 
     try:
         if input_data == "yes":
-            print(f"Great you said {(input_data)}")
+            print("Great, lets proceed to the menu")
+            display_menu()
         elif input_data == "no":
-            print(f"You said {(input_data)} Thats okay, hope to see you again soon")
+            print("Thats okay, hope to see you again soon")
         else:
-            raise ValueError(f"Exactly yes or no answer required, you said {(input_data)}")
+            raise ValueError(
+                f"Exactly yes or no answer required, you said {(input_data)}"
+            )
     except ValueError as e:
         print(f"Invalid entry: {e}, please try again\n")
 
