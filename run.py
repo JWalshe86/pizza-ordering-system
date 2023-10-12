@@ -34,7 +34,7 @@ def display_menu(data):
     """
     displays the menu as per the google sheet menu page
     """
-    print(tabulate(data))
+    print(tabulate(data, headers=["Option", "Name", "Price(€)"], numalign="center", tablefmt="double_outline"),)
 
 def validate_user_input_data(input_data):
     """
@@ -43,7 +43,7 @@ def validate_user_input_data(input_data):
 
     try:
         if input_data == "yes":
-            print("Great, here's the menu")
+            print("Great! here's the menu...\n\n")
             display_menu(menu_data)
         elif input_data == "no":
             print("Thats okay, hope to see you again soon")
