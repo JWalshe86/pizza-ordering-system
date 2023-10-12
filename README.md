@@ -76,8 +76,7 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 
 ## CREDITS
 * Readme template adapted from [useriasminna](https://github.com/useriasminna/american_pizza_order_system/blob/main/README.md)
-  
-<hr>
+* Manipulating google sheets [gspread.org](https://docs.gspread.org/en/latest/user-guide.html)
 
 ## TOOLS
 [GitHub](https://github.com/) - used for hosting the source code of the program

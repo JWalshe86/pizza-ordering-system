@@ -1,6 +1,5 @@
 import gspread
 from google.oauth2.service_account import Credentials
-import pprint
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -15,9 +14,12 @@ SHEET = GSPREAD_CLIENT.open("pizza_ordering_system_data")
 
 # link to order sheet
 menu = SHEET.worksheet("menu")
+
+pizza_names = menu.col_values(1)
+pizza_prices = menu.col_values(2)
+
 # all the order sheet data
 menu_data = menu.get_all_values()
-
 
 def get_order_request():
     """Get order request input from the user"""
@@ -30,13 +32,11 @@ def get_order_request():
     validate_user_input_data(user_input_data)
 
 
-def display_menu():
+def display_menu(data):
     """
     displays the menu as per the google sheet menu page
     """
-    for new_menu in menu_data:
-        print(new_menu, end=",")
-
+    return data
 
 def validate_user_input_data(input_data):
     """
@@ -45,8 +45,9 @@ def validate_user_input_data(input_data):
 
     try:
         if input_data == "yes":
+            print(pizza_names, pizza_prices)
             print("Great, lets proceed to the menu")
-            display_menu()
+            display_menu(menu_data)
         elif input_data == "no":
             print("Thats okay, hope to see you again soon")
         else:
