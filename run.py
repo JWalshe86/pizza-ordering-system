@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from tabulate import tabulate
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -14,9 +15,6 @@ SHEET = GSPREAD_CLIENT.open("pizza_ordering_system_data")
 
 # link to order sheet
 menu = SHEET.worksheet("menu")
-
-pizza_names = menu.col_values(1)
-pizza_prices = menu.col_values(2)
 
 # all the order sheet data
 menu_data = menu.get_all_values()
@@ -36,7 +34,7 @@ def display_menu(data):
     """
     displays the menu as per the google sheet menu page
     """
-    return data
+    print(tabulate(data))
 
 def validate_user_input_data(input_data):
     """
@@ -45,8 +43,7 @@ def validate_user_input_data(input_data):
 
     try:
         if input_data == "yes":
-            print(pizza_names, pizza_prices)
-            print("Great, lets proceed to the menu")
+            print("Great, here's the menu")
             display_menu(menu_data)
         elif input_data == "no":
             print("Thats okay, hope to see you again soon")
