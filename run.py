@@ -23,15 +23,24 @@ menu_data = menu.get_all_values()
 
 def get_order_request():
     """Get order request input from the user"""
-    print(
-        "\033[1m" + "Welcome to " + colored("Nags with Notions!", "red") + "\033[0m\n"
-    )
-    print("Do you want to order?")
-    print("Please answer 'yes' or 'no'\n")
 
-    user_input_yesno_data = input("Enter 'yes' or 'no' here:\n")
-    print(f"You said {user_input_yesno_data}\n\n")
-    validate_user_yes_no(user_input_yesno_data)
+    while True:
+        print(
+            "\033[1m"
+            + "Welcome to "
+            + colored("Nags with Notions!", "red")
+            + "\033[0m\n"
+        )
+        print("Do you want to order?")
+        print("Please answer 'yes' or 'no'\n")
+
+        user_input_yesno_data = input("Enter 'yes' or 'no' here:\n")
+        print(f"You said {user_input_yesno_data}\n\n")
+
+        # when the validate function returns true this the while loop ends
+        if validate_user_yes_no(user_input_yesno_data):
+            print("Input valid!")
+            break
 
 
 def display_menu(data):
@@ -47,6 +56,86 @@ def display_menu(data):
         ),
     )
 
+
+class Validation:
+    """
+    main class covering general validation processes
+    initialise important info about validation"""
+
+    def __init__(self):
+        # validation class attributes
+        self.yes_answer = "yes"
+        self.valid_ans_message = ""
+        print(self.valid_ans_message)
+        # method to validate user input
+        
+
+    def validate_user(self):
+        """actions to run when user has valid response
+        """
+        print('validate user')
+        try:
+            if self.yes_answer == 'yes':
+                print("your yes/no answer is valid")
+        except ValueError as e:
+            print(f"Invalid entry: {e}, please try again\n")
+    # try:
+    #     if self.yes_answer == "yes":
+    #         print("Here is our" + "\033[1m" + " pizza menu")
+    #         display_menu(menu_data)
+    #         pizza_option = input("Enter a number between 1 and 5 here:\n")
+    #         validate_get_user_menu_options(pizza_option)
+    #     elif input_data == "no":
+    #         print("Thats okay, hope to see you again soon")
+    #     else:
+    #         raise ValueError(f"Number must be between 1 and 5, you said {(input_data)}")
+    # except ValueError as e:
+    #     print(f"Invalid entry: {e}, please try again\n")
+    #     # if an error occurs
+    #     return False
+
+    #     # if the function runs without any errors
+    # return True
+    #     pass
+
+# yes/no option child class of general validation class
+# pass validation class in as argument so childclass inherits validation functions
+# class ValidateYesNoOption(Validation):
+    # """to make changes only to the child class"""
+    # def __init__(self):
+        # super function gives access to parent Validation values
+        # super().__init__()
+        # change valid ans message for pizza option selection
+    #     valid_ans_message = "Your yes no response is valid"
+    #     print(valid_ans_message)
+    # def print_yesno_option_valid_response(self):
+    #     """actions to run if yes/no option is valid
+    #     """
+    #     print("Your yes no response is valid")
+
+
+# pizza option child class of general validation class
+# class ValidatePizzaOption(Validation):
+#     """to make changes only to the child class"""
+#     def __init__(self):
+        # super function gives access to parent Validation values
+        # super().__init__()
+        # change valid ans message for pizza option selection
+    #     valid_ans_message = "Your number is valid"
+    #     print(valid_ans_message)
+    # def print_pizza_option_valid_response(self):
+    #     """actions to run if pizza option is valid
+    #     """
+    #     print("Your number is valid")
+        
+
+my_validator = Validation()
+
+my_validator.validate_user()
+
+print(f"checking my validation class: {my_validator.user_input_valid}")
+
+
 def validate_user_yes_no(input_data):
     """
     validate if user inputs yes or no string and if not they are informed they need to do so
@@ -61,20 +150,24 @@ def validate_user_yes_no(input_data):
         elif input_data == "no":
             print("Thats okay, hope to see you again soon")
         else:
-            raise ValueError(
-                f"Number must be between 1 and 5, you said {(input_data)}"
-            )
+            raise ValueError(f"Number must be between 1 and 5, you said {(input_data)}")
     except ValueError as e:
         print(f"Invalid entry: {e}, please try again\n")
+        # if an error occurs
+        return False
+
+        # if the function runs without any errors
+    return True
+
 
 def validate_get_user_menu_options(pizza_option):
     """_summary_
-validate if the user input is an integer between 1-5 
-if not the user is informed that they need to re-enter their option
-    
+    validate if the user input is an integer between 1-5
+    if not the user is informed that they need to re-enter their option
+
     """
     try:
-        if int(pizza_option)>=1 and int(pizza_option)<=5:
+        if int(pizza_option) >= 1 and int(pizza_option) <= 5:
             i = pizza_option
             pizza_names = menu.cell(i, 2).value
             pizza_price = menu.cell(i, 3).value
