@@ -20,6 +20,66 @@ menu = SHEET.worksheet("menu")
 # all the order sheet data
 menu_data = menu.get_all_values()
 
+class DisplayToUser:
+    """
+    main class covering information to display to user    
+    """
+    def __init__(self, user_input_request = ' '):
+        self.user_input_request = user_input_request
+        # As I always want this to run first, I'll run this function in the initialiser function 
+        # which is automatically always called
+        self.initial_screen_display()
+        
+    def initial_screen_display(self):
+        """content for initial user interaction with system"""
+        print("\033[1m"+ "Welcome to " + colored("Nags with Notions!", "red") + "\033[0m\n")
+        print("Do you want to order?")
+        print("Please answer 'yes' or 'no'\n")
+        
+# inherit from parent DisplayToUser class
+class YesNoDisplayToUser(DisplayToUser):
+    """subclass covering inital yesno display to user"""
+
+    # only make changes to child class
+    def __init__(self):
+        # to access parent class
+        super().__init__()
+        self.user_input_request=input("Enter 'yes' or 'no' here:\n")
+    def request_yes_or_no(self):
+        """request if user wants to order"""
+        print('testing here again')
+
+class PizzaOptionsDisplayToUser(DisplayToUser):
+    """subclass covering pizza menu display to user"""
+
+    # only make changes to child class
+    def __init__(self):
+        # to access parent class
+        super().__init__()
+        self.pizza_menu_display =  print(
+        tabulate(
+            menu_data,
+            headers=["Option", "Name", "Price(€)"],
+            numalign="center",
+            tablefmt="double_outline",
+        ),
+    )
+        self.user_input_request = input("Enter a number between 1 and 5 here:\n")
+        
+    def request_pizza_option_number(self):
+        """request number option from user"""
+        print('get pizza no here')
+        
+class UserInput(DisplayToUser):
+    """function to handle user input"""
+    pass
+        
+user_input_request_check = PizzaOptionsDisplayToUser()
+user_input_request_check.request_pizza_option_number()
+print(f'Userinput function here says:{UserInput("cat").user_input_request}')
+print(f'Yes No function here says:{YesNoDisplayToUser().user_input_request}')
+
+
 
 def get_order_request():
     """Get order request input from the user"""
@@ -55,6 +115,7 @@ def display_menu(data):
             tablefmt="double_outline",
         ),
     )
+    
 
 
 class Validation:
@@ -133,7 +194,7 @@ my_validator = Validation()
 
 my_validator.validate_user()
 
-print(f"checking my validation class: {my_validator.user_input_valid}")
+# print(f"checking my validation class: {my_validator.user_input_valid}")
 
 
 def validate_user_yes_no(input_data):
