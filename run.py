@@ -31,7 +31,6 @@ class DisplayToUser:
         # which is automatically always called
         self.initial_screen_display()
         self.yes_no_display_to_user()
-        self.pizza_options_display_to_user()
         self.pizza_option_number = None
 
     def initial_screen_display(self):
@@ -44,13 +43,9 @@ class DisplayToUser:
         )
         print("Do you want to order?")
         print("Please answer 'yes' or 'noo'\n")
-
-    def yes_no_display_to_user(self):
-        """request a yes no answer from user re proceeding to order"""
-        self.user_input_request = input("Enter 'yes' or 'no' here:\n")
-
+        
     def pizza_options_display_to_user(self):
-        """display table with menu options to user"""       
+        """display table with menu options to user"""
         print(
             tabulate(
                 menu_data,
@@ -61,50 +56,57 @@ class DisplayToUser:
         )
         self.request_pizza_option_number()
 
+    def yes_no_display_to_user(self):
+        """request a yes no answer from user re proceeding to order"""
+        self.user_input_request = input("Enter 'yes' or 'no' here:\n")
+
+        # input error handling
+        try:
+            if self.user_input_request == "yes":
+                print("Here is our" + "\033[1m" + " pizza menu")
+                self.pizza_options_display_to_user()
+            elif self.user_input_request == "no":
+                exit()
+            else:
+                raise ValueError(
+                    f"Answer must be yes or no, you said {self.user_input_request}"
+                )
+        except ValueError as e:
+            print(f"Invalid entry: {e}, please try again\n")
+
+
     def request_pizza_option_number(self):
         """request number option from user"""
-        print("get pizza no here")
         self.pizza_option_number = input("Enter a number between 1 and 5 here:\n")
+        if int(self.pizza_option_number) >= 1 and int(self.pizza_option_number) <= 5:
+            i = self.pizza_option_number
+            pizza_names = menu.cell(i, 2).value
+            pizza_price = menu.cell(i, 3).value
+            print(f"You have chosen {pizza_names} at a cost of €{pizza_price}")
+
+        # try:
+
+        #     if
+        #         self.yes_answer == "yes":
+        #         print("Here is our" + "\033[1m" + " pizza menu")
+        #         display_menu(menu_data)
+        #         pizza_option = input("Enter a number between 1 and 5 here:\n")
+        #         validate_get_user_menu_options(pizza_option)
+        #     elif input_data == "no":
+        #         print("Thats okay, hope to see you again soon")
+        #     else:
+        #         raise ValueError(f"Number must be between 1 and 5, you said {(input_data)}")
+        # except ValueError as e:
+        #     print(f"Invalid entry: {e}, please try again\n")
+        #     # if an error occurs
+        #     return False
+
+        #     # if the function runs without any errors
+        # return True
+        pass
+
 
 DisplayToUser()
-
-
-
-
-# def get_order_request():
-#     """Get order request input from the user"""
-
-#     while True:
-#         print(
-#             "\033[1m"
-#             + "Welcome to "
-#             + colored("Nags with Notions!", "red")
-#             + "\033[0m\n"
-#         )
-#         print("Do you want to order?")
-#         print("Please answer 'yes' or 'no'\n")
-
-#         user_input_yesno_data = input("Enter 'yes' or 'no' here:\n")
-#         print(f"You said {user_input_yesno_data}\n\n")
-
-#         # when the validate function returns true this the while loop ends
-#         if validate_user_yes_no(user_input_yesno_data):
-#             print("Input valid!")
-#             break
-
-
-# def display_menu(data):
-#     """
-#     displays the menu as per the google sheet menu page
-#     """
-#     print(
-#         tabulate(
-#             data,
-#             headers=["Option", "Name", "Price(€)"],
-#             numalign="center",
-#             tablefmt="double_outline",
-#         ),
-#     )
 
 
 # class Validation:
@@ -128,24 +130,24 @@ DisplayToUser()
 #         except ValueError as e:
 #             print(f"Invalid entry: {e}, please try again\n")
 
-    # try:
-    #     if self.yes_answer == "yes":
-    #         print("Here is our" + "\033[1m" + " pizza menu")
-    #         display_menu(menu_data)
-    #         pizza_option = input("Enter a number between 1 and 5 here:\n")
-    #         validate_get_user_menu_options(pizza_option)
-    #     elif input_data == "no":
-    #         print("Thats okay, hope to see you again soon")
-    #     else:
-    #         raise ValueError(f"Number must be between 1 and 5, you said {(input_data)}")
-    # except ValueError as e:
-    #     print(f"Invalid entry: {e}, please try again\n")
-    #     # if an error occurs
-    #     return False
+# try:
+#     if self.yes_answer == "yes":
+#         print("Here is our" + "\033[1m" + " pizza menu")
+#         display_menu(menu_data)
+#         pizza_option = input("Enter a number between 1 and 5 here:\n")
+#         validate_get_user_menu_options(pizza_option)
+#     elif input_data == "no":
+#         print("Thats okay, hope to see you again soon")
+#     else:
+#         raise ValueError(f"Number must be between 1 and 5, you said {(input_data)}")
+# except ValueError as e:
+#     print(f"Invalid entry: {e}, please try again\n")
+#     # if an error occurs
+#     return False
 
-    #     # if the function runs without any errors
-    # return True
-    #     pass
+#     # if the function runs without any errors
+# return True
+#     pass
 
 
 # yes/no option child class of general validation class
@@ -185,6 +187,27 @@ DisplayToUser()
 
 # print(f"checking my validation class: {my_validator.user_input_valid}")
 
+
+# def get_order_request():
+#     """Get order request input from the user"""
+
+#     while True:
+#         print(
+#             "\033[1m"
+#             + "Welcome to "
+#             + colored("Nags with Notions!", "red")
+#             + "\033[0m\n"
+#         )
+#         print("Do you want to order?")
+#         print("Please answer 'yes' or 'no'\n")
+
+#         user_input_yesno_data = input("Enter 'yes' or 'no' here:\n")
+#         print(f"You said {user_input_yesno_data}\n\n")
+
+#         # when the validate function returns true this the while loop ends
+#         if validate_user_yes_no(user_input_yesno_data):
+#             print("Input valid!")
+#             break
 
 # def validate_user_yes_no(input_data):
 #     """
