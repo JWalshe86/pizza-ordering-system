@@ -43,7 +43,7 @@ class DisplayToUser:
         )
         print("Do you want to order?")
         print("Please answer 'yes' or 'noo'\n")
-        
+
     def pizza_options_display_to_user(self):
         """display table with menu options to user"""
         print(
@@ -74,15 +74,25 @@ class DisplayToUser:
         except ValueError as e:
             print(f"Invalid entry: {e}, please try again\n")
 
-
     def request_pizza_option_number(self):
         """request number option from user"""
         self.pizza_option_number = input("Enter a number between 1 and 5 here:\n")
-        if int(self.pizza_option_number) >= 1 and int(self.pizza_option_number) <= 5:
-            i = self.pizza_option_number
-            pizza_names = menu.cell(i, 2).value
-            pizza_price = menu.cell(i, 3).value
-            print(f"You have chosen {pizza_names} at a cost of €{pizza_price}")
+
+        try:
+            if (
+                int(self.pizza_option_number) >= 1
+                and int(self.pizza_option_number) <= 5
+            ):
+                i = self.pizza_option_number
+                pizza_names = menu.cell(i, 2).value
+                pizza_price = menu.cell(i, 3).value
+                print(f"You have chosen {pizza_names} at a cost of €{pizza_price}")
+            else:
+                raise ValueError(
+                    f"Number must be between 1 and 5, you said {(self.pizza_option_number)}"
+                )
+        except ValueError as e:
+            print(f"Invalid entry: {e}, please try again\n")
 
         # try:
 
