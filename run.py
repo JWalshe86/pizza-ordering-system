@@ -20,6 +20,8 @@ menu = SHEET.worksheet("menu")
 # all the order sheet data
 menu_data = menu.get_all_values()
 
+RUN_INPUT = True
+
 def initial_screen_display():
     """content for initial user interaction with system"""
 
@@ -33,10 +35,10 @@ def yes_no_display_to_user():
     """request a yes no answer from user re proceeding to order
     while loop ensures input request & yes no validator repeated each time loop runs"""
 
-    # while True:
-    initial_screen_display()
-    user_input_request = input("Enter 'yes' or 'no' here:\n")
-    yes_no_display_validator(user_input_request)
+    while RUN_INPUT:
+        initial_screen_display()
+        user_input_request = input("Enter 'yes' or 'no' here:\n")
+        yes_no_display_validator(user_input_request)
 
 
 def yes_no_display_validator(user_input_request):
@@ -46,8 +48,13 @@ def yes_no_display_validator(user_input_request):
             print("\n\nHere is our" + "\033[1m" + " pizza menu")
             pizza_options_display_to_user()
             request_pizza_option_number()
+            RUN_INPUT = False
+            if RUN_INPUT is False:
+                exit()
         elif user_input_request == "no":
+            print('See you again')
             exit()
+
         else:
             raise ValueError(
                 print(f"Answer must be yes or no, you said {user_input_request}")
@@ -90,25 +97,26 @@ def request_pizza_option_validator(data):
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-    # try:
-    #     if int(data) >= 1 and int(data) <= 5:
-    #         i = data
-    #         pizza_names = menu.cell(i, 2).value
-    #         pizza_price = menu.cell(i, 3).value
-    #         print(f"You have chosen {pizza_names} at a cost of €{pizza_price}")
-
-    #     else:
-    #         raise ValueError(
-    #             print(f"Answer must be 1 - 5, you said {data}")
-    #         )
-    # except ValueError as e:
-    #     print(f"\nInvalid entry: {e}, please try again\n")
-    #     # if an error occurs
-    #     return False
+    try:
+        if int(data) >= 1 and int(data) <= 5:
+            i = data
+            pizza_names = menu.cell(i, 2).value
+            pizza_price = menu.cell(i, 3).value
+            print(f"You have chosen {pizza_names} at a cost of €{pizza_price}")
+        else:
+            raise ValueError(
+                print(f"Answer must be 1 - 5, you said {data}")
+            )
+    except ValueError as e:
+        print(f"\nInvalid entry: {e}, please try again\n")
+        request_pizza_option_number()
+        return False
+        # if an error occurs
+        
 
     # if the function runs without any errors
-    # return True
-    # pass
+    return RUN_INPUT is True
+    pass
 
 def main():
     """function which I want to run each time"""
