@@ -30,7 +30,6 @@ def initial_screen_display():
     )
     print("Do you want to order?")
 
-
 def yes_no_display_to_user():
     """request a yes no answer from user re proceeding to order
     while loop ensures input request & yes no validator repeated each time loop runs"""
@@ -39,7 +38,6 @@ def yes_no_display_to_user():
         initial_screen_display()
         user_input_request = input("Enter 'yes' or 'no' here:\n")
         yes_no_display_validator(user_input_request)
-
 
 def yes_no_display_validator(user_input_request):
     """validate user yes no response"""
@@ -52,7 +50,7 @@ def yes_no_display_validator(user_input_request):
             if RUN_INPUT is False:
                 exit()
         elif user_input_request == "no":
-            print('See you again')
+            print("See you again")
             exit()
 
         else:
@@ -68,14 +66,12 @@ def yes_no_display_validator(user_input_request):
     return True
     pass
 
-
 def request_pizza_option_number():
     """request number option from user"""
 
-    # while True:
     pizza_option_number = input("Enter a number between 1 and 5 here:\n")
     request_pizza_option_validator(pizza_option_number)
-        
+
 def pizza_options_display_to_user():
     """display table with menu options to user"""
     print(
@@ -86,7 +82,6 @@ def pizza_options_display_to_user():
             tablefmt="double_outline",
         ),
     )
-    
 
 def request_pizza_option_validator(data):
     """Check if user has inputted an integer between 1 - 5
@@ -103,24 +98,22 @@ def request_pizza_option_validator(data):
             pizza_names = menu.cell(i, 2).value
             pizza_price = menu.cell(i, 3).value
             print(f"You have chosen {pizza_names} at a cost of €{pizza_price}")
+            order = SHEET.worksheet("order")
+            order.append_row([f'{pizza_names}',f'{pizza_price}'])
         else:
-            raise ValueError(
-                print(f"Answer must be 1 - 5, you said {data}")
-            )
+            raise ValueError(print(f"Answer must be 1 - 5, you said {data}"))
     except ValueError as e:
         print(f"\nInvalid entry: {e}, please try again\n")
         request_pizza_option_number()
         return False
         # if an error occurs
-        
 
     # if the function runs without any errors
     return RUN_INPUT is True
     pass
 
 def main():
-    """function which I want to run each time"""
+    """start user engagement by asking yes or no to ordering"""
     yes_no_display_to_user()
-
-
 main()
+
