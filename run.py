@@ -32,14 +32,12 @@ def user_input_validator(data):
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-    
     try:
         if int(data) >= 1 and int(data) <= 5:
-            pizza_option_number = input("Enter a number between 1 and 5 here:\n")
-            i = pizza_option_number
+            i = data
             pizza_names = menu.cell(i, 2).value
             pizza_price = menu.cell(i, 3).value
-            print(f"\n\nYou have chosen {pizza_names} at a cost of €{pizza_price}")
+            print(f"You have chosen {pizza_names} at a cost of €{pizza_price}")
             user_order_quantity_request()
             order = SHEET.worksheet("order")
             # adds order to order worksheet
@@ -48,7 +46,7 @@ def user_input_validator(data):
             raise ValueError(print(f"Answer must be 1 - 5, you said {data}"))
     except ValueError as e:
         print(f"\nInvalid entry: {e}, please try again\n")
-        user_input_validator(data)
+        request_pizza_option_number()
         return False
         # if an error occurs
 
@@ -63,13 +61,10 @@ def initial_screen_display():
     print(
         "\033[1m" + "Welcome to " + colored("Nags with Notions!", "red") + "\033[0m\n"
     )
-    print(
-        "Please select one of the 5 number options below"
-    )
+    print("\n\nPlease select one of the 5 number options below")
+    
     pizza_options_display_to_user()
-    user_input_validator()
-    
-    
+
 def pizza_options_display_to_user():
     """display table with menu options to user"""
     print(
@@ -80,6 +75,13 @@ def pizza_options_display_to_user():
             tablefmt="double_outline",
         ),
     )
+    request_pizza_option_number()
+
+def request_pizza_option_number():
+    """request number option from user"""
+
+    pizza_option_number = input("Enter a number between 1 and 5 here:\n")
+    user_input_validator(pizza_option_number)
 
 def user_order_quantity_request():
     """function to get the amount of product the user has ordered
@@ -88,17 +90,18 @@ def user_order_quantity_request():
     """    
     print("\n\n\033[1m" + "Please insert the amount of you want, " +
         "10 pizzas maximum" + "\033[0m \n")
-    
+
     while True:
         print("Enter a number between 1 and 10")
-        
+
         order_quantity = input("\033[1m" + "Write your answer here and"
-                        " press Enter when you're ready:\n")
+                            " press Enter when you're ready:\n")
         print('order quantity:', order_quantity)
         
 def main():
     """functions which I wish to run everytime"""
 
     initial_screen_display()
+
 
 main()
