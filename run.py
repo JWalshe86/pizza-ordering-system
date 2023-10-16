@@ -24,8 +24,7 @@ RUN_INPUT = True
 
 
 def user_input_validator(data, input_identity):
-    """Check if user has inputted an integer between 1 - 5
-
+    """Check if user has inputted valid data & let them know if they have not
     Args:
         data (integer): _description_ the numerical option the user takes whether it's 1-5 
         for pizza or 1-10 for quantity.
@@ -43,10 +42,10 @@ def user_input_validator(data, input_identity):
                 pizza_names = menu.cell(i, 2).value
                 pizza_price = menu.cell(i, 3).value
                 print(f"You have chosen {pizza_names} at a cost of €{pizza_price}")
+                add_to_order_sheet(pizza_names, pizza_price)
                 user_order_quantity_request()
-                order = SHEET.worksheet("order")
                 # adds order to order worksheet
-                order.append_row([f"{pizza_names}", f"{pizza_price}"])
+                
             
             elif input_identity == 'order_quantity' and int(data) >= 1 and int(data) <= 10:
                 print(f'you chose: {data}')
@@ -68,6 +67,14 @@ def user_input_validator(data, input_identity):
     return RUN_INPUT is True
     pass
 
+def add_to_order_sheet(*data):
+    """
+    *arg used here so I don't have to put in a specific amount of arguments & thus
+    would have to make several similar add functions
+    """
+    print('data', data)
+    order = SHEET.worksheet("order")
+    order.append_row(data)
 
 def initial_screen_display():
     """content for initial user interaction with system"""
@@ -112,6 +119,7 @@ def user_order_quantity_request():
                             " press Enter when you're ready:\n")
         print('order quantity:', order_quantity)
         user_input_validator(order_quantity, 'order_quantity')
+        
         
 def main():
     """functions which I wish to run everytime"""
