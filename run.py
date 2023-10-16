@@ -22,68 +22,8 @@ menu_data = menu.get_all_values()
 
 RUN_INPUT = True
 
-def initial_screen_display():
-    """content for initial user interaction with system"""
 
-    print(
-        "\033[1m" + "Welcome to " + colored("Nags with Notions!", "red") + "\033[0m\n"
-    )
-    print("Do you want to order?")
-
-def yes_no_display_to_user():
-    """request a yes no answer from user re proceeding to order
-    while loop ensures input request & yes no validator repeated each time loop runs"""
-
-    while RUN_INPUT:
-        initial_screen_display()
-        user_input_request = input("Enter 'yes' or 'no' here:\n")
-        yes_no_display_validator(user_input_request)
-
-def yes_no_display_validator(user_input_request):
-    """validate user yes no response"""
-    try:
-        if user_input_request == "yes":
-            print("\n\nHere is our" + "\033[1m" + " pizza menu")
-            pizza_options_display_to_user()
-            request_pizza_option_number()
-            RUN_INPUT = False
-            if RUN_INPUT is False:
-                exit()
-        elif user_input_request == "no":
-            print("See you again")
-            exit()
-
-        else:
-            raise ValueError(
-                print(f"Answer must be yes or no, you said {user_input_request}")
-            )
-    except ValueError as e:
-        print(f"\nInvalid entry: {e}, please try again\n")
-        # if an error occurs
-        return False
-
-    # if the function runs without any errors
-    return True
-    pass
-
-def request_pizza_option_number():
-    """request number option from user"""
-
-    pizza_option_number = input("Enter a number between 1 and 5 here:\n")
-    request_pizza_option_validator(pizza_option_number)
-
-def pizza_options_display_to_user():
-    """display table with menu options to user"""
-    print(
-        tabulate(
-            menu_data,
-            headers=["Option", "Name", "Price(€)"],
-            numalign="center",
-            tablefmt="double_outline",
-        ),
-    )
-
-def request_pizza_option_validator(data):
+def user_input_validator(data):
     """Check if user has inputted an integer between 1 - 5
 
     Args:
@@ -99,7 +39,8 @@ def request_pizza_option_validator(data):
             pizza_price = menu.cell(i, 3).value
             print(f"You have chosen {pizza_names} at a cost of €{pizza_price}")
             order = SHEET.worksheet("order")
-            order.append_row([f'{pizza_names}',f'{pizza_price}'])
+            # adds order to order worksheet
+            order.append_row([f"{pizza_names}", f"{pizza_price}"])
         else:
             raise ValueError(print(f"Answer must be 1 - 5, you said {data}"))
     except ValueError as e:
@@ -112,8 +53,38 @@ def request_pizza_option_validator(data):
     return RUN_INPUT is True
     pass
 
-def main():
-    """start user engagement by asking yes or no to ordering"""
-    yes_no_display_to_user()
-main()
 
+def initial_screen_display():
+    """content for initial user interaction with system"""
+
+    print(
+        "\033[1m" + "Welcome to " + colored("Nags with Notions!", "red") + "\033[0m\n"
+    )
+
+
+def request_pizza_option_number():
+    """request number option from user"""
+
+    pizza_option_number = input("Enter a number between 1 and 5 here:\n")
+    user_input_validator(pizza_option_number)
+
+
+def pizza_options_display_to_user():
+    """display table with menu options to user"""
+    print(
+        tabulate(
+            menu_data,
+            headers=["Option", "Name", "Price(€)"],
+            numalign="center",
+            tablefmt="double_outline",
+        ),
+    )
+
+
+def main():
+    """functions which I wish to run everytime"""
+
+    initial_screen_display()
+
+
+main()
