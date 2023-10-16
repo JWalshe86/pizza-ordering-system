@@ -23,7 +23,7 @@ menu_data = menu.get_all_values()
 RUN_INPUT = True
 
 
-def user_input_validator(data):
+def user_input_validator(data, pizza_names, pizza_price):
     """Check if user has inputted an integer between 1 - 5
 
     Args:
@@ -32,12 +32,12 @@ def user_input_validator(data):
     Returns:
         _type_: boolean_description_if no errors returns True
     """
+    
+    i = data
     try:
         if int(data) >= 1 and int(data) <= 5:
-            i = data
-            pizza_names = menu.cell(i, 2).value
-            pizza_price = menu.cell(i, 3).value
             print(f"You have chosen {pizza_names} at a cost of €{pizza_price}")
+            user_order_quantity_request(pizza_names)
             order = SHEET.worksheet("order")
             # adds order to order worksheet
             order.append_row([f"{pizza_names}", f"{pizza_price}"])
@@ -60,15 +60,12 @@ def initial_screen_display():
     print(
         "\033[1m" + "Welcome to " + colored("Nags with Notions!", "red") + "\033[0m\n"
     )
-
-
-def request_pizza_option_number():
-    """request number option from user"""
-
-    pizza_option_number = input("Enter a number between 1 and 5 here:\n")
-    user_input_validator(pizza_option_number)
-
-
+    print(
+        "Please select one of the 5 number options below"
+    )
+    pizza_options_display_to_user()
+    
+    
 def pizza_options_display_to_user():
     """display table with menu options to user"""
     print(
@@ -79,6 +76,29 @@ def pizza_options_display_to_user():
             tablefmt="double_outline",
         ),
     )
+    request_pizza_option_number()
+
+def request_pizza_option_number():
+    """request number option from user"""
+    
+    pizza_option_number = input("Enter a number between 1 and 5 here:\n")
+    i = pizza_option_number
+    pizza_names = menu.cell(i, 2).value
+    pizza_price = menu.cell(i, 3).value
+    user_input_validator(pizza_option_number, pizza_names, pizza_price)
+    
+    
+    
+def user_order_quantity_request(pizza_names):
+    """function to get the amount of product the user has ordered"""    
+    print("\n\n\033[1m" + f"Please insert the amount of {pizza_names} you want, " +
+          "10 pizzas maximum" + "\033[0m \n")
+    
+    while True:
+        print("Enter a number between 1 and 10")
+        
+        order_quantity = input("\033[1m" + "Write your answer here and"
+                               " press Enter when you're ready:\n")
 
 
 def main():
