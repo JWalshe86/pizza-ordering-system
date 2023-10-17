@@ -23,10 +23,10 @@ menu_data = menu.get_all_values()
 RUN_INPUT = True
 
 
-def user_input_validator(data, input_identity):
+def user_input_validator(data: str, input_identity: str) -> bool:
     """Check if user has inputted valid data & let them know if they have not
     Args:
-        data (integer): _description_ the numerical option the user takes whether it's 1-5 
+        data (str): _description_ the numerical option the user takes whether it's 1-5 
         for pizza or 1-10 for quantity.
         input_identity (string) _description_ returns a value so the validator knows if it's validating
         user input for pizza selection or user input for quantity selection
@@ -69,7 +69,7 @@ def user_input_validator(data, input_identity):
     return RUN_INPUT is True
     pass
 
-def add_to_order_sheet(*data):
+def add_to_order_sheet(*data: str):
     """
     *arg used here so I don't have to put in a specific amount of arguments & thus
     would have to make several similar add functions
@@ -85,7 +85,6 @@ def add_to_order_sheet(*data):
         if len(data[0]) > 2:
             # iterator is length of columns + 1 so new row entered each time
             i = len(order.col_values(1)) + 1
-            data = list(data)
             order.update_cell(i,1,f'{data[0]}')
             order.update_cell(i,2,f'{data[1]}')
             break
@@ -95,8 +94,9 @@ def add_to_order_sheet(*data):
             i = len(order.col_values(1))
             quantity_selection = list(item)
             order.update_cell(i,3,f'{quantity_selection[0]}')
+            total_price(quantity_selection[0])
             break
-
+        
 def initial_screen_display():
     """content for initial user interaction with system"""
 
@@ -142,7 +142,20 @@ def user_order_quantity_request():
         user_input_validator(order_quantity, 'order_quantity')
         add_to_order_sheet(order_quantity)
         
-        
+def total_price(quantity: str) -> int: 
+    """function to calculate total price. Quantity taken from add values function. Quantity argument
+    then multiplied with corresponding price in excel sheet. Total price then added to total price column
+    in excel
+
+    Args:
+        quantity (string): Users selection of amount of pizzas required.
+    """
+    order = SHEET.worksheet("order")
+    i = len(order.col_values(1))
+    price = order.cell(i,2).value
+    total = int(quantity)*int(price)
+    order.update_cell(i,4,f'{total}')
+    return total
 def main():
     """functions which I wish to run everytime"""
 
