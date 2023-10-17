@@ -48,6 +48,8 @@ def user_input_validator(data, input_identity):
                 
             
             elif input_identity == 'order_quantity' and int(data) >= 1 and int(data) <= 10:
+                # add the quantity order to teh add to sheet function
+                add_to_order_sheet(data)
                 print(f'you chose: {data}')
                 exit()
 
@@ -71,10 +73,28 @@ def add_to_order_sheet(*data):
     """
     *arg used here so I don't have to put in a specific amount of arguments & thus
     would have to make several similar add functions
+    To differenciate between the pizza selection input and quantity here
+    each tuple item is looped through. If it's length is less than 2 not a word, so
+    it's the quantity selection which will either have a length of 1 (nums 1 -9) or 2 for '10'
     """
-    print('data', data)
     order = SHEET.worksheet("order")
-    order.append_row(data)
+    
+    
+    for item in data:
+        
+        if len(data[0]) > 2:
+            i = len(order.col_values(1)) + 1
+            print('i', i)
+            data = list(data)
+            order.update_cell(i,1,f'{data[0]}')
+            order.update_cell(i,2,f'{data[1]}')
+            break
+            
+        if len(data[0]) <= 2:
+            i = 2
+            quantity_selection = list(item)
+            order.update_cell(2,3,f'{quantity_selection[0]}')
+            break
 
 def initial_screen_display():
     """content for initial user interaction with system"""
@@ -119,6 +139,7 @@ def user_order_quantity_request():
                             " press Enter when you're ready:\n")
         print('order quantity:', order_quantity)
         user_input_validator(order_quantity, 'order_quantity')
+        add_to_order_sheet(order_quantity)
         
         
 def main():
