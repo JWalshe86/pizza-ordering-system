@@ -44,6 +44,9 @@
 
 ### FUTURE FEATURES
 
+## Technologies used
+- HeroKu - Used host and deploy website.
+
 ## BUGS OR ERRORS
  
 ## TESTING
@@ -76,6 +79,7 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 
 ## CREDITS
 * Readme template adapted from [useriasminna](https://github.com/useriasminna/american_pizza_order_system/blob/main/README.md)
+* Inspiration for large title heading from [LauraMaynock](https://github.com/LauraMayock/who-wants-Ice-cream)
 * Manipulating google sheets [gspread.org](https://docs.gspread.org/en/latest/user-guide.html)
 
 ## TOOLS

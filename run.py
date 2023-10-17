@@ -23,7 +23,7 @@ menu_data = menu.get_all_values()
 RUN_INPUT = True
 
 
-def user_input_validator(data: str, input_identity: str) -> bool:
+def user_input_validator(data: str, input_identity: str):
     """Check if user has inputted valid data & let them know if they have not
     Args:
         data (str): _description_ the numerical option the user takes whether it's 1-5 
@@ -42,12 +42,12 @@ def user_input_validator(data: str, input_identity: str) -> bool:
                 pizza_names = menu.cell(i, 2).value
                 pizza_price = menu.cell(i, 3).value
                 print(f"You have chosen {pizza_names} at a cost of €{pizza_price}")
+                user_order_quantity_request(pizza_names)
                 add_to_order_sheet(pizza_names, pizza_price)
-                user_order_quantity_request()
-                # adds order to order worksheet
+
+                return pizza_names
                 
-            
-            elif input_identity == 'order_quantity' and int(data) >= 1 and int(data) <= 10:
+            if input_identity == 'order_quantity' and int(data) >= 1 and int(data) <= 10:
                 # add the quantity order to teh add to sheet function
                 add_to_order_sheet(data)
                 print(f'you chose: {data}')
@@ -103,6 +103,8 @@ def initial_screen_display():
     print(
         "\033[1m" + "Welcome to " + colored("Nags with Notions!", "red") + "\033[0m\n"
     )
+    
+    
     print("\n\nPlease select one of the 5 number options below")
     
     pizza_options_display_to_user()
@@ -125,22 +127,24 @@ def request_pizza_option_number():
     pizza_option_number = input("Enter a number between 1 and 5 here:\n")
     user_input_validator(pizza_option_number, 'pizza_option')
 
-def user_order_quantity_request():
+def user_order_quantity_request(data):
     """function to get the amount of product the user has ordered
     String argument pizza_names passed so user can chose the quantity of the 
     specific pizza they ordered. 
     """    
     print("\n\n\033[1m" + "Please insert the amount of you want, " +
         "10 pizzas maximum" + "\033[0m \n")
-
+    print('pizza name?', data)
     while True:
         print("Enter a number between 1 and 10")
 
         order_quantity = input("\033[1m" + "Write your answer here and"
                             " press Enter when you're ready:\n")
+        stock_checker(data, order_quantity)
         print('order quantity:', order_quantity)
         user_input_validator(order_quantity, 'order_quantity')
         add_to_order_sheet(order_quantity)
+        
         
 def total_price(quantity: str) -> int: 
     """function to calculate total price. Quantity taken from add values function. Quantity argument
@@ -156,6 +160,24 @@ def total_price(quantity: str) -> int:
     total = int(quantity)*int(price)
     order.update_cell(i,4,f'{total}')
     return total
+
+def stock_checker(pizza_names, quantity):
+    
+    """function takes in the order and reduces this from the stock. If
+    the stock is below 0 the user is informed that the products unavailable 
+    and to try something else
+
+    Args:
+        quantity (int): take from user_order_quantity request function
+        pizza_name (int): _description_ taken from user_input_validator function
+
+    Returns:
+        int: an identifer for which pizza needs to have its stock reduced
+        and by how much
+    """
+    stock = SHEET.worksheet("stock")
+    print('stock_checker',pizza_names, quantity)
+    
 def main():
     """functions which I wish to run everytime"""
 
