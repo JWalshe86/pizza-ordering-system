@@ -83,17 +83,18 @@ def add_to_order_sheet(*data):
     for item in data:
         
         if len(data[0]) > 2:
+            # iterator is length of columns + 1 so new row entered each time
             i = len(order.col_values(1)) + 1
-            print('i', i)
             data = list(data)
             order.update_cell(i,1,f'{data[0]}')
             order.update_cell(i,2,f'{data[1]}')
             break
             
         if len(data[0]) <= 2:
-            i = 2
+            # iterator already updated by 1 above so no need for +1 here
+            i = len(order.col_values(1))
             quantity_selection = list(item)
-            order.update_cell(2,3,f'{quantity_selection[0]}')
+            order.update_cell(i,3,f'{quantity_selection[0]}')
             break
 
 def initial_screen_display():
