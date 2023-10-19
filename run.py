@@ -41,7 +41,7 @@ def pizza_option_user_input_validator():
             pizza_option = pizza_option_input()
             if int(pizza_option) >= 1 and int(pizza_option) <= 5:
                 print(f"You have chosen {pizza_option}  at a cost of €")
-                order_quantity()
+                quantity_user_input_validator()
                 break #exit the immediate loop
             
         except ValueError as e:
@@ -51,7 +51,7 @@ def pizza_option_user_input_validator():
         #check the while condition if true repeat
         
                 
-def quantity_user_input_validator(pizza_quantity: str):
+def quantity_user_input_validator():
     """Check if user has inputted valid data & let them know if they have not
     Args:
         pizza_quantity (str): _description_ the numerical option the use it's 1-10 for quantity.
@@ -63,9 +63,8 @@ def quantity_user_input_validator(pizza_quantity: str):
     
     while (True):
         try:
+            pizza_quantity = order_quantity()
             #code that might crash
-            # catch pizza quantity value
-            # pizza_quantity = order_quantity()
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
             # add the quantity order to the add to sheet function
                 break #exit the immediate loop
@@ -195,12 +194,9 @@ def main():
     # catch pizza option value
     # catch pizza_name from pizza name function
     # pizza_name = get_pizza_name_and_price_ordered(pizza_option)
-    # catch pizza quantity value
-    # pizza_quantity = order_quantity()
-
     # pass pizza quantity and name to validator function
     pizza_option_user_input_validator()
-    # quantity_user_input_validator(pizza_quantity)
+    
 
 
 main()
