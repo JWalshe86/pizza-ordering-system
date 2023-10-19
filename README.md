@@ -81,6 +81,7 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 * Readme template adapted from [useriasminna](https://github.com/useriasminna/american_pizza_order_system/blob/main/README.md)
 * Inspiration for large title heading from [LauraMaynock](https://github.com/LauraMayock/who-wants-Ice-cream)
 * Manipulating google sheets [gspread.org](https://docs.gspread.org/en/latest/user-guide.html)
+* Try catch with loop [Paul Miskew](https://youtu.be/b0q9vVgAMq8?si=U_UnqDxHyZegVnsX)
 
 ## TOOLS
 [GitHub](https://github.com/) - used for hosting the source code of the program
