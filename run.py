@@ -33,21 +33,20 @@ def pizza_option_user_input_validator():
         _type_: boolean_description_if no errors returns True
     """
     
-    # get_pizza_name_and_price_ordered(pizza_option)
     #infinite loop thats only broken if valid input is given
     while (True):
         try:
             #code that might crash
             pizza_option = pizza_option_input()
+            pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
             if int(pizza_option) >= 1 and int(pizza_option) <= 5:
-                print(f"You have chosen {pizza_option}  at a cost of €")
+                print(f"You have chosen {pizza_name} at a cost of €{pizza_price}")
                 quantity_user_input_validator()
                 break #exit the immediate loop
             
         except ValueError as e:
-            
-            print('not a number between 1 and 5')
             print(f"\nInvalid pizza option entry: {e}, please try again\n")
+            print('not a number between 1 and 5')
         #check the while condition if true repeat
         
                 
@@ -72,21 +71,21 @@ def quantity_user_input_validator():
         except ValueError as e1:
                     
             print(f"\nInvalid quantity entry: {e1}, please try again\n")
-            print("on error with quantity")
+            print("Must be a number between 1 and 10")
                     
         #check the while condition if true repeat
 
-def get_pizza_name_and_price_ordered(pizza_option) -> tuple:
+def get_pizza_name_and_price_ordered(pizza_option):
     """_summary_
 
     Returns:
         : _description_a string of the name of the pizza chosen by the user.
         Passes these values back to where they were called in the main function
     """
-    # i = pizza_option
-    # pizza_option = menu.cell(i, 2).value
-    # pizza_price = menu.cell(i, 3).value
-    # return pizza_option, pizza_price
+    i = pizza_option
+    pizza_option = menu.cell(i, 2).value
+    pizza_price = menu.cell(i, 3).value
+    return pizza_option, pizza_price
 
 
 def add_to_order_sheet(*data: str):
@@ -191,12 +190,6 @@ def main():
     """Creates a function called main. This function controls the flow of the program"""
     # present Nags with notions welcome & pizza menu
     initial_screen_display()
-    # catch pizza option value
-    # catch pizza_name from pizza name function
-    # pizza_name = get_pizza_name_and_price_ordered(pizza_option)
-    # pass pizza quantity and name to validator function
     pizza_option_user_input_validator()
     
-
-
 main()
