@@ -34,26 +34,26 @@ def pizza_option_user_input_validator():
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-    
-    #infinite loop thats only broken if valid input is given
-    while (True):
+
+    # infinite loop thats only broken if valid input is given
+    while True:
         try:
-            #code that might crash
+            # code that might crash
             pizza_option = pizza_option_input()
             pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
             if int(pizza_option) >= 1 and int(pizza_option) <= 5:
                 print(f"You have chosen {pizza_name} at a cost of €{pizza_price}\n\n")
-                print(f'How many {pizza_name} would you like?\n')
+                print(f"How many {pizza_name} would you like?\n")
                 add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
                 quantity_user_input_validator()
-                break #exit the immediate loop
-            
+                break  # exit the immediate loop
+
         except ValueError as e:
             print(f"\nInvalid pizza option entry: {e}, please try again\n")
-            print('not a number between 1 and 5')
-        #check the while condition if true repeat
-        
-                
+            print("not a number between 1 and 5")
+        # check the while condition if true repeat
+
+
 def quantity_user_input_validator():
     """Check if user has inputted valid data & let them know if they have not
     Args:
@@ -62,22 +62,23 @@ def quantity_user_input_validator():
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-    #infinite loop thats only broken if valid input is given
-    
-    while (True):
+    # infinite loop thats only broken if valid input is given
+
+    while True:
         try:
             pizza_quantity = order_quantity()
-            #code that might crash
+            # code that might crash
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
-            # add the quantity order to the add to sheet function
-                break #exit the immediate loop
+                # add the quantity order to the add to sheet function
+                add_quantity_to_order_sheet(pizza_quantity)
+                break  # exit the immediate loop
 
         except ValueError as e1:
-                    
             print(f"\nInvalid quantity entry: {e1}, please try again\n")
             print("Must be a number between 1 and 10")
-                    
-        #check the while condition if true repeat
+
+        # check the while condition if true repeat
+
 
 def get_pizza_name_and_price_ordered(pizza_option):
     """_summary_
@@ -91,32 +92,36 @@ def get_pizza_name_and_price_ordered(pizza_option):
     pizza_price = menu.cell(i, 3).value
     return pizza_option, pizza_price
 
+
 def add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price):
     """
     Pizza info taken from pizza validator function. Uploaded to google sheets
-    stock sheet here. 
+    stock sheet here.
     """
     order = SHEET.worksheet("order")
 
-   
-            # iterator is length of columns + 1 so new row entered each time
+    # iterator is length of columns + 1 so new row entered each time
     i = len(order.col_values(1)) + 1
     order.update_cell(i, 1, f"{pizza_name}")
     order.update_cell(i, 2, f"{pizza_price}")
-            
 
-        
-            # # iterator already updated by 1 above so no need for +1 here
-            # i = len(order.col_values(1))
-            # quantity_selection = list(item)
-            # order.update_cell(i, 3, f"{quantity_selection[0]}")
-            # total_price(quantity_selection[0])
-            
+def add_quantity_to_order_sheet(pizza_quantity):
+    """
+    Pizza info taken from pizza validator function. Uploaded to google sheets
+    stock sheet here.
+    """
+    order = SHEET.worksheet("order")
+
+    # iterator is length of columns + 1 so new row entered each time
+    i = len(order.col_values(1))
+    quantity_selection = list(pizza_quantity)
+    order.update_cell(i, 3, f"{quantity_selection[0]}")
+    total_price(quantity_selection[0])
 
 def initial_screen_display():
     """content for initial user interaction with system
     display table with menu to user"""
-    
+
     print("\033[1m" + "Welcome to " + colored("Nags with Notions!", "red") + "\033[0m")
     time.sleep(2)
     os.system("cls")
@@ -130,6 +135,7 @@ def initial_screen_display():
             tablefmt="double_outline",
         ),
     )
+
 
 def pizza_option_input() -> str:
     """create a function to get users pizza choice, return it to the calling function
@@ -191,5 +197,6 @@ def main():
     # present Nags with notions welcome & pizza menu
     initial_screen_display()
     pizza_option_user_input_validator()
-    
+
+
 main()
