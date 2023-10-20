@@ -1,3 +1,5 @@
+import os
+import time
 import gspread
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
@@ -40,7 +42,9 @@ def pizza_option_user_input_validator():
             pizza_option = pizza_option_input()
             pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
             if int(pizza_option) >= 1 and int(pizza_option) <= 5:
-                print(f"You have chosen {pizza_name} at a cost of €{pizza_price}")
+                print(f"You have chosen {pizza_name} at a cost of €{pizza_price}\n\n")
+                print(f'How many {pizza_name} would you like?\n')
+                add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
                 quantity_user_input_validator()
                 break #exit the immediate loop
             
@@ -87,39 +91,35 @@ def get_pizza_name_and_price_ordered(pizza_option):
     pizza_price = menu.cell(i, 3).value
     return pizza_option, pizza_price
 
-
-def add_to_order_sheet(*data: str):
+def add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price):
     """
-    *arg used here so I don't have to put in a specific amount of arguments & thus
-    would have to make several similar add functions
-    To differenciate between the pizza selection input and quantity here
-    each tuple item is looped through. If it's length is less than 2 not a word, so
-    it's the quantity selection which will either have a length of 1 (nums 1 -9) or 2 for '10'
+    Pizza info taken from pizza validator function. Uploaded to google sheets
+    stock sheet here. 
     """
     order = SHEET.worksheet("order")
 
-    for item in data:
-        if len(data[0]) > 2:
+   
             # iterator is length of columns + 1 so new row entered each time
-            i = len(order.col_values(1)) + 1
-            order.update_cell(i, 1, f"{data[0]}")
-            order.update_cell(i, 2, f"{data[1]}")
-            break
+    i = len(order.col_values(1)) + 1
+    order.update_cell(i, 1, f"{pizza_name}")
+    order.update_cell(i, 2, f"{pizza_price}")
+            
 
-        if len(data[0]) <= 2:
-            # iterator already updated by 1 above so no need for +1 here
-            i = len(order.col_values(1))
-            quantity_selection = list(item)
-            order.update_cell(i, 3, f"{quantity_selection[0]}")
-            total_price(quantity_selection[0])
-            break
-
+        
+            # # iterator already updated by 1 above so no need for +1 here
+            # i = len(order.col_values(1))
+            # quantity_selection = list(item)
+            # order.update_cell(i, 3, f"{quantity_selection[0]}")
+            # total_price(quantity_selection[0])
+            
 
 def initial_screen_display():
     """content for initial user interaction with system
     display table with menu to user"""
-
+    
     print("\033[1m" + "Welcome to " + colored("Nags with Notions!", "red") + "\033[0m")
+    time.sleep(2)
+    os.system("cls")
     print("\nPlease select one of the 5 number options below")
 
     print(
@@ -131,13 +131,13 @@ def initial_screen_display():
         ),
     )
 
-
 def pizza_option_input() -> str:
     """create a function to get users pizza choice, return it to the calling function
     which is called in main()
     """
     pizza_option_number = input("Enter a number between 1 and 5 here:\n")
-    # TODO: need to implement a clear timer here import timer & os system modules
+    time.sleep(1)
+    os.system("cls")
 
     return pizza_option_number
 
