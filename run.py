@@ -49,8 +49,9 @@ def pizza_option_user_input_validator():
                 add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
                 currentOrder.append(pizza_name)
                 quantity_user_input_validator()
-                break  # exit the immediate loop
-
+                return updated_order
+                # break  # exit the immediate loop
+                
         except ValueError as e:
             print(f"\nInvalid pizza option entry: {e}, please try again\n")
             print("not a number between 1 and 5")
@@ -73,13 +74,16 @@ def quantity_user_input_validator():
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
-                print(f'You have ordered {pizza_quantity} {currentOrder[0]} at a cost of €{currentOrderCost[0]}')
-                finish_order = input(print('Have you completed your order?'))
+                # in the event the user says yes to re-ordering
+                currentOrder.append(currentOrder)
+                currentOrderCost.append(currentOrderCost)
+                print(f'Current order: {pizza_quantity} {currentOrder} at a cost of €{currentOrderCost}')
+                finish_order = input('Have you completed your order?')
                 if finish_order == 'yes':
                     print('thank you')
                     break  # exit the immediate loop
-                elif finish_order == 'no':
-                    initial_screen_display()
+                if finish_order == 'no':
+                    main()
                 
 
         except ValueError as e1:
@@ -129,11 +133,11 @@ def add_quantity_to_order_sheet(pizza_quantity):
 def initial_screen_display():
     """content for initial user interaction with system
     display table with menu to user"""
-
     print("\033[1m" + "Welcome to " + colored("Nags with Notions!", "red") + "\033[0m")
     time.sleep(2)
     os.system("cls")
     print("\nPlease select one of the 5 number options below")
+    print('current order lad', currentOrder)
 
     print(
         tabulate(
