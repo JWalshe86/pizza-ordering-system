@@ -74,14 +74,19 @@ def quantity_user_input_validator():
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
                 print(f'You have ordered {pizza_quantity} {currentOrder[0]} at a cost of €{currentOrderCost[0]}')
-                break  # exit the immediate loop
+                finish_order = input(print('Have you completed your order?'))
+                if finish_order == 'yes':
+                    print('thank you')
+                    break  # exit the immediate loop
+                elif finish_order == 'no':
+                    initial_screen_display()
+                
 
         except ValueError as e1:
             print(f"\nInvalid quantity entry: {e1}, please try again\n")
             print("Must be a number between 1 and 10")
 
         # check the while condition if true repeat
-
 
 def get_pizza_name_and_price_ordered(pizza_option):
     """_summary_
