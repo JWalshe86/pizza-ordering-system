@@ -22,6 +22,8 @@ menu = SHEET.worksheet("menu")
 # all the order sheet data
 menu_data = menu.get_all_values()
 
+currentOrder = []
+currentOrderCost = []
 
 def pizza_option_user_input_validator():
     """Check if user has inputted valid data & let them know if they have not
@@ -45,6 +47,7 @@ def pizza_option_user_input_validator():
                 print(f"You have chosen {pizza_name} at a cost of €{pizza_price}\n\n")
                 print(f"How many {pizza_name} would you like?\n")
                 add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
+                currentOrder.append(pizza_name)
                 quantity_user_input_validator()
                 break  # exit the immediate loop
 
@@ -52,7 +55,6 @@ def pizza_option_user_input_validator():
             print(f"\nInvalid pizza option entry: {e}, please try again\n")
             print("not a number between 1 and 5")
         # check the while condition if true repeat
-
 
 def quantity_user_input_validator():
     """Check if user has inputted valid data & let them know if they have not
@@ -71,6 +73,7 @@ def quantity_user_input_validator():
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
+                print(f'You have ordered {pizza_quantity} {currentOrder[0]} at a cost of €{currentOrderCost[0]}')
                 break  # exit the immediate loop
 
         except ValueError as e1:
@@ -169,6 +172,7 @@ def total_price(quantity: str) -> int:
     price = order.cell(i, 2).value
     total = int(quantity) * int(price)
     order.update_cell(i, 4, f"{total}")
+    currentOrderCost.append(total)
     return total
 
 
