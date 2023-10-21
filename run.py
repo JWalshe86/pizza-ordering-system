@@ -41,6 +41,8 @@ def pizza_option_user_input_validator():
     while True:
         try:
             # code that might crash
+            # present Nags with notions welcome & pizza menu
+            initial_screen_display()
             pizza_option = pizza_option_input()
             pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
             if int(pizza_option) >= 1 and int(pizza_option) <= 5:
@@ -48,16 +50,20 @@ def pizza_option_user_input_validator():
                 print(f"How many {pizza_name} would you like?\n")
                 add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
                 currentOrder.append(pizza_name)
-                quantity_user_input_validator()
-                return updated_order
+                pizza_quantity = order_quantity()
+                quantity_user_input_validator(pizza_quantity)
+                finished_order = have_finished_order()
+                if finished_order == 'no':
+                    print('finish order no', finished_order)
+                    continue
+                break
                 # break  # exit the immediate loop
                 
         except ValueError as e:
             print(f"\nInvalid pizza option entry: {e}, please try again\n")
             print("not a number between 1 and 5")
-        # check the while condition if true repeat
 
-def quantity_user_input_validator():
+def quantity_user_input_validator(pizza_quantity):
     """Check if user has inputted valid data & let them know if they have not
     Args:
         pizza_quantity (str): _description_ the numerical option the use it's 1-10 for quantity.
@@ -69,28 +75,32 @@ def quantity_user_input_validator():
 
     while True:
         try:
-            pizza_quantity = order_quantity()
+            
             # code that might crash
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
                 # in the event the user says yes to re-ordering
                 currentOrder.append(currentOrder)
-                currentOrderCost.append(currentOrderCost)
-                print(f'Current order: {pizza_quantity} {currentOrder} at a cost of €{currentOrderCost}')
-                finish_order = input('Have you completed your order?')
-                if finish_order == 'yes':
-                    print('thank you')
-                    break  # exit the immediate loop
-                if finish_order == 'no':
-                    main()
                 
-
+                print(f'Current order: {pizza_quantity} {currentOrder} at a cost of €')
+                break
         except ValueError as e1:
             print(f"\nInvalid quantity entry: {e1}, please try again\n")
             print("Must be a number between 1 and 10")
+            main()
 
-        # check the while condition if true repeat
+def have_finished_order():
+    """check if user has finished order or wants
+    to go back and add more to order
+
+    Returns:
+        _type_: _description_
+                    """
+    finish_order = input('Have you completed your order?')
+                    
+    return finish_order
+
 
 def get_pizza_name_and_price_ordered(pizza_option):
     """_summary_
@@ -207,8 +217,7 @@ def stock_checker(pizza_option, quantity):
 
 def main():
     """Creates a function called main. This function controls the flow of the program"""
-    # present Nags with notions welcome & pizza menu
-    initial_screen_display()
+    
     pizza_option_user_input_validator()
 
 
