@@ -24,6 +24,7 @@ menu_data = menu.get_all_values()
 
 currentOrder = []
 currentOrderCost = []
+pizza_quantity_holder = []
 
 def pizza_option_user_input_validator():
     """Check if user has inputted valid data & let them know if they have not
@@ -46,12 +47,16 @@ def pizza_option_user_input_validator():
             pizza_option = pizza_option_input()
             pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
             if int(pizza_option) >= 1 and int(pizza_option) <= 5:
+                
                 print(f"You have chosen {pizza_name} at a cost of €{pizza_price}\n\n")
                 print(f"How many {pizza_name} would you like?\n")
+                
                 add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
                 currentOrder.append(pizza_name)
+                
                 pizza_quantity = order_quantity()
                 quantity_user_input_validator(pizza_quantity)
+                
                 finished_order = have_finished_order()
                 if finished_order == 'no':
                     print('finish order no', finished_order)
@@ -75,7 +80,6 @@ def quantity_user_input_validator(pizza_quantity):
 
     while True:
         try:
-            
             # code that might crash
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
                 # add the quantity order to the add to sheet function
@@ -84,6 +88,11 @@ def quantity_user_input_validator(pizza_quantity):
                 currentOrder.append(currentOrder)
                 
                 print(f'Current order: {pizza_quantity} {currentOrder} at a cost of €')
+                pizza_quantity_holder.append(int(pizza_quantity))
+                print(pizza_quantity_holder)
+                total = sum(pizza_quantity_holder)
+                print(f'Your total order is {total} pizzas')
+                
                 break
         except ValueError as e1:
             print(f"\nInvalid quantity entry: {e1}, please try again\n")
