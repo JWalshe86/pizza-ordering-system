@@ -87,11 +87,13 @@ def quantity_user_input_validator(pizza_quantity):
                 # in the event the user says yes to re-ordering
                 currentOrder.append(currentOrder)
                 
-                print(f'Current order: {pizza_quantity} {currentOrder} at a cost of €')
+                print(f'Current order: {pizza_quantity} {currentOrder} at a cost of €{currentOrderCost}')
                 pizza_quantity_holder.append(int(pizza_quantity))
-                print(pizza_quantity_holder)
-                total = sum(pizza_quantity_holder)
-                print(f'Your total order is {total} pizzas')
+                # add the quantities if user goes back to select more pizzas
+                totalquantity = sum(pizza_quantity_holder)
+                total_cost = sum(currentOrderCost)
+                
+                print(f'Your total order is {totalquantity} pizzas at a cost of {total_cost}')
                 
                 break
         except ValueError as e1:
@@ -200,7 +202,7 @@ def total_price(quantity: str) -> int:
     price = order.cell(i, 2).value
     total = int(quantity) * int(price)
     order.update_cell(i, 4, f"{total}")
-    currentOrderCost.append(total)
+    currentOrderCost.append(int(total))
     return total
 
 
