@@ -37,13 +37,12 @@ def pizza_option_user_input_validator():
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-
+            # present Nags with notions welcome & pizza menu
+    initial_screen_display()
     # infinite loop thats only broken if valid input is given
     while True:
         try:
             # code that might crash
-            # present Nags with notions welcome & pizza menu
-            initial_screen_display()
             pizza_option = pizza_option_input()
             pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
             if int(pizza_option) >= 1 and int(pizza_option) <= 5:
@@ -76,10 +75,12 @@ def quantity_user_input_validator(pizza_quantity):
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-    # infinite loop thats only broken if valid input is given
+    overall_price = total_price(pizza_quantity)
 
+    # infinite loop thats only broken if valid input is given
     while True:
         try:
+            
             # code that might crash
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
                 # add the quantity order to the add to sheet function
@@ -87,13 +88,13 @@ def quantity_user_input_validator(pizza_quantity):
                 # in the event the user says yes to re-ordering
                 currentOrder.append(currentOrder)
                 
-                print(f'Current order: {pizza_quantity} {currentOrder} at a cost of €{currentOrderCost}')
+                print(f'Current order: {pizza_quantity} {currentOrder[0]} at a cost of €{overall_price}')
                 pizza_quantity_holder.append(int(pizza_quantity))
                 # add the quantities if user goes back to select more pizzas
                 totalquantity = sum(pizza_quantity_holder)
-                total_cost = sum(currentOrderCost)
+                total_cost = sum(currentOrderCost) / 2
                 
-                print(f'Your total order is {totalquantity} pizzas at a cost of {total_cost}')
+                print(f'\nYour total order is {totalquantity} pizzas at a cost of {int(total_cost)}\n')
                 
                 break
         except ValueError as e1:
@@ -157,8 +158,12 @@ def initial_screen_display():
     print("\033[1m" + "Welcome to " + colored("Nags with Notions!", "red") + "\033[0m")
     time.sleep(2)
     os.system("cls")
+    
+def pizza_option_input() -> str:
+    """create a function to get users pizza choice, return it to the calling function
+    which is called in main()
+    """
     print("\nPlease select one of the 5 number options below")
-    print('current order lad', currentOrder)
 
     print(
         tabulate(
@@ -168,12 +173,6 @@ def initial_screen_display():
             tablefmt="double_outline",
         ),
     )
-
-
-def pizza_option_input() -> str:
-    """create a function to get users pizza choice, return it to the calling function
-    which is called in main()
-    """
     pizza_option_number = input("Enter a number between 1 and 5 here:\n")
     time.sleep(1)
     os.system("cls")
