@@ -4,6 +4,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 from termcolor import colored
+from collections import Counter
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -25,6 +26,7 @@ menu_data = menu.get_all_values()
 currentOrder = []
 currentOrderCost = []
 pizza_quantity_holder = []
+quant_pizza_holder = []
 
 def pizza_option_user_input_validator():
     """Check if user has inputted valid data & let them know if they have not
@@ -51,21 +53,43 @@ def pizza_option_user_input_validator():
                 print(f"How many {pizza_name} would you like?\n")
                 
                 add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
-                currentOrder.append(pizza_name)
-                
+                    
                 pizza_quantity = order_quantity()
                 quantity_user_input_validator(pizza_quantity)
                 
-                finished_order = have_finished_order()
-                if finished_order == 'no':
+                currentOrder.append(pizza_name)
+                print('current order *', currentOrder)
+                
+                res = [pizza_name]*int(pizza_quantity)
+                print('result1', res)
+                
+                # res = str(res)[1:-1]
+                # res = list(res)
+                
+            
+                print('result', res)
+                    
+                quant_pizza_holder.append(res)
+                print('pizza_quant_holder', quant_pizza_holder)
+                
+                # how to flatten list from bobbyhadz
+                flat_list = [x for xs in quant_pizza_holder for x in xs]
+                print('round 1million', flat_list) 
+                counter = Counter(flat_list)
+                print('this is counter', counter)    
+    
+            finished_order = have_finished_order()
+            if finished_order == 'no':
                     print('finish order no', finished_order)
                     continue
-                break
+            break
                 # break  # exit the immediate loop
                 
         except ValueError as e:
             print(f"\nInvalid pizza option entry: {e}, please try again\n")
             print("not a number between 1 and 5")
+            
+
 
 def quantity_user_input_validator(pizza_quantity):
     """Check if user has inputted valid data & let them know if they have not
@@ -75,6 +99,9 @@ def quantity_user_input_validator(pizza_quantity):
     Returns:
         _type_: boolean_description_if no errors returns True
     """
+    # passing data in this way adapted from Data Analytics Ireland. 
+    # This video was used as a means to get over
+    # the issue of wishing to pass data to one function from 2 different functions
     overall_price = total_price(pizza_quantity)
 
     # infinite loop thats only broken if valid input is given
@@ -85,16 +112,16 @@ def quantity_user_input_validator(pizza_quantity):
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
-                # in the event the user says yes to re-ordering
-                currentOrder.append(currentOrder)
                 
-                print(f'Current order: {pizza_quantity} {currentOrder[0]} at a cost of €{overall_price}')
+                print('cur order', currentOrder) 
+
+                print(f'Current order: {pizza_quantity} {currentOrder} at a cost of €{overall_price}')
                 pizza_quantity_holder.append(int(pizza_quantity))
                 # add the quantities if user goes back to select more pizzas
                 totalquantity = sum(pizza_quantity_holder)
                 total_cost = sum(currentOrderCost) / 2
                 
-                print(f'\nYour total order is {totalquantity} pizzas at a cost of {int(total_cost)}\n')
+                print(f'\nYour total order is {totalquantity}: current order at a cost of {int(total_cost)}\n')
                 
                 break
         except ValueError as e1:
