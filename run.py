@@ -5,6 +5,10 @@ from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 from termcolor import colored
 from collections import Counter
+# pip install pyfiglet
+import pyfiglet
+
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -56,7 +60,7 @@ def pizza_option_user_input_validator():
                     
                 pizza_quantity = order_quantity()
                 quantity_user_input_validator(pizza_quantity)
-                 # passing data in this way adapted from Data Analytics Ireland. 
+                # passing data in this way adapted from Data Analytics Ireland. 
                 # This video was used as a means to get over
                 # the issue of wishing to pass data to one function from 2 different functions
                 overall_price = total_price(pizza_quantity)
@@ -70,20 +74,23 @@ def pizza_option_user_input_validator():
                 # how to flatten list from bobbyhadz
                 flat_list = [x for xs in quant_pizza_holder for x in xs]
                 total_cost = sum(currentOrderCost) / 2
+                
                 counter = Counter(flat_list)
+                
                 counter = dict(counter) 
-                # switch key & value adapted from GGW stackoverflow
-                counter = {y: x for x, y in counter.items()}
-
-                print('counter', counter)
+                # swap keys and values in dictionary from stackoverflow see credits
+                counter = {counter[k]: k for k in counter}
+                # remove brackets
                 counter = str(counter)[1:-1]
                 
                 counter = counter.replace("'", '')
                 
+
                 print(f'Total order: {counter} at a cost of €{int(total_cost)}\n')    
     
             finished_order = have_finished_order()
             if finished_order == 'no':
+                
                     print('finish order no', finished_order)
                     continue
             break
@@ -176,7 +183,8 @@ def add_quantity_to_order_sheet(pizza_quantity):
 def initial_screen_display():
     """content for initial user interaction with system
     display table with menu to user"""
-    print("\033[1m" + "Welcome to " + colored("Nags with Notions!", "red") + "\033[0m")
+    ascii_banner = pyfiglet.figlet_format("Nags with Notions")
+    print(ascii_banner)
     time.sleep(2)
     os.system("cls")
     
