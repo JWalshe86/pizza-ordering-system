@@ -56,27 +56,31 @@ def pizza_option_user_input_validator():
                     
                 pizza_quantity = order_quantity()
                 quantity_user_input_validator(pizza_quantity)
-                
+                 # passing data in this way adapted from Data Analytics Ireland. 
+                # This video was used as a means to get over
+                # the issue of wishing to pass data to one function from 2 different functions
+                overall_price = total_price(pizza_quantity)
                 currentOrder.append(pizza_name)
-                print('current order *', currentOrder)
+                print(f'\nCurrent selection: {pizza_quantity} {currentOrder[0]} at a cost of €{overall_price}\n')
                 
                 res = [pizza_name]*int(pizza_quantity)
-                print('result1', res)
-                
-                # res = str(res)[1:-1]
-                # res = list(res)
-                
-            
-                print('result', res)
-                    
+                                    
                 quant_pizza_holder.append(res)
-                print('pizza_quant_holder', quant_pizza_holder)
                 
                 # how to flatten list from bobbyhadz
                 flat_list = [x for xs in quant_pizza_holder for x in xs]
-                print('round 1million', flat_list) 
+                total_cost = sum(currentOrderCost) / 2
                 counter = Counter(flat_list)
-                print('this is counter', counter)    
+                counter = dict(counter) 
+                # switch key & value adapted from GGW stackoverflow
+                counter = {y: x for x, y in counter.items()}
+
+                print('counter', counter)
+                counter = str(counter)[1:-1]
+                
+                counter = counter.replace("'", '')
+                
+                print(f'Total order: {counter} at a cost of €{int(total_cost)}\n')    
     
             finished_order = have_finished_order()
             if finished_order == 'no':
@@ -99,10 +103,6 @@ def quantity_user_input_validator(pizza_quantity):
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-    # passing data in this way adapted from Data Analytics Ireland. 
-    # This video was used as a means to get over
-    # the issue of wishing to pass data to one function from 2 different functions
-    overall_price = total_price(pizza_quantity)
 
     # infinite loop thats only broken if valid input is given
     while True:
@@ -113,16 +113,10 @@ def quantity_user_input_validator(pizza_quantity):
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
                 
-                print('cur order', currentOrder) 
-
-                print(f'Current order: {pizza_quantity} {currentOrder} at a cost of €{overall_price}')
                 pizza_quantity_holder.append(int(pizza_quantity))
                 # add the quantities if user goes back to select more pizzas
                 totalquantity = sum(pizza_quantity_holder)
-                total_cost = sum(currentOrderCost) / 2
-                
-                print(f'\nYour total order is {totalquantity}: current order at a cost of {int(total_cost)}\n')
-                
+                                
                 break
         except ValueError as e1:
             print(f"\nInvalid quantity entry: {e1}, please try again\n")
