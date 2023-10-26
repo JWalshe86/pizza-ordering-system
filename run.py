@@ -73,11 +73,11 @@ def pizza_option_user_input_validator():
                 
                 # how to flatten list from bobbyhadz
                 flat_list = [x for xs in quant_pizza_holder for x in xs]
-                total_cost = sum(currentOrderCost) / 2
-                
+                total_cost = sum(currentOrderCost) / 2   
                 counter = Counter(flat_list)
                 
                 counter = dict(counter) 
+        
                 # swap keys and values in dictionary from stackoverflow see credits
                 counter = {counter[k]: k for k in counter}
                 # remove brackets
@@ -86,19 +86,20 @@ def pizza_option_user_input_validator():
                 counter = counter.replace("'", '')
                 
 
-                print(f'Total order: {counter} at a cost of €{int(total_cost)}\n')    
-    
-            finished_order = have_finished_order()
-            if finished_order == 'no':
+                print(f'Total order: {counter} at a cost of €{int(total_cost)}\n')
                 
-                    print('finish order no', finished_order)
-                    continue
-            break
-                # break  # exit the immediate loop
                 
+
+                break # exit the immediate loop
+            
         except ValueError as e:
             print(f"\nInvalid pizza option entry: {e}, please try again\n")
             print("not a number between 1 and 5")
+            continue
+            
+            
+                
+        
             
 
 
@@ -256,8 +257,15 @@ def stock_checker(pizza_option, quantity):
 
 def main():
     """Creates a function called main. This function controls the flow of the program"""
+finished_order_boolean = True
+# creates infinite loop which only ends if user says they've finished their order
+while finished_order_boolean is True:
     
     pizza_option_user_input_validator()
-
+    
+    finished_order = have_finished_order()            
+    
+    if finished_order == 'no':
+        finished_order_boolean = True        
 
 main()
