@@ -51,6 +51,8 @@
  
 ## TESTING
 
+[Pylint Actions 261023](./Pylint_actions261023.pdf)
+
 ## MODULES IMPORTED
 
 
