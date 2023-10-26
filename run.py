@@ -32,6 +32,9 @@ currentOrderCost = []
 pizza_quantity_holder = []
 quant_pizza_holder = []
 
+initial_screen_display_has_run = False
+print('initial', initial_screen_display_has_run)
+
 def pizza_option_user_input_validator():
     """Check if user has inputted valid data & let them know if they have not
     Args:
@@ -43,8 +46,10 @@ def pizza_option_user_input_validator():
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-            # present Nags with notions welcome & pizza menu
+    # present Nags with notions welcome & pizza menu
+    
     initial_screen_display()
+        
     # infinite loop thats only broken if valid input is given
     while True:
         try:
@@ -184,10 +189,21 @@ def add_quantity_to_order_sheet(pizza_quantity):
 def initial_screen_display():
     """content for initial user interaction with system
     display table with menu to user"""
+    global initial_screen_display_has_run
+    # code adapted from bobbyhadz.com so initial screen display only ever runs once 
+    # and does not re-run when user selects no to finished order
+    # as long as its true it returns before inner codes executed,
+    # when it's executed it turns true from false,
+    # so it's only false the first time
+    if initial_screen_display_has_run:
+        return 
+    initial_screen_display_has_run = True
     ascii_banner = pyfiglet.figlet_format("Nags with Notions")
     print(ascii_banner)
     time.sleep(2)
     os.system("cls")
+    
+    
     
 def pizza_option_input() -> str:
     """create a function to get users pizza choice, return it to the calling function
@@ -253,19 +269,17 @@ def stock_checker(pizza_option, quantity):
         print("Margherita here", pizza_option)
     print("Pony", stock.cell(2, 1).value)
     print("stock_checker", pizza_option, quantity, stock.acell("A2"))
-
-
+    
+finished_order_boolean = True
 def main():
     """Creates a function called main. This function controls the flow of the program"""
-finished_order_boolean = True
-# creates infinite loop which only ends if user says they've finished their order
+
+# # creates infinite loop which only ends if user says they've finished their order
+
 while finished_order_boolean is True:
-    
     pizza_option_user_input_validator()
-    
     finished_order = have_finished_order()            
     
     if finished_order == 'no':
         finished_order_boolean = True        
-
 main()
