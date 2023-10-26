@@ -59,60 +59,75 @@ def pizza_option_user_input_validator():
                 print(f"How many {pizza_name} would you like?\n")
 
                 add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
-
-                pizza_quantity = order_quantity()
-                quantity_user_input_validator(pizza_quantity)
-                # passing data in this way adapted from Data Analytics Ireland.
-                # This video was used as a means to get over
-                # the issue of wishing to pass data to one function from 2 different functions
+                
+                pizza_quantity = quantity_user_input_validator()
+                
                 overall_price = total_price(pizza_quantity)
                 currentOrder.append(pizza_name)
                 print(
                     f'''\nCurrent selection: {pizza_quantity} {currentOrder[0]},
                     at a cost of €{overall_price}\n'''
                 )
-
-                res = [pizza_name] * int(pizza_quantity)
-
-                quant_pizza_holder.append(res)
-
-                # how to flatten list from bobbyhadz
-                flat_list = [x for xs in quant_pizza_holder for x in xs]
-                total_cost = sum(currentOrderCost) / 2
-                counter = Counter(flat_list)
-
-                counter = dict(counter)
-
-                # swap keys and values in dictionary from stackoverflow see credits
-                counter = {counter[k]: k for k in counter}
-                # remove brackets
-                counter = str(counter)[1:-1]
-
-                counter = counter.replace("'", "")
+                # continually update order as user adds to it
+                counter, total_cost = calculate_total_order(pizza_name, pizza_quantity)
 
                 print(f"Total order: {counter} at a cost of €{int(total_cost)}\n")
 
                 break  # exit the immediate loop
-
+    
         except ValueError as e:
             print(f"\nInvalid pizza option entry: {e}, please try again\n")
             print("not a number between 1 and 5")
             continue
+    return pizza_name, pizza_quantity
 
+def calculate_total_order(pizza_name, pizza_quantity):
+    """_summary_presents total order as x: pizza names. Continually
+    updates as user selects more pizzas
 
-def quantity_user_input_validator(pizza_quantity):
+    Args:
+        pizza_name (_type_): _description_string
+        pizza_quantity (_type_): _description_string
+
+    Returns:
+        _type_: _description_dictionary with brackets removed to show quantity & type of pizza
+    """
+    res = [pizza_name] * int(pizza_quantity)
+
+    quant_pizza_holder.append(res)
+
+    # how to flatten list from bobbyhadz
+    flat_list = [x for xs in quant_pizza_holder for x in xs]
+    total_cost = sum(currentOrderCost) / 2
+    counter = Counter(flat_list)
+
+    counter = dict(counter)
+
+    # swap keys and values in dictionary from stackoverflow see credits
+    counter = {counter[k]: k for k in counter}
+    # remove brackets
+    counter = str(counter)[1:-1]
+
+    counter = counter.replace("'", "")    
+
+    return counter, total_cost
+
+def quantity_user_input_validator():
     """Check if user has inputted valid data & let them know if they have not
     Args:
-        pizza_quantity (str): _description_ the numerical option the use it's 1-10 for quantity.
-        i
+        
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-
+    CORRECT_QUANTITY_INPUT = True
+    
     # infinite loop thats only broken if valid input is given
-    while True:
+    while CORRECT_QUANTITY_INPUT is True:
+        pizza_quantity = input("\033[1m" + "Enter a number between 1 and 10 here:\n")
+    
         try:
             # code that might crash
+
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
@@ -120,11 +135,12 @@ def quantity_user_input_validator(pizza_quantity):
                 pizza_quantity_holder.append(int(pizza_quantity))
 
                 break
+            
         except ValueError as e1:
             print(f"\nInvalid quantity entry: {e1}, please try again\n")
             print("Must be a number between 1 and 10")
-            main()
-
+            CORRECT_QUANTITY_INPUT = True
+    return pizza_quantity
 
 def have_finished_order():
     """check if user has finished order or wants
@@ -220,12 +236,11 @@ def pizza_option_input() -> str:
     return pizza_option_number
 
 
-def order_quantity():
+def get_pizza_order_quantity():
     """create a function to get users quantity choice, return it to the calling function
     which is called in main()
     """
-    order_quantity1 = input("\033[1m" + "Enter a number between 1 and 10 here:\n")
-    return order_quantity1
+    
 
 
 def total_price(quantity: str) -> int:
