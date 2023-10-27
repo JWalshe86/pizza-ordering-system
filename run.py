@@ -42,10 +42,10 @@ def main():
     # present Nags with notions welcome & pizza menu
     initial_screen_display()
     pizza_option = pizza_option_input()
+    pizza_quantity = quantity_user_input()
 
 # # creates infinite loop which only ends if user says they've finished their order
 # while FINISHED_ORDER_BOOLEAN is True:
-    pizza_option_user_input_validator(pizza_option)
     finished_order = have_finished_order()
 
     # if finished_order == "no":
@@ -91,35 +91,62 @@ def pizza_option_input():
             pizza_option = input("Enter a number between 1 and 5 here:\n")
             time.sleep(1)
             os.system("cls")
+            
             pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
+            
             if int(pizza_option) >= 1 and int(pizza_option) <= 5:
                 print(f"You have chosen {pizza_name} at a cost of €{pizza_price}\n\n")
                 print(f"How many {pizza_name} would you like?\n")
 
                 add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
-                    
-                pizza_quantity = quantity_user_input_validator()
-                    
-                overall_price = total_price(pizza_quantity)
-                currentOrder.append(pizza_name)
-                print(
-                    f'''\nCurrent selection: {pizza_quantity} {currentOrder[0]},
-                    at a cost of €{overall_price}\n'''
-                    )
-                # continually update order as user adds to it
-                counter, total_cost = calculate_total_order(pizza_name, pizza_quantity)
-
-                print(f"Total order: {counter} at a cost of €{int(total_cost)}\n")
+                break
+            
                 
+                    
+                # overall_price = total_price(pizza_quantity)
+                # currentOrder.append(pizza_name)
+                # print(
+                #     f'''\nCurrent selection: {pizza_quantity} {currentOrder[0]},
+                #     at a cost of €{overall_price}\n'''
+                #     )
+                # # continually update order as user adds to it
+                # counter, total_cost = calculate_total_order(pizza_name, pizza_quantity)
+
+                # print(f"Total order: {counter} at a cost of €{int(total_cost)}\n")
     
         except ValueError as e:
             print(f"\nInvalid pizza option entry: {e}, please try again\n")
             print("not a number between 1 and 5")
-        
+    return pizza_option 
 
+def quantity_user_input():
+    """Check if user has inputted valid data & let them know if they have not
+    Args:
         
+    Returns:
+        _type_: boolean_description_if no errors returns True
+    """
     
+    # infinite loop thats only broken if valid input is given
+    while True:
+        pizza_quantity = input("\033[1m" + "Enter a number between 1 and 10 here:\n")
+    
+        try:
+            # code that might crash
 
+            if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
+                # add the quantity order to the add to sheet function
+                add_quantity_to_order_sheet(pizza_quantity)
+
+                pizza_quantity_holder.append(int(pizza_quantity))
+
+                break
+            
+        except ValueError as e1:
+            print(f"\nInvalid quantity entry: {e1}, please try again\n")
+            print("Must be a number between 1 and 10")
+        return pizza_quantity
+            
         
 def calculate_total_order(pizza_name, pizza_quantity):
     """_summary_presents total order as x: pizza names. Continually
@@ -152,35 +179,7 @@ def calculate_total_order(pizza_name, pizza_quantity):
 
     return counter, total_cost
 
-def quantity_user_input_validator():
-    """Check if user has inputted valid data & let them know if they have not
-    Args:
-        
-    Returns:
-        _type_: boolean_description_if no errors returns True
-    """
-    CORRECT_QUANTITY_INPUT = True
-    
-    # infinite loop thats only broken if valid input is given
-    while CORRECT_QUANTITY_INPUT is True:
-        pizza_quantity = input("\033[1m" + "Enter a number between 1 and 10 here:\n")
-    
-        try:
-            # code that might crash
 
-            if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
-                # add the quantity order to the add to sheet function
-                add_quantity_to_order_sheet(pizza_quantity)
-
-                pizza_quantity_holder.append(int(pizza_quantity))
-
-                break
-            
-        except ValueError as e1:
-            print(f"\nInvalid quantity entry: {e1}, please try again\n")
-            print("Must be a number between 1 and 10")
-            CORRECT_QUANTITY_INPUT = True
-    return pizza_quantity
 
 def have_finished_order():
     """check if user has finished order or wants
