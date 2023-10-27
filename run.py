@@ -69,71 +69,57 @@ def initial_screen_display():
     print(nags_banner)
     time.sleep(3)
     os.system("cls")
-    
-PIZZA_OPTION_VALID = True
-    
+        
 def pizza_option_input():
     """create a function to get users pizza choice, return it to the calling function
     which is called in main()
     """
-    while PIZZA_OPTION_VALID is True:
-        print("\nPlease select one of the 5 number options below")
-
-        print(
-            tabulate(
-                menu_data,
-                headers=["Option", "Name", "Price(€)"],
-                numalign="center",
-                tablefmt="double_outline",
-            ),
-        )
-        pizza_option_number = input("Enter a number between 1 and 5 here:\n")
-        time.sleep(1)
-        os.system("cls")
-
-        return pizza_option_number
-    
-
-def pizza_option_user_input_validator(pizza_option):
-    """Check if user has inputted valid data & let them know if they have not
-    Args:
-        data (str): _description_ the numerical option the user takes whether it's 1-5
-        for pizza or 1-10 for quantity.
-        input_identity (string) _description_ returns
-        a value so the validator knows if it's validating
-        user input for pizza selection or user input for quantity selection
-
-    Returns:
-        _type_: boolean_description_if no errors returns True
-    """
     # infinite loop thats only broken if valid input is given
-    try:
-        # code that might crash
-        pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
-        if int(pizza_option) >= 1 and int(pizza_option) <= 5:
-            print(f"You have chosen {pizza_name} at a cost of €{pizza_price}\n\n")
-            print(f"How many {pizza_name} would you like?\n")
+    while True:
+        try:
+            # code that might crash
+            print("\nPlease select one of the 5 number options below")
 
-            add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
-                
-            pizza_quantity = quantity_user_input_validator()
-                
-            overall_price = total_price(pizza_quantity)
-            currentOrder.append(pizza_name)
             print(
-                f'''\nCurrent selection: {pizza_quantity} {currentOrder[0]},
-                at a cost of €{overall_price}\n'''
-                )
-            # continually update order as user adds to it
-            counter, total_cost = calculate_total_order(pizza_name, pizza_quantity)
+                tabulate(
+                    menu_data,
+                    headers=["Option", "Name", "Price(€)"],
+                    numalign="center",
+                    tablefmt="double_outline",
+                ),
+            )
+            pizza_option = input("Enter a number between 1 and 5 here:\n")
+            time.sleep(1)
+            os.system("cls")
+            pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
+            if int(pizza_option) >= 1 and int(pizza_option) <= 5:
+                print(f"You have chosen {pizza_name} at a cost of €{pizza_price}\n\n")
+                print(f"How many {pizza_name} would you like?\n")
 
-            print(f"Total order: {counter} at a cost of €{int(total_cost)}\n")
-            PIZZA_OPTION_VALID = False
-            return PIZZA_OPTION_VALID,pizza_name, pizza_quantity    
+                add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
+                    
+                pizza_quantity = quantity_user_input_validator()
+                    
+                overall_price = total_price(pizza_quantity)
+                currentOrder.append(pizza_name)
+                print(
+                    f'''\nCurrent selection: {pizza_quantity} {currentOrder[0]},
+                    at a cost of €{overall_price}\n'''
+                    )
+                # continually update order as user adds to it
+                counter, total_cost = calculate_total_order(pizza_name, pizza_quantity)
+
+                print(f"Total order: {counter} at a cost of €{int(total_cost)}\n")
+                
     
-    except ValueError as e:
-        print(f"\nInvalid pizza option entry: {e}, please try again\n")
-        print("not a number between 1 and 5")    
+        except ValueError as e:
+            print(f"\nInvalid pizza option entry: {e}, please try again\n")
+            print("not a number between 1 and 5")
+        
+
+        
+    
+
         
 def calculate_total_order(pizza_name, pizza_quantity):
     """_summary_presents total order as x: pizza names. Continually
