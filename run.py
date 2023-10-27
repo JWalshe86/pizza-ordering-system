@@ -41,16 +41,17 @@ def main():
     """Creates a function called main. This function controls the flow of the program"""
     # present Nags with notions welcome & pizza menu
     initial_screen_display()
+    pizza_option = pizza_option_input()
 
 # # creates infinite loop which only ends if user says they've finished their order
 # while FINISHED_ORDER_BOOLEAN is True:
-    pizza_option_user_input_validator()
+    pizza_option_user_input_validator(pizza_option)
     finished_order = have_finished_order()
 
     # if finished_order == "no":
         # FINISHED_ORDER_BOOLEAN = True
 
-def pizza_option_user_input_validator():
+def pizza_option_user_input_validator(pizza_option):
     """Check if user has inputted valid data & let them know if they have not
     Args:
         data (str): _description_ the numerical option the user takes whether it's 1-5
@@ -66,7 +67,6 @@ def pizza_option_user_input_validator():
     while True:
         try:
             # code that might crash
-            pizza_option = pizza_option_input()
             pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
             if int(pizza_option) >= 1 and int(pizza_option) <= 5:
                 print(f"You have chosen {pizza_name} at a cost of €{pizza_price}\n\n")
