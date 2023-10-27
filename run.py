@@ -160,8 +160,20 @@ def have_finished_order():
     Returns:
         _type_: _description_
     """
-    finish_order = input("Have you completed your order?")
-    os.system("cls")
+    while True:
+        try:
+            print("Please enter 'yes or 'no\n")
+            finish_order = input("Have you completed your order?")
+            os.system("cls")
+            if finish_order == 'yes' or finish_order == 'no':
+                print('Answer must be yes or no')
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            notyes_no = "Answer must be yes or no"
+            notyes_no = colored(notyes_no, "red", attrs=["reverse", "blink"])
+            print(notyes_no)
 
     return finish_order
 
