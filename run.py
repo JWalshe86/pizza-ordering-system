@@ -115,8 +115,9 @@ def pizza_option_input():
             else:
                 raise ValueError      
         except ValueError:
-            print("not a number between 1 and 5")
-            print(ValueError)
+            not1_5 = "not a number between 1 and 5"
+            not1_5 = colored(not1_5, "red", attrs=["reverse", "blink"])
+            print(not1_5)
     return pizza_option
             
 
@@ -146,7 +147,9 @@ def quantity_user_input():
             else:
                 raise ValueError
         except ValueError:
-            print("Must be a number between 1 and 10")
+            not1_10 = "Must be a number between 1 and 10\n"
+            not1_10 = colored(not1_10, "red", attrs=["reverse", "blink"])
+            print(not1_10)
         
     return pizza_quantity
 
