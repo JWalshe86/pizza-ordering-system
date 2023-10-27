@@ -69,6 +69,27 @@ def initial_screen_display():
     print(nags_banner)
     time.sleep(3)
     os.system("cls")
+    
+def pizza_option_input() -> str:
+    """create a function to get users pizza choice, return it to the calling function
+    which is called in main()
+    """
+    print("\nPlease select one of the 5 number options below")
+
+    print(
+        tabulate(
+            menu_data,
+            headers=["Option", "Name", "Price(€)"],
+            numalign="center",
+            tablefmt="double_outline",
+        ),
+    )
+    pizza_option_number = input("Enter a number between 1 and 5 here:\n")
+    time.sleep(1)
+    os.system("cls")
+
+    return pizza_option_number
+    
 
 def pizza_option_user_input_validator(pizza_option):
     """Check if user has inputted valid data & let them know if they have not
@@ -227,33 +248,10 @@ def add_quantity_to_order_sheet(pizza_quantity):
     order.update_cell(i, 3, f"{quantity_selection[0]}")
     total_price(quantity_selection[0])
 
-def pizza_option_input() -> str:
-    """create a function to get users pizza choice, return it to the calling function
-    which is called in main()
-    """
-    print("\nPlease select one of the 5 number options below")
-
-    print(
-        tabulate(
-            menu_data,
-            headers=["Option", "Name", "Price(€)"],
-            numalign="center",
-            tablefmt="double_outline",
-        ),
-    )
-    pizza_option_number = input("Enter a number between 1 and 5 here:\n")
-    time.sleep(1)
-    os.system("cls")
-
-    return pizza_option_number
-
-
 def get_pizza_order_quantity():
     """create a function to get users quantity choice, return it to the calling function
     which is called in main()
     """
-    
-
 
 def total_price(quantity: str) -> int:
     """function to calculate total price. Quantity taken from add values function. Quantity argument
