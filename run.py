@@ -1,3 +1,4 @@
+
 """Module used here to clear terminal screen"""
 import os
 import time
@@ -33,6 +34,21 @@ quant_pizza_holder = []
 
 INITIAL_SCREEN_DISPLAY_HAS_RUN = False
 
+FINISHED_ORDER_BOOLEAN = True
+
+
+def main():
+    """Creates a function called main. This function controls the flow of the program"""
+
+
+# # creates infinite loop which only ends if user says they've finished their order
+
+while FINISHED_ORDER_BOOLEAN is True:
+    pizza_option_user_input_validator()
+    finished_order = have_finished_order()
+
+    if finished_order == "no":
+        FINISHED_ORDER_BOOLEAN = True
 
 def pizza_option_user_input_validator():
     """Check if user has inputted valid data & let them know if they have not
@@ -279,20 +295,4 @@ def stock_checker(pizza_option, quantity):
     print("Pony", stock.cell(2, 1).value)
     print("stock_checker", pizza_option, quantity, stock.acell("A2"))
 
-
-FINISHED_ORDER_BOOLEAN = True
-
-
-def main():
-    """Creates a function called main. This function controls the flow of the program"""
-
-
-# # creates infinite loop which only ends if user says they've finished their order
-
-while FINISHED_ORDER_BOOLEAN is True:
-    pizza_option_user_input_validator()
-    finished_order = have_finished_order()
-
-    if finished_order == "no":
-        FINISHED_ORDER_BOOLEAN = True
 main()
