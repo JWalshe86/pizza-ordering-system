@@ -153,6 +153,18 @@ def quantity_user_input():
         
     return pizza_quantity
 
+def have_finished_order():
+    """check if user has finished order or wants
+    to go back and add more to order
+
+    Returns:
+        _type_: _description_
+    """
+    finish_order = input("Have you completed your order?")
+    os.system("cls")
+
+    return finish_order
+
 def calculate_total_order(pizza_name, pizza_quantity):
     """_summary_presents total order as x: pizza names. Continually
     updates as user selects more pizzas
@@ -183,20 +195,6 @@ def calculate_total_order(pizza_name, pizza_quantity):
     counter = counter.replace("'", "")
 
     return counter, total_cost
-
-
-def have_finished_order():
-    """check if user has finished order or wants
-    to go back and add more to order
-
-    Returns:
-        _type_: _description_
-    """
-    finish_order = input("Have you completed your order?")
-    os.system("cls")
-
-    return finish_order
-
 
 def get_pizza_name_and_price_ordered(pizza_option):
     """_summary_
