@@ -50,6 +50,25 @@ def main():
 
     # if finished_order == "no":
         # FINISHED_ORDER_BOOLEAN = True
+        
+def initial_screen_display():
+    """content for initial user interaction with system
+    display table with menu to user"""
+    global INITIAL_SCREEN_DISPLAY_HAS_RUN
+    # code adapted from bobbyhadz.com so initial screen display only ever runs once
+    # and does not re-run when user selects no to finished order
+    # as long as its true it returns before inner codes executed,
+    # when it's executed it turns true from false,
+    # so it's only false the first time
+    if INITIAL_SCREEN_DISPLAY_HAS_RUN:
+        return
+    INITIAL_SCREEN_DISPLAY_HAS_RUN = True
+
+    nags_banner = pyfiglet.figlet_format("Nags with Notions")
+    nags_banner = colored(nags_banner, "magenta", attrs=["reverse", "blink"])
+    print(nags_banner)
+    time.sleep(3)
+    os.system("cls")
 
 def pizza_option_user_input_validator(pizza_option):
     """Check if user has inputted valid data & let them know if they have not
@@ -207,27 +226,6 @@ def add_quantity_to_order_sheet(pizza_quantity):
     quantity_selection = list(pizza_quantity)
     order.update_cell(i, 3, f"{quantity_selection[0]}")
     total_price(quantity_selection[0])
-
-
-def initial_screen_display():
-    """content for initial user interaction with system
-    display table with menu to user"""
-    global INITIAL_SCREEN_DISPLAY_HAS_RUN
-    # code adapted from bobbyhadz.com so initial screen display only ever runs once
-    # and does not re-run when user selects no to finished order
-    # as long as its true it returns before inner codes executed,
-    # when it's executed it turns true from false,
-    # so it's only false the first time
-    if INITIAL_SCREEN_DISPLAY_HAS_RUN:
-        return
-    INITIAL_SCREEN_DISPLAY_HAS_RUN = True
-
-    nags_banner = pyfiglet.figlet_format("Nags with Notions")
-    nags_banner = colored(nags_banner, "magenta", attrs=["reverse", "blink"])
-    print(nags_banner)
-    time.sleep(3)
-    os.system("cls")
-
 
 def pizza_option_input() -> str:
     """create a function to get users pizza choice, return it to the calling function
