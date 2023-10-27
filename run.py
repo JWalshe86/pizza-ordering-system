@@ -165,9 +165,10 @@ def have_finished_order():
             print("Please enter 'yes or 'no\n")
             finish_order = input("Have you completed your order?")
             os.system("cls")
-            if finish_order == 'yes' or finish_order == 'no':
-                print('Answer must be yes or no')
-                break
+            if finish_order == 'yes':
+                print('You said yes')
+            if finish_order == 'no':
+                pizza_option_input()
             else:
                 raise ValueError
         except ValueError:
