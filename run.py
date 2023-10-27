@@ -1,4 +1,3 @@
-
 """Module used here to clear terminal screen"""
 import os
 import time
@@ -44,13 +43,14 @@ def main():
     pizza_option = pizza_option_input()
     pizza_quantity = quantity_user_input()
 
-# # creates infinite loop which only ends if user says they've finished their order
-# while FINISHED_ORDER_BOOLEAN is True:
+    # # creates infinite loop which only ends if user says they've finished their order
+    # while FINISHED_ORDER_BOOLEAN is True:
     finished_order = have_finished_order()
 
     # if finished_order == "no":
-        # FINISHED_ORDER_BOOLEAN = True
-        
+    # FINISHED_ORDER_BOOLEAN = True
+
+
 def initial_screen_display():
     """content for initial user interaction with system
     display table with menu to user"""
@@ -69,7 +69,8 @@ def initial_screen_display():
     print(nags_banner)
     time.sleep(3)
     os.system("cls")
-        
+
+
 def pizza_option_input():
     """create a function to get users pizza choice, return it to the calling function
     which is called in main()
@@ -88,21 +89,19 @@ def pizza_option_input():
                     tablefmt="double_outline",
                 ),
             )
-            pizza_option = input("Enter a number between 1 and 5 here:\n")
+            pizza_option = int(input("Enter a number between 1 and 5 here:\n"))
             time.sleep(1)
             os.system("cls")
-            
+
             pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
-            
-            if int(pizza_option) >= 1 and int(pizza_option) <= 5:
+
+            if pizza_option >= 1 and pizza_option <= 5:
                 print(f"You have chosen {pizza_name} at a cost of €{pizza_price}\n\n")
                 print(f"How many {pizza_name} would you like?\n")
 
                 add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
                 break
-            
-                
-                    
+
                 # overall_price = total_price(pizza_quantity)
                 # currentOrder.append(pizza_name)
                 # print(
@@ -113,27 +112,30 @@ def pizza_option_input():
                 # counter, total_cost = calculate_total_order(pizza_name, pizza_quantity)
 
                 # print(f"Total order: {counter} at a cost of €{int(total_cost)}\n")
-    
-        except ValueError as e:
-            print(f"\nInvalid pizza option entry: {e}, please try again\n")
+            else:
+                raise ValueError      
+        except ValueError:
             print("not a number between 1 and 5")
-    return pizza_option 
+            print(ValueError)
+    return pizza_option
+            
+
 
 def quantity_user_input():
     """Check if user has inputted valid data & let them know if they have not
     Args:
-        
+
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-    
+
     # infinite loop thats only broken if valid input is given
     while True:
-        pizza_quantity = input("\033[1m" + "Enter a number between 1 and 10 here:\n")
-    
         try:
             # code that might crash
-
+            pizza_quantity = input(
+                "\033[1m" + "Enter a number between 1 and 10 here:\n"
+            )
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
@@ -141,13 +143,13 @@ def quantity_user_input():
                 pizza_quantity_holder.append(int(pizza_quantity))
 
                 break
-            
-        except ValueError as e1:
-            print(f"\nInvalid quantity entry: {e1}, please try again\n")
+            else:
+                raise ValueError
+        except ValueError:
             print("Must be a number between 1 and 10")
-        return pizza_quantity
-            
         
+    return pizza_quantity
+
 def calculate_total_order(pizza_name, pizza_quantity):
     """_summary_presents total order as x: pizza names. Continually
     updates as user selects more pizzas
@@ -175,10 +177,9 @@ def calculate_total_order(pizza_name, pizza_quantity):
     # remove brackets
     counter = str(counter)[1:-1]
 
-    counter = counter.replace("'", "")    
+    counter = counter.replace("'", "")
 
     return counter, total_cost
-
 
 
 def have_finished_order():
@@ -233,10 +234,12 @@ def add_quantity_to_order_sheet(pizza_quantity):
     order.update_cell(i, 3, f"{quantity_selection[0]}")
     total_price(quantity_selection[0])
 
+
 def get_pizza_order_quantity():
     """create a function to get users quantity choice, return it to the calling function
     which is called in main()
     """
+
 
 def total_price(quantity: str) -> int:
     """function to calculate total price. Quantity taken from add values function. Quantity argument
@@ -273,5 +276,6 @@ def stock_checker(pizza_option, quantity):
         print("Margherita here", pizza_option)
     print("Pony", stock.cell(2, 1).value)
     print("stock_checker", pizza_option, quantity, stock.acell("A2"))
+
 
 main()
