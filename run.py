@@ -34,21 +34,21 @@ quant_pizza_holder = []
 
 INITIAL_SCREEN_DISPLAY_HAS_RUN = False
 
-FINISHED_ORDER_BOOLEAN = True
+# FINISHED_ORDER_BOOLEAN = True
 
 
 def main():
     """Creates a function called main. This function controls the flow of the program"""
-
+    # present Nags with notions welcome & pizza menu
+    initial_screen_display()
 
 # # creates infinite loop which only ends if user says they've finished their order
-
-while FINISHED_ORDER_BOOLEAN is True:
+# while FINISHED_ORDER_BOOLEAN is True:
     pizza_option_user_input_validator()
     finished_order = have_finished_order()
 
-    if finished_order == "no":
-        FINISHED_ORDER_BOOLEAN = True
+    # if finished_order == "no":
+        # FINISHED_ORDER_BOOLEAN = True
 
 def pizza_option_user_input_validator():
     """Check if user has inputted valid data & let them know if they have not
@@ -62,8 +62,6 @@ def pizza_option_user_input_validator():
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-    # present Nags with notions welcome & pizza menu
-    initial_screen_display()
     # infinite loop thats only broken if valid input is given
     while True:
         try:
