@@ -44,9 +44,10 @@ def main():
     initial_screen_display()
     pizza_option = pizza_option_input()
     pizza_quantity = quantity_user_input()
-    finished_order = have_finished_order()
     pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
-    shopping_cart(pizza_name, pizza_quantity)
+    total_cost = shopping_cart(pizza_name, pizza_quantity)
+    overall_quant_items = calc_overall_quant_items()
+    finished_order = have_finished_order()
 
 def initial_screen_display():
     """content for initial user interaction with system
@@ -91,10 +92,10 @@ def pizza_option_input():
             os.system("cls")
 
             if pizza_option >= 1 and pizza_option <= 5:
-                print(f"You have chosen {pizza_name} at a cost of €{pizza_price}\n\n")
-                print(f"How many {pizza_name} would you like?\n")
+                
+                print(f"How many would you like?\n")
 
-                add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
+                # add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
                 break
 
             else:
@@ -145,8 +146,8 @@ def have_finished_order():
     """
     while True:
         try:
-            print("Please enter 'yes or 'no\n")
             finish_order = input("Have you completed your order?")
+            print("Please enter 'yes or 'no\n")
             os.system("cls")
             if finish_order == 'yes':
                 print('You said yes')
@@ -187,35 +188,44 @@ def shopping_cart(pizza_name, pizza_quantity):
         _type_: _description_dictionary with brackets removed to show quantity & type of pizza
     """
     res = [pizza_name] * int(pizza_quantity)
+    print('----- YOUR CART -----\n')
     
-    # overall_price = total_price(pizza_quantity)
-                # currentOrder.append(pizza_name)
-                # print(
-                #     f'''\nCurrent selection: {pizza_quantity} {currentOrder[0]},
-                #     at a cost of €{overall_price}\n'''
-                #     )
-                # # continually update order as user adds to it
-                # counter, total_cost = shopping_cart(pizza_name, pizza_quantity)
+    overall_price = total_price(pizza_quantity)
+    currentOrder.append(pizza_name)
+    
+    # continually update order as user adds to it
+    # counter, total_cost = shopping_cart(pizza_name, pizza_quantity)
 
-                # print(f"Total order: {counter} at a cost of €{int(total_cost)}\n")
+    # print(f"Total order: {counter} at a cost of €{int(total_cost)}\n")
 
     quant_pizza_holder.append(res)
 
+    
+    total_cost = sum(currentOrderCost) / 2
+    
+
+    return total_cost
+
+def calc_overall_quant_items():
+    """_summary_calculate the amount of items by multiplying items
+    by quantity and adding these to basket each time more items are selected.
+    """
     # how to flatten list from bobbyhadz
     flat_list = [x for xs in quant_pizza_holder for x in xs]
-    total_cost = sum(currentOrderCost) / 2
-    counter = Counter(flat_list)
+    overall_quant_items = Counter(flat_list)
 
-    counter = dict(counter)
+    overall_quant_items = dict(overall_quant_items)
 
     # swap keys and values in dictionary from stackoverflow see credits
-    counter = {counter[k]: k for k in counter}
+    overall_quant_items = {overall_quant_items[k]: k for k in overall_quant_items}
     # remove brackets
-    counter = str(counter)[1:-1]
+    overall_quant_items = str(overall_quant_items)[1:-1]
 
-    counter = counter.replace("'", "")
-
-    return counter, total_cost
+    overall_quant_items = overall_quant_items.replace("'", "")
+    
+    print('overall quant items:', overall_quant_items)
+    
+    return overall_quant_items
 
 def add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price):
     """
