@@ -37,19 +37,16 @@ INITIAL_SCREEN_DISPLAY_HAS_RUN = False
 
 
 def main():
-    """Creates a function called main. This function controls the flow of the program"""
+    """Creates a function called main. This function controls the flow of the program
+    Also has the benefit of having returned values in the same place and these can contribute
+    to other, more complex functions, as the project progresses"""
     # present Nags with notions welcome & pizza menu
     initial_screen_display()
     pizza_option = pizza_option_input()
     pizza_quantity = quantity_user_input()
-
-    # # creates infinite loop which only ends if user says they've finished their order
-    # while FINISHED_ORDER_BOOLEAN is True:
     finished_order = have_finished_order()
-
-    # if finished_order == "no":
-    # FINISHED_ORDER_BOOLEAN = True
-
+    pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
+    shopping_cart(pizza_name, pizza_quantity)
 
 def initial_screen_display():
     """content for initial user interaction with system
@@ -93,8 +90,6 @@ def pizza_option_input():
             time.sleep(1)
             os.system("cls")
 
-            pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
-
             if pizza_option >= 1 and pizza_option <= 5:
                 print(f"You have chosen {pizza_name} at a cost of €{pizza_price}\n\n")
                 print(f"How many {pizza_name} would you like?\n")
@@ -102,16 +97,6 @@ def pizza_option_input():
                 add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
                 break
 
-                # overall_price = total_price(pizza_quantity)
-                # currentOrder.append(pizza_name)
-                # print(
-                #     f'''\nCurrent selection: {pizza_quantity} {currentOrder[0]},
-                #     at a cost of €{overall_price}\n'''
-                #     )
-                # # continually update order as user adds to it
-                # counter, total_cost = calculate_total_order(pizza_name, pizza_quantity)
-
-                # print(f"Total order: {counter} at a cost of €{int(total_cost)}\n")
             else:
                 raise ValueError      
         except ValueError:
@@ -120,8 +105,6 @@ def pizza_option_input():
             print(not1_5)
     return pizza_option
             
-
-
 def quantity_user_input():
     """Check if user has inputted valid data & let them know if they have not
     Args:
@@ -144,8 +127,8 @@ def quantity_user_input():
                 pizza_quantity_holder.append(int(pizza_quantity))
 
                 break
-            else:
-                raise ValueError
+            
+            raise ValueError
         except ValueError:
             not1_10 = "Must be a number between 1 and 10\n"
             not1_10 = colored(not1_10, "red", attrs=["reverse", "blink"])
@@ -167,10 +150,12 @@ def have_finished_order():
             os.system("cls")
             if finish_order == 'yes':
                 print('You said yes')
+                break
             if finish_order == 'no':
-                pizza_option_input()
-            else:
-                raise ValueError
+                main()
+                break
+            
+            raise ValueError
         except ValueError:
             notyes_no = "Answer must be yes or no"
             notyes_no = colored(notyes_no, "red", attrs=["reverse", "blink"])
@@ -178,7 +163,19 @@ def have_finished_order():
 
     return finish_order
 
-def calculate_total_order(pizza_name, pizza_quantity):
+def get_pizza_name_and_price_ordered(pizza_option):
+    """_summary_
+
+    Returns:
+        : _description_a string of the name of the pizza chosen by the user.
+        Passes these values back to where they were called in the main function
+    """
+    i = pizza_option
+    pizza_option = menu.cell(i, 2).value
+    pizza_price = menu.cell(i, 3).value
+    return pizza_option, pizza_price
+
+def shopping_cart(pizza_name, pizza_quantity):
     """_summary_presents total order as x: pizza names. Continually
     updates as user selects more pizzas
 
@@ -190,6 +187,17 @@ def calculate_total_order(pizza_name, pizza_quantity):
         _type_: _description_dictionary with brackets removed to show quantity & type of pizza
     """
     res = [pizza_name] * int(pizza_quantity)
+    
+    # overall_price = total_price(pizza_quantity)
+                # currentOrder.append(pizza_name)
+                # print(
+                #     f'''\nCurrent selection: {pizza_quantity} {currentOrder[0]},
+                #     at a cost of €{overall_price}\n'''
+                #     )
+                # # continually update order as user adds to it
+                # counter, total_cost = shopping_cart(pizza_name, pizza_quantity)
+
+                # print(f"Total order: {counter} at a cost of €{int(total_cost)}\n")
 
     quant_pizza_holder.append(res)
 
@@ -208,19 +216,6 @@ def calculate_total_order(pizza_name, pizza_quantity):
     counter = counter.replace("'", "")
 
     return counter, total_cost
-
-def get_pizza_name_and_price_ordered(pizza_option):
-    """_summary_
-
-    Returns:
-        : _description_a string of the name of the pizza chosen by the user.
-        Passes these values back to where they were called in the main function
-    """
-    i = pizza_option
-    pizza_option = menu.cell(i, 2).value
-    pizza_price = menu.cell(i, 3).value
-    return pizza_option, pizza_price
-
 
 def add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price):
     """
