@@ -33,9 +33,6 @@ quant_pizza_holder = []
 
 INITIAL_SCREEN_DISPLAY_HAS_RUN = False
 
-# FINISHED_ORDER_BOOLEAN = True
-
-
 def main():
     """Creates a function called main. This function controls the flow of the program
     Also has the benefit of having returned values in the same place and these can contribute
@@ -45,8 +42,9 @@ def main():
     pizza_option = pizza_option_input()
     pizza_quantity = quantity_user_input()
     pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
-    total_cost = shopping_cart(pizza_name, pizza_quantity)
     overall_quant_items = calc_overall_quant_items()
+    total_cost = calc_overall_cost(pizza_name, pizza_quantity)
+    shopping_cart(overall_quant_items, total_cost)
     finished_order = have_finished_order()
 
 def initial_screen_display():
@@ -176,39 +174,10 @@ def get_pizza_name_and_price_ordered(pizza_option):
     pizza_price = menu.cell(i, 3).value
     return pizza_option, pizza_price
 
-def shopping_cart(pizza_name, pizza_quantity):
-    """_summary_presents total order as x: pizza names. Continually
-    updates as user selects more pizzas
-
-    Args:
-        pizza_name (_type_): _description_string
-        pizza_quantity (_type_): _description_string
-
-    Returns:
-        _type_: _description_dictionary with brackets removed to show quantity & type of pizza
-    """
-    res = [pizza_name] * int(pizza_quantity)
-    print('----- YOUR CART -----\n')
-    
-    overall_price = total_price(pizza_quantity)
-    currentOrder.append(pizza_name)
-    
-    # continually update order as user adds to it
-    # counter, total_cost = shopping_cart(pizza_name, pizza_quantity)
-
-    # print(f"Total order: {counter} at a cost of €{int(total_cost)}\n")
-
-    quant_pizza_holder.append(res)
-
-    
-    total_cost = sum(currentOrderCost) / 2
-    
-
-    return total_cost
-
 def calc_overall_quant_items():
     """_summary_calculate the amount of items by multiplying items
     by quantity and adding these to basket each time more items are selected.
+    Returns total quantity to main function
     """
     # how to flatten list from bobbyhadz
     flat_list = [x for xs in quant_pizza_holder for x in xs]
@@ -223,9 +192,44 @@ def calc_overall_quant_items():
 
     overall_quant_items = overall_quant_items.replace("'", "")
     
-    print('overall quant items:', overall_quant_items)
+    print(overall_quant_items)
     
     return overall_quant_items
+
+def calc_overall_cost(pizza_name, pizza_quantity):
+    """_summary_calculate the users total cost as items are
+    added to the list. Returns this to main()
+    """
+    res = [pizza_name] * int(pizza_quantity)
+    overall_price = total_price(pizza_quantity)
+    currentOrder.append(pizza_name)
+    
+    # continually update order as user adds to it
+    # counter, total_cost = shopping_cart(pizza_name, pizza_quantity)
+
+    # print(f"Total order: {counter} at a cost of €{int(total_cost)}\n")
+
+    quant_pizza_holder.append(res)
+
+    
+    total_cost = sum(currentOrderCost) / 2
+    
+    return total_cost
+
+def shopping_cart(overall_quant_items, total_cost):
+    """_summary_presents total order as x: pizza names. Continually
+    updates as user selects more pizzas
+
+    Args:
+        pizza_name (_type_): _description_string
+        pizza_quantity (_type_): _description_string
+
+    Returns:
+        _type_: _description_dictionary with brackets removed to show quantity & type of pizza
+    """
+    
+    print('----- YOUR CART -----\n')
+    
 
 def add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price):
     """
