@@ -85,6 +85,7 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 * Manipulating google sheets [gspread.org](https://docs.gspread.org/en/latest/user-guide.html)
 * Try catch with loop [Paul Miskew](https://youtu.be/b0q9vVgAMq8?si=U_UnqDxHyZegVnsX)
 * [How to pass data between functions](https://www.youtube.com/watch?v=GsKDtSHRHdI) this video was used as a means to get over the issue of wishing to pass data to one function from 2 different functions
+* [Print two lists side by side stackoverflow](https://stackoverflow.com/questions/48053979/print-2-lists-side-by-side)
 
 ## TOOLS
 [GitHub](https://github.com/) - used for hosting the source code of the program

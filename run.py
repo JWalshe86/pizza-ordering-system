@@ -44,8 +44,8 @@ def main():
     pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
     total_cost = calc_overall_cost(pizza_name, pizza_quantity)
     overall_quant_items = calc_overall_quant_items()
-    print('in main',*overall_quant_items,sep='\n')
-    shopping_cart(overall_quant_items, total_cost)
+    overall_price = total_price(pizza_quantity)
+    shopping_cart(overall_quant_items, overall_price)
     finished_order = have_finished_order()
 
 def initial_screen_display():
@@ -120,6 +120,7 @@ def quantity_user_input():
             pizza_quantity = input(
                 "\033[1m" + "Enter a number between 1 and 10 here:\n"
             )
+            os.system("cls")
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
@@ -184,6 +185,15 @@ def calc_overall_quant_items():
 
     flat_list = [x for xs in quant_pizza_holder for x in xs]
     overall_quant_items = Counter(flat_list)
+    # print('this is under flatlist',*overall_quant_items,sep='\n')
+    # overall_quant_items = dict(overall_quant_items)
+
+    # # swap keys and values in dictionary from stackoverflow see credits
+    # overall_quant_items = {overall_quant_items[k]: k for k in overall_quant_items}
+    # # remove brackets
+    # overall_quant_items = str(overall_quant_items)[1:-1]
+
+    # overall_quant_items = overall_quant_items.replace("'", "")
         
     return overall_quant_items
 
@@ -192,13 +202,12 @@ def calc_overall_cost(pizza_name, pizza_quantity):
     added to the list. Returns this to main()
     """
     res = [pizza_name] * int(pizza_quantity)
-    overall_price = total_price(pizza_quantity)
     currentOrder.append(pizza_name)
     
     quant_pizza_holder.append(res)
 
     total_cost = sum(currentOrderCost) / 2
-    
+    total_cost = str(total_cost)
     return total_cost
 
 def shopping_cart(overall_quant_items, total_cost):
@@ -213,11 +222,17 @@ def shopping_cart(overall_quant_items, total_cost):
         _type_: _description_dictionary with brackets removed to show quantity & type of pizza
     """
     
-    print('----- YOUR CART -----\n')
+    print('     ---------- YOUR CART ---------\n')
+    # print 2 lists side by side from stackoverflow
+    cart_list= "\n".join("{} {}".format(x, y) for x, y in zip(overall_quant_items, currentOrderCost))
+    print('Item                            Price/n')
+    print('                   ')
+    print(cart_list)
+    total_cost = str(total_cost)
+    print('                               ')
+    print('total cost.......................', total_cost)
+    print('                               ')
     
-    
-    print(f"Total order: {overall_quant_items}, at a cost of €{int(total_cost)}")
-
 def add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price):
     """
     Pizza info taken from pizza validator function. Uploaded to google sheets
@@ -242,8 +257,8 @@ def add_quantity_to_order_sheet(pizza_quantity):
     i = len(order.col_values(1))
     quantity_selection = list(pizza_quantity)
     order.update_cell(i, 3, f"{quantity_selection[0]}")
-    total_price(quantity_selection[0])
-
+    # total_price(quantity_selection[0])
+    return  quantity_selection
 
 def get_pizza_order_quantity():
     """create a function to get users quantity choice, return it to the calling function
@@ -262,7 +277,7 @@ def total_price(quantity: str) -> int:
     order = SHEET.worksheet("order")
     i = len(order.col_values(1))
     price = order.cell(i, 2).value
-    total = int(quantity) * int(price)
+    total = int(quantity[0]) * int(price)
     order.update_cell(i, 4, f"{total}")
     currentOrderCost.append(int(total))
     return total
