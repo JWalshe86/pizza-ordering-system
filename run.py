@@ -42,9 +42,12 @@ def main():
     pizza_quantity = quantity_user_input()
     pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
     total_cost = calc_overall_cost(pizza_name, pizza_quantity)
+    print('total cost in main', total_cost)
     overall_quant_items = calc_overall_quant_items()
-    overall_price = total_price(pizza_quantity)
-    shopping_cart(overall_quant_items, overall_price)
+    total_cost = total_price(pizza_quantity)
+    add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
+    print('total_cost beneath price in main', total_cost)
+    shopping_cart(overall_quant_items, total_cost)
     finished_order = have_finished_order()
 
 def initial_screen_display():
@@ -66,7 +69,6 @@ def initial_screen_display():
     time.sleep(3)
     os.system("cls")
 
-
 def pizza_option_input():
     """create a function to get users pizza choice, return it to the calling function
     which is called in main()
@@ -84,8 +86,11 @@ def pizza_option_input():
                     numalign="center",
                     tablefmt="double_outline",
                 ),
-            )
+            )            
+            
+            
             pizza_option = int(input("Enter a number between 1 and 5 here:\n"))
+
             time.sleep(1)
             os.system("cls")
 
@@ -93,7 +98,6 @@ def pizza_option_input():
                 
                 print(f"How many would you like?\n")
 
-                # add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
                 break
 
             else:
@@ -171,6 +175,7 @@ def get_pizza_name_and_price_ordered(pizza_option):
     i = pizza_option
     pizza_name = menu.cell(i, 2).value
     pizza_price = menu.cell(i, 3).value
+    print('pizza price in get pizza price', pizza_price)
     return pizza_name, pizza_price
 
 def calc_overall_quant_items():
@@ -182,15 +187,6 @@ def calc_overall_quant_items():
 
     flat_list = [x for xs in quant_pizza_holder for x in xs]
     overall_quant_items = Counter(flat_list)
-    # print('this is under flatlist',*overall_quant_items,sep='\n')
-    # overall_quant_items = dict(overall_quant_items)
-
-    # # swap keys and values in dictionary from stackoverflow see credits
-    # overall_quant_items = {overall_quant_items[k]: k for k in overall_quant_items}
-    # # remove brackets
-    # overall_quant_items = str(overall_quant_items)[1:-1]
-
-    # overall_quant_items = overall_quant_items.replace("'", "")
         
     return overall_quant_items
 
@@ -204,7 +200,9 @@ def calc_overall_cost(pizza_name, pizza_quantity):
     quant_pizza_holder.append(res)
 
     total_cost = sum(currentOrderCost) / 2
+    print('total_cost under current ordercost', total_cost)
     total_cost = str(total_cost)
+    print('total cost in calc overall cost', str(total_cost))
     return total_cost
 
 def shopping_cart(overall_quant_items, total_cost):
@@ -218,14 +216,13 @@ def shopping_cart(overall_quant_items, total_cost):
     Returns:
         _type_: _description_dictionary with brackets removed to show quantity & type of pizza
     """
-    
+    print('total cost cart at start', total_cost)
     print('     ---------- YOUR CART ---------\n')
     # print 2 lists side by side from stackoverflow
     cart_list= "\n".join("{} {}".format(x, y) for x, y in zip(overall_quant_items, currentOrderCost))
     print('Item                            Price/n')
     print('                   ')
     print(cart_list)
-    total_cost = str(total_cost)
     print('                               ')
     print('total cost.......................', total_cost)
     print('                               ')
