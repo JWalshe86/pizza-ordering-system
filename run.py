@@ -28,7 +28,6 @@ menu_data = menu.get_all_values()
 
 currentOrder = []
 currentOrderCost = []
-pizza_quantity_holder = []
 quant_pizza_holder = []
 
 INITIAL_SCREEN_DISPLAY_HAS_RUN = False
@@ -124,8 +123,6 @@ def quantity_user_input():
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
-
-                pizza_quantity_holder.append(int(pizza_quantity))
 
                 break
             
