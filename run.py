@@ -28,8 +28,8 @@ menu_data = menu.get_all_values()
 
 currentOrder = []
 totalCost = []
-print('total cost in open', totalCost)
 quant_pizza_holder = []
+cart_display = []
 
 INITIAL_SCREEN_DISPLAY_HAS_RUN = False
 
@@ -198,14 +198,13 @@ def shopping_cart(pizza_quantity, pizza_name, pizza_price, total_cost):
     
     total_cost = sum(totalCost)
     print('     ---------- YOUR CART ---------\n')
-    # print 2 lists side by side from stackoverflow
-    cart_list= "\n".join("{} {}".format(x, y) for x, y in zip(pizza_name, str(total_cost)))
-    print('Item                            Price/n')
-    print('                   ')
-    print(cart_list)
-    print('                               ')
-    print('total cost.......................', total_cost)
-    print('                               ')
+    
+    cart_display.append([pizza_quantity,pizza_name,pizza_price,total_cost])
+    
+    # code adapted from stackoverflow 'print a nested list line by line'
+    [print(*a)                           #1 Expression
+    for a in cart_display][1:-1]        #2 Iteration
+
     
 def add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price):
     """
