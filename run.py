@@ -43,10 +43,9 @@ def main():
     pizza_quantity = quantity_user_input()
     pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
     calc_overall_cost(pizza_name, pizza_quantity)
-    overall_quant_items = calc_overall_quant_items()
     total_cost = total_cost_calculator(pizza_quantity, pizza_price)
     add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
-    shopping_cart(overall_quant_items, total_cost)
+    shopping_cart(pizza_quantity, pizza_name, pizza_price, total_cost)
     finished_order = have_finished_order()
 
 def initial_screen_display():
@@ -177,18 +176,6 @@ def get_pizza_name_and_price_ordered(pizza_option):
     print('pizza price in get pizza price', pizza_price)
     return pizza_name, pizza_price
 
-def calc_overall_quant_items():
-    """_summary_calculate the amount of items by multiplying items
-    by quantity and adding these to basket each time more items are selected.
-    Returns total quantity to main function
-    """
-    # how to flatten list from bobbyhadz
-
-    flat_list = [x for xs in quant_pizza_holder for x in xs]
-    overall_quant_items = Counter(flat_list)
-        
-    return overall_quant_items
-
 def calc_overall_cost(pizza_name, pizza_quantity):
     """_summary_calculate the users total cost as items are
     added to the list. Returns this to main()
@@ -197,7 +184,7 @@ def calc_overall_cost(pizza_name, pizza_quantity):
     quant_pizza_holder.append(pizza_name_by_quantity)
     currentOrder.append(pizza_name)
 
-def shopping_cart(overall_quant_items, total_cost):
+def shopping_cart(pizza_quantity, pizza_name, pizza_price, total_cost):
     """_summary_presents total order as x: pizza names. Continually
     updates as user selects more pizzas
 
@@ -212,7 +199,7 @@ def shopping_cart(overall_quant_items, total_cost):
     total_cost = sum(totalCost)
     print('     ---------- YOUR CART ---------\n')
     # print 2 lists side by side from stackoverflow
-    cart_list= "\n".join("{} {}".format(x, y) for x, y in zip(overall_quant_items, str(total_cost)))
+    cart_list= "\n".join("{} {}".format(x, y) for x, y in zip(pizza_name, str(total_cost)))
     print('Item                            Price/n')
     print('                   ')
     print(cart_list)
