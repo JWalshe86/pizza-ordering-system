@@ -200,7 +200,11 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
     
     cart_display.append([pizza_quantity,pizza_name,current_total,total_cost])
     
-    print(f'Quantity      Item                     Price       Overall Price')
+    
+    # # TODO: Get nested lists to add on seperate lines each time a new order is added 
+    # # remove the list brackets and add space behind the current and total prices.
+    
+    print(f'Quantity               Item                            Price       Overall Price')
     
     # TODO: Get nested lists to add on seperate lines each time a new order is added 
     # remove the list brackets and add space behind the current and total prices.
@@ -208,7 +212,8 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
     while len(cart_display[0]) <= 6: 
         i = int(len(cart_display)) - 1
         for b in range (3,len(cart_display[i])):
-            cart_display[i].insert(b*1,"_________________")
+            cart_display[i].insert(b*1,"           ")
+            cart_display[i].insert(b*-1,"   ")
         break
     [print(*x) for x in cart_display]
     
