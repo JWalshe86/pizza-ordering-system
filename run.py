@@ -204,7 +204,7 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
     # # TODO: Get nested lists to add on seperate lines each time a new order is added 
     # # remove the list brackets and add space behind the current and total prices.
     
-    print(f'Quantity               Item                            Price       Overall Price')
+    print(f'Quantity               Item                            Price       Overall Price\n')
     
     # TODO: Get nested lists to add on seperate lines each time a new order is added 
     # remove the list brackets and add space behind the current and total prices.
