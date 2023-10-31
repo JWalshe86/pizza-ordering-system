@@ -42,12 +42,12 @@ def main():
     pizza_option = pizza_option_input()
     pizza_quantity = quantity_user_input()
     pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
-    calc_overall_cost(pizza_name, pizza_quantity)
-    total_cost = total_cost_calculator(pizza_quantity, pizza_price)
+    calc_how_many_pizzas(pizza_name, pizza_quantity)
+    current_total = total_cost_calculator(pizza_quantity, pizza_price)
     add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
-    shopping_cart(pizza_quantity, pizza_name, pizza_price, total_cost)
+    shopping_cart(pizza_quantity, pizza_name, current_total)
     finished_order = have_finished_order()
-
+    
 def initial_screen_display():
     """content for initial user interaction with system
     display table with menu to user"""
@@ -145,7 +145,7 @@ def have_finished_order():
     """
     while True:
         try:
-            finish_order = input("Have you completed your order?")
+            finish_order = input("\nHave you completed your order?")
             print("Please enter 'yes or 'no\n")
             os.system("cls")
             if finish_order == 'yes':
@@ -173,10 +173,9 @@ def get_pizza_name_and_price_ordered(pizza_option):
     i = pizza_option
     pizza_name = menu.cell(i, 2).value
     pizza_price = menu.cell(i, 3).value
-    print('pizza price in get pizza price', pizza_price)
     return pizza_name, pizza_price
 
-def calc_overall_cost(pizza_name, pizza_quantity):
+def calc_how_many_pizzas(pizza_name, pizza_quantity):
     """_summary_calculate the users total cost as items are
     added to the list. Returns this to main()
     """
@@ -184,7 +183,7 @@ def calc_overall_cost(pizza_name, pizza_quantity):
     quant_pizza_holder.append(pizza_name_by_quantity)
     currentOrder.append(pizza_name)
 
-def shopping_cart(pizza_quantity, pizza_name, pizza_price, total_cost):
+def shopping_cart(pizza_quantity, pizza_name, current_total):
     """_summary_presents total order as x: pizza names. Continually
     updates as user selects more pizzas
 
@@ -199,12 +198,19 @@ def shopping_cart(pizza_quantity, pizza_name, pizza_price, total_cost):
     total_cost = sum(totalCost)
     print('     ---------- YOUR CART ---------\n')
     
-    cart_display.append([pizza_quantity,pizza_name,pizza_price,total_cost])
+    cart_display.append([pizza_quantity,pizza_name,current_total,total_cost])
     
-    # code adapted from stackoverflow 'print a nested list line by line'
-    [print(*a)                           #1 Expression
-    for a in cart_display][1:-1]        #2 Iteration
+    print(f'Quantity      Item                     Price       Overall Price')
+    
+    # TODO: Get nested lists to add on seperate lines each time a new order is added 
+    # remove the list brackets and add space behind the current and total prices.
 
+    while len(cart_display[0]) <= 6: 
+        i = int(len(cart_display)) - 1
+        for b in range (3,len(cart_display[i])):
+            cart_display[i].insert(b*1,"_________________")
+        break
+    [print(*x) for x in cart_display]
     
 def add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price):
     """
@@ -242,11 +248,10 @@ def total_cost_calculator(quantity: str, pizza_price) -> int:
     """
     order = SHEET.worksheet("order")
     i = len(order.col_values(1))
-    total = int(quantity[0]) * int(pizza_price)
-    print('total cost in cost calc', total, quantity[0], pizza_price)
-    order.update_cell(i, 4, f"{total}")
-    totalCost.append(int(total))
-    return total
+    current_total = int(quantity[0]) * int(pizza_price)
+    order.update_cell(i, 4, f"{current_total}")
+    totalCost.append(int(current_total))
+    return current_total
 
 def stock_checker(pizza_option, quantity):
     """function takes in the order and reduces this from the stock. If
