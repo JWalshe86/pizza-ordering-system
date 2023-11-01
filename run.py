@@ -7,6 +7,7 @@ from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 from termcolor import colored
 import pyfiglet
+import random
 
 
 SCOPE = [
@@ -45,8 +46,11 @@ def main():
     calc_how_many_pizzas(pizza_name, pizza_quantity)
     current_total = total_cost_calculator(pizza_quantity, pizza_price)
     add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
+    estimated_cooking_time = calculate_estimated_cooking_time(pizza_quantity)
     shopping_cart(pizza_quantity, pizza_name, current_total)
     finished_order = have_finished_order()
+    reference_number = create_order_reference()
+    final_message(finished_order, estimated_cooking_time, reference_number)
     
 def initial_screen_display():
     """content for initial user interaction with system
@@ -86,8 +90,7 @@ def pizza_option_input():
                 ),
             )            
             
-            
-            pizza_option = int(input("Enter a number between 1 and 5 here:\n"))
+            pizza_option = int(input("Which pizza would you like? Enter number 1 - 5:\n"))
 
             time.sleep(1)
             os.system("cls")
@@ -119,7 +122,7 @@ def quantity_user_input():
         try:
             # code that might crash
             pizza_quantity = input(
-                "\033[1m" + "Enter a number between 1 and 10 here:\n"
+                "\033[1m" + "Enter number between 1 and 10 here:\n"
             )
             os.system("cls")
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
@@ -145,15 +148,24 @@ def have_finished_order():
     """
     while True:
         try:
-            finish_order = input("\nHave you completed your order?")
+            finish_order = input("\nHave you completed your order? (yes/no):  ")
             print("Please enter 'yes or 'no\n")
             os.system("cls")
-            if finish_order == 'yes':
-                print('You said yes')
+            
+            # check for variations of yes/no
+            # adapted from https://bobbyhadz.com/blog/python-input-yes-no
+            yes_choices = ['yes', 'y']
+            no_choices = ['no', 'n']
+            
+            # lower() function used in case user inputs capitals
+            if finish_order.lower() in yes_choices:
                 break
-            if finish_order == 'no':
+            elif finish_order.lower() in no_choices:
+                print('You said no')
                 main()
                 break
+            else:
+                print('Type yes or no')
             
             raise ValueError
         except ValueError:
@@ -196,18 +208,12 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
     """
     
     total_cost = sum(totalCost)
-    print('     ---------- YOUR CART ---------\n')
+    print('                   ---------- YOUR CART ---------\n')
     
     cart_display.append([pizza_quantity,pizza_name,current_total,total_cost])
     
-    
-    # # TODO: Get nested lists to add on seperate lines each time a new order is added 
-    # # remove the list brackets and add space behind the current and total prices.
-    
     print(f'Quantity               Item                            Price       Overall Price\n')
     
-    # TODO: Get nested lists to add on seperate lines each time a new order is added 
-    # remove the list brackets and add space behind the current and total prices.
 
     while len(cart_display[0]) <= 6: 
         i = int(len(cart_display)) - 1
@@ -215,7 +221,53 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
             cart_display[i].insert(b*1,"           ")
             cart_display[i].insert(b*-1,"   ")
         break
+        
     [print(*x) for x in cart_display]
+    
+    # code inspiration from useriasminna
+def create_order_reference():
+    """Generate random number between 1- 1000 and set as reference
+    """
+    random_number = random.randint(0, 1000)
+    return random_number
+
+    # code inspiration from useriasminna
+
+def calculate_estimated_cooking_time(pizza_quantity):
+    """calculate the estimated cooking time in relation 
+    to the amount of pizzas ordered. Nags with Notions have 
+    2 ovens, and each pizza takes 15 mins to cook
+    """
+    estimated_cooking_time = 0
+    
+    pizza_quantity = int(pizza_quantity)
+    print('in calc pizza', pizza_quantity)
+    if pizza_quantity <= 2:
+        estimated_cooking_time = 15
+    
+    elif pizza_quantity <= 4:
+        estimated_cooking_time = 30
+        
+    elif pizza_quantity <= 6:
+        estimated_cooking_time = 45
+        
+    elif pizza_quantity <= 8:
+        estimated_cooking_time = 60
+        
+    else:
+        estimated_cooking_time = 75
+        
+    return estimated_cooking_time
+    
+def final_message(finished_order, estimated_cooking_time, reference_number):
+    """final message displaying reference number,
+    and estimated cooking time. Only runs if finished order is true.
+    """
+    while finished_order in ('yes', 'y'):
+        print("\033[1m" + "Thank you! Enjoy your meal" + "\033[0m \n")
+        print(f'Your reference number is: PZ{reference_number}')
+        print(f'\nEstimated cooking time: {estimated_cooking_time} minutes\n')
+        break
     
 def add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price):
     """

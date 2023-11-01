@@ -46,12 +46,14 @@
 
 ## Technologies used
 - HeroKu - Used host and deploy website.
+#TODO: add external libraries
 
 ## BUGS OR ERRORS
  
 ## TESTING
 
 [Pylint Actions 261023](./Pylint_actions261023.pdf)
+#TODO: use pep8
 
 ## MODULES IMPORTED
 
