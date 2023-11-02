@@ -43,10 +43,10 @@ def main():
     pizza_option = pizza_option_input()
     pizza_quantity = quantity_user_input()
     pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
-    quant_pizza_holder = calc_how_many_pizzas(pizza_name, pizza_quantity)
+    total_pizza_sum = calc_how_many_pizzas(pizza_name, pizza_quantity)
     current_total = total_cost_calculator(pizza_quantity, pizza_price)
     add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
-    estimated_cooking_time = calculate_estimated_cooking_time(quant_pizza_holder)
+    estimated_cooking_time = calculate_estimated_cooking_time(total_pizza_sum)
     shopping_cart(pizza_quantity, pizza_name, current_total)
     finished_order = have_finished_order()
     reference_number = create_order_reference()
@@ -195,11 +195,15 @@ def calc_how_many_pizzas(pizza_name, pizza_quantity):
     """_summary_calculate the users total cost as items are
     added to the list. Returns this to main()
     """
+    
     pizza_name_by_quantity = [pizza_name] * int(pizza_quantity)
     quant_pizza_holder.append(pizza_name_by_quantity)
+    
+    total_pizza_sum = [len(sub_list) for sub_list in quant_pizza_holder]
+    total_pizza_sum = sum(total_pizza_sum)
+        
     currentOrder.append(pizza_name)
-    return quant_pizza_holder
-
+    return total_pizza_sum
 
 def shopping_cart(pizza_quantity, pizza_name, current_total):
     """_summary_presents total order as x: pizza names. Continually
@@ -242,28 +246,31 @@ def create_order_reference():
     # code inspiration from useriasminna
 
 
-def calculate_estimated_cooking_time(quant_pizza_holder):
+def calculate_estimated_cooking_time(total_pizza_sum):
     """calculate the estimated cooking time in relation
     to the amount of pizzas ordered. Nags with Notions have
     2 ovens, and each pizza takes 15 mins to cook
     """
     
-    
     # code adapted from https://stackoverflow.com/questions/69577262/how-to-count-elements-in-nested-lists
-    quant_pizza_holder = [len(sub_list) for sub_list in quant_pizza_holder]
-    quant_pizza_holder = sum(quant_pizza_holder)
+    # quant_pizza_holder = [len(sub_list) for sub_list in quant_pizza_holder]
+    # quant_pizza_holder = sum(quant_pizza_holder)
     
     estimated_cooking_time = 0
 
-    pizza_quantity = int(quant_pizza_holder)
+    print('total pizza sum in est waittime', total_pizza_sum)
+    
+    # if pizza_quantity > 10:
+    #     print('Too many pizzas ordered')
+    
     for i in range(1, 11, 1):
         for j in range(15, 100, 15):
             #for even numbers
-            if pizza_quantity == i and int(i) % 2 == 0:
-                estimated_cooking_time = i*j/2
-                break
-            # for odd numbers
-            elif pizza_quantity == i:
+            # if pizza_quantity == i and int(i) % 2 == 0:
+            #     estimated_cooking_time = i*j/2
+            #     break
+            # # for odd numbers
+            # elif pizza_quantity == i:
             
                 estimated_cooking_time = (i*j/2)/5 +3 #margin of error higher at longer cook times 
         
