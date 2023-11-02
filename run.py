@@ -34,6 +34,7 @@ cart_display = []
 
 INITIAL_SCREEN_DISPLAY_HAS_RUN = False
 
+
 def main():
     """Creates a function called main. This function controls the flow of the program
     Also has the benefit of having returned values in the same place and these can contribute
@@ -47,11 +48,13 @@ def main():
     current_total = total_cost_calculator(pizza_quantity, pizza_price)
     add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
     estimated_cooking_time = calculate_estimated_cooking_time(pizza_quantity)
+    print('est cook time in main', estimated_cooking_time)
     shopping_cart(pizza_quantity, pizza_name, current_total)
     finished_order = have_finished_order()
     reference_number = create_order_reference()
     final_message(finished_order, estimated_cooking_time, reference_number)
-    
+
+
 def initial_screen_display():
     """content for initial user interaction with system
     display table with menu to user"""
@@ -71,6 +74,7 @@ def initial_screen_display():
     time.sleep(3)
     os.system("cls")
 
+
 def pizza_option_input():
     """create a function to get users pizza choice, return it to the calling function
     which is called in main()
@@ -88,27 +92,29 @@ def pizza_option_input():
                     numalign="center",
                     tablefmt="double_outline",
                 ),
-            )            
-            
-            pizza_option = int(input("Which pizza would you like? Enter number 1 - 5:\n"))
+            )
+
+            pizza_option = int(
+                input("Which pizza would you like? Enter number 1 - 5:\n")
+            )
 
             time.sleep(1)
             os.system("cls")
 
             if pizza_option >= 1 and pizza_option <= 5:
-                
                 print(f"How many would you like?\n")
 
                 break
 
             else:
-                raise ValueError      
+                raise ValueError
         except ValueError:
             not1_5 = "not a number between 1 and 5"
             not1_5 = colored(not1_5, "red", attrs=["reverse", "blink"])
             print(not1_5)
     return pizza_option
-            
+
+
 def quantity_user_input():
     """Check if user has inputted valid data & let them know if they have not
     Args:
@@ -121,23 +127,22 @@ def quantity_user_input():
     while True:
         try:
             # code that might crash
-            pizza_quantity = input(
-                "\033[1m" + "Enter number between 1 and 10 here:\n"
-            )
+            pizza_quantity = input("\033[1m" + "Enter number between 1 and 10 here:\n")
             os.system("cls")
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
 
                 break
-            
+
             raise ValueError
         except ValueError:
             not1_10 = "Must be a number between 1 and 10\n"
             not1_10 = colored(not1_10, "red", attrs=["reverse", "blink"])
             print(not1_10)
-        
+
     return pizza_quantity
+
 
 def have_finished_order():
     """check if user has finished order or wants
@@ -151,22 +156,22 @@ def have_finished_order():
             finish_order = input("\nHave you completed your order? (yes/no):  ")
             print("Please enter 'yes or 'no\n")
             os.system("cls")
-            
+
             # check for variations of yes/no
             # adapted from https://bobbyhadz.com/blog/python-input-yes-no
-            yes_choices = ['yes', 'y']
-            no_choices = ['no', 'n']
-            
+            yes_choices = ["yes", "y"]
+            no_choices = ["no", "n"]
+
             # lower() function used in case user inputs capitals
             if finish_order.lower() in yes_choices:
                 break
             elif finish_order.lower() in no_choices:
-                print('You said no')
+                print("You said no")
                 main()
                 break
             else:
-                print('Type yes or no')
-            
+                print("Type yes or no")
+
             raise ValueError
         except ValueError:
             notyes_no = "Answer must be yes or no"
@@ -174,6 +179,7 @@ def have_finished_order():
             print(notyes_no)
 
     return finish_order
+
 
 def get_pizza_name_and_price_ordered(pizza_option):
     """_summary_
@@ -187,6 +193,7 @@ def get_pizza_name_and_price_ordered(pizza_option):
     pizza_price = menu.cell(i, 3).value
     return pizza_name, pizza_price
 
+
 def calc_how_many_pizzas(pizza_name, pizza_quantity):
     """_summary_calculate the users total cost as items are
     added to the list. Returns this to main()
@@ -194,6 +201,7 @@ def calc_how_many_pizzas(pizza_name, pizza_quantity):
     pizza_name_by_quantity = [pizza_name] * int(pizza_quantity)
     quant_pizza_holder.append(pizza_name_by_quantity)
     currentOrder.append(pizza_name)
+
 
 def shopping_cart(pizza_quantity, pizza_name, current_total):
     """_summary_presents total order as x: pizza names. Continually
@@ -206,69 +214,73 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
     Returns:
         _type_: _description_dictionary with brackets removed to show quantity & type of pizza
     """
-    
-    total_cost = sum(totalCost)
-    print('                   ---------- YOUR CART ---------\n')
-    
-    cart_display.append([pizza_quantity,pizza_name,current_total,total_cost])
-    
-    print(f'Quantity               Item                            Price       Overall Price\n')
-    
 
-    while len(cart_display[0]) <= 6: 
+    total_cost = sum(totalCost)
+    print("                   ---------- YOUR CART ---------\n")
+
+    cart_display.append([pizza_quantity, pizza_name, current_total, total_cost])
+
+    print(
+        f"Quantity               Item                            Price       Overall Price\n"
+    )
+
+    while len(cart_display[0]) <= 6:
         i = int(len(cart_display)) - 1
-        for b in range (3,len(cart_display[i])):
-            cart_display[i].insert(b*1,"           ")
-            cart_display[i].insert(b*-1,"   ")
+        for b in range(3, len(cart_display[i])):
+            cart_display[i].insert(b * 1, "           ")
+            cart_display[i].insert(b * -1, "   ")
         break
-        
+
     [print(*x) for x in cart_display]
-    
+
     # code inspiration from useriasminna
+
+
 def create_order_reference():
-    """Generate random number between 1- 1000 and set as reference
-    """
+    """Generate random number between 1- 1000 and set as reference"""
     random_number = random.randint(0, 1000)
     return random_number
 
     # code inspiration from useriasminna
 
+
 def calculate_estimated_cooking_time(pizza_quantity):
-    """calculate the estimated cooking time in relation 
-    to the amount of pizzas ordered. Nags with Notions have 
+    """calculate the estimated cooking time in relation
+    to the amount of pizzas ordered. Nags with Notions have
     2 ovens, and each pizza takes 15 mins to cook
     """
     estimated_cooking_time = 0
-    
+
     pizza_quantity = int(pizza_quantity)
-    print('in calc pizza', pizza_quantity)
-    if pizza_quantity <= 2:
-        estimated_cooking_time = 15
-    
-    elif pizza_quantity <= 4:
-        estimated_cooking_time = 30
-        
-    elif pizza_quantity <= 6:
-        estimated_cooking_time = 45
-        
-    elif pizza_quantity <= 8:
-        estimated_cooking_time = 60
-        
-    else:
-        estimated_cooking_time = 75
-        
+    print("pizza quant", pizza_quantity)
+    for i in range(2, 11, 2):
+        for j in range(15, 100, 15):
+            if pizza_quantity <= i:
+                estimated_cooking_time += j
+            elif pizza_quantity > i and pizza_quantity < i +2:
+                estimated_cooking_time += j*2
+            elif pizza_quantity > i +2 and pizza_quantity < i +4:
+                estimated_cooking_time += j*3
+            elif pizza_quantity > i +4  and pizza_quantity < i +6:
+                estimated_cooking_time += j*4
+            elif pizza_quantity > i +6  and pizza_quantity < i + 8:
+                estimated_cooking_time += j*5
+            break
+        break
     return estimated_cooking_time
-    
+        
+
 def final_message(finished_order, estimated_cooking_time, reference_number):
     """final message displaying reference number,
     and estimated cooking time. Only runs if finished order is true.
     """
-    while finished_order in ('yes', 'y'):
+    while finished_order in ("yes", "y"):
         print("\033[1m" + "Thank you! Enjoy your meal" + "\033[0m \n")
-        print(f'Your reference number is: PZ{reference_number}')
-        print(f'\nEstimated cooking time: {estimated_cooking_time} minutes\n')
+        print(f"Your reference number is: PZ{reference_number}")
+        print(f"\nEstimated cooking time: {estimated_cooking_time} minutes\n")
         break
-    
+
+
 def add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price):
     """
     Pizza info taken from pizza validator function. Uploaded to google sheets
@@ -293,7 +305,8 @@ def add_quantity_to_order_sheet(pizza_quantity):
     i = len(order.col_values(1))
     quantity_selection = list(pizza_quantity)
     order.update_cell(i, 3, f"{quantity_selection[0]}")
-    return  quantity_selection
+    return quantity_selection
+
 
 def total_cost_calculator(quantity: str, pizza_price) -> int:
     """function to calculate total price. Quantity taken from add values function. Quantity argument
@@ -309,6 +322,7 @@ def total_cost_calculator(quantity: str, pizza_price) -> int:
     order.update_cell(i, 4, f"{current_total}")
     totalCost.append(int(current_total))
     return current_total
+
 
 def stock_checker(pizza_option, quantity):
     """function takes in the order and reduces this from the stock. If
