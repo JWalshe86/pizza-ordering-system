@@ -22,15 +22,15 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("pizza_ordering_system_data")
 
 # link to order sheet
-menu = SHEET.worksheet("menu")
+MENU = SHEET.worksheet("menu")
 
 # all the order sheet data
-menu_data = menu.get_all_values()
+MENU_DATA = MENU.get_all_values()
 
-currentOrder = []
-totalCost = []
-quant_pizza_holder = []
-cart_display = []
+CURRENT_ORDER = []
+TOTAL_COST = []
+QUANT_PIZZA_HOLDER = []
+CART_DISPLAY = []
 
 INITIAL_SCREEN_DISPLAY_HAS_RUN = False
 
@@ -84,7 +84,7 @@ def pizza_option_input():
 
             print(
                 tabulate(
-                    menu_data,
+                    MENU_DATA,
                     headers=["Option", "Name", "Price(€)"],
                     numalign="center",
                     tablefmt="double_outline",
@@ -186,10 +186,9 @@ def get_pizza_name_and_price_ordered(pizza_option):
         Passes these values back to where they were called in the main function
     """
     i = pizza_option
-    pizza_name = menu.cell(i, 2).value
-    pizza_price = menu.cell(i, 3).value
+    pizza_name = MENU.cell(i, 2).value
+    pizza_price = MENU.cell(i, 3).value
     return pizza_name, pizza_price
-
 
 def calc_how_many_pizzas(pizza_name, pizza_quantity):
     """_summary_calculate the users total cost as items are
@@ -197,12 +196,12 @@ def calc_how_many_pizzas(pizza_name, pizza_quantity):
     """
     
     pizza_name_by_quantity = [pizza_name] * int(pizza_quantity)
-    quant_pizza_holder.append(pizza_name_by_quantity)
+    QUANT_PIZZA_HOLDER.append(pizza_name_by_quantity)
     
-    total_pizza_sum = [len(sub_list) for sub_list in quant_pizza_holder]
+    total_pizza_sum = [len(sub_list) for sub_list in QUANT_PIZZA_HOLDER]
     total_pizza_sum = sum(total_pizza_sum)
         
-    currentOrder.append(pizza_name)
+    CURRENT_ORDER.append(pizza_name)
     return total_pizza_sum
 
 def shopping_cart(pizza_quantity, pizza_name, current_total):
@@ -217,23 +216,23 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
         _type_: _description_dictionary with brackets removed to show quantity & type of pizza
     """
 
-    total_cost = sum(totalCost)
+    total_cost = sum(TOTAL_COST)
     print("                   ---------- YOUR CART ---------\n")
 
-    cart_display.append([pizza_quantity, pizza_name, current_total, total_cost])
+    CART_DISPLAY.append([pizza_quantity, pizza_name, current_total, total_cost])
 
     print(
         f"Quantity               Item                            Price       Overall Price\n"
     )
 
-    while len(cart_display[0]) <= 6:
-        i = int(len(cart_display)) - 1
-        for b in range(3, len(cart_display[i])):
-            cart_display[i].insert(b * 1, "           ")
-            cart_display[i].insert(b * -1, "   ")
+    while len(CART_DISPLAY[0]) <= 6:
+        i = int(len(CART_DISPLAY)) - 1
+        for b in range(3, len(CART_DISPLAY[i])):
+            CART_DISPLAY[i].insert(b * 1, "           ")
+            CART_DISPLAY[i].insert(b * -1, "   ")
         break
 
-    [print(*x) for x in cart_display]
+    [print(*x) for x in CART_DISPLAY]
 
     # code inspiration from useriasminna
 
@@ -252,27 +251,26 @@ def calculate_estimated_cooking_time(total_pizza_sum):
     2 ovens, and each pizza takes 15 mins to cook
     """
     
-    # code adapted from https://stackoverflow.com/questions/69577262/how-to-count-elements-in-nested-lists
-    # quant_pizza_holder = [len(sub_list) for sub_list in quant_pizza_holder]
-    # quant_pizza_holder = sum(quant_pizza_holder)
+    # code adapted from https://stackoverflow.com/questions/69577262/how-to-count-elements-in-nested-lists\nmp/
     
     estimated_cooking_time = 0
-
-    print('total pizza sum in est waittime', total_pizza_sum)
-    
-    # if pizza_quantity > 10:
-    #     print('Too many pizzas ordered')
-    
+    while True:   
+        if total_pizza_sum > 10:
+            print('Too many pizzas ordered. Must be below 10. Some items removed from cart')
+            QUANT_PIZZA_HOLDER.pop()
+            CART_DISPLAY.pop()
+            break
+        
     for i in range(1, 11, 1):
         for j in range(15, 100, 15):
             #for even numbers
-            # if pizza_quantity == i and int(i) % 2 == 0:
-            #     estimated_cooking_time = i*j/2
-            #     break
-            # # for odd numbers
-            # elif pizza_quantity == i:
+            if total_pizza_sum == i and int(i) % 2 == 0:
+                estimated_cooking_time = i*j/2
+                break
+            # for odd numbers
+            if total_pizza_sum == i:
             
-                estimated_cooking_time = (i*j/2)/5 +3 #margin of error higher at longer cook times 
+                estimated_cooking_time = (i*j/2)/5 +3 #margin of error higher at longer cook times of 5+ min
         
     return estimated_cooking_time
         
@@ -326,7 +324,7 @@ def total_cost_calculator(quantity: str, pizza_price) -> int:
     i = len(order.col_values(1))
     current_total = int(quantity[0]) * int(pizza_price)
     order.update_cell(i, 4, f"{current_total}")
-    totalCost.append(int(current_total))
+    TOTAL_COST.append(int(current_total))
     return current_total
 
 
