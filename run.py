@@ -259,14 +259,16 @@ def calculate_estimated_cooking_time(pizza_quantity):
                 estimated_cooking_time += j
             elif pizza_quantity > i and pizza_quantity < i +2:
                 estimated_cooking_time += j*2
-            elif pizza_quantity > i +2 and pizza_quantity < i +4:
+            elif pizza_quantity > i +2 and pizza_quantity <= i +4:
                 estimated_cooking_time += j*3
-            elif pizza_quantity > i +4  and pizza_quantity < i +6:
+            elif pizza_quantity > i +4  and pizza_quantity <= i +6:
                 estimated_cooking_time += j*4
-            elif pizza_quantity > i +6  and pizza_quantity < i + 8:
+            elif pizza_quantity > i +6  and pizza_quantity <= i + 8:
                 estimated_cooking_time += j*5
             break
+        print('jloop broken')
         break
+    print('iloop broken')
     return estimated_cooking_time
         
 
