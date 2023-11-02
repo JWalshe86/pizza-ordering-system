@@ -252,26 +252,19 @@ def calculate_estimated_cooking_time(pizza_quantity):
     estimated_cooking_time = 0
 
     pizza_quantity = int(pizza_quantity)
-    print("pizza quant", pizza_quantity)
-    for i in range(2, 11, 2):
+    for i in range(1, 11, 1):
         for j in range(15, 100, 15):
-            if pizza_quantity <= i:
-                estimated_cooking_time += j
-            elif pizza_quantity > i and pizza_quantity <= i +2:
-                estimated_cooking_time += j*2
-            elif pizza_quantity > i +2 and pizza_quantity <= i +4:
-                estimated_cooking_time += j*3
-            elif pizza_quantity > i +4  and pizza_quantity <= i +6:
-                estimated_cooking_time += j*4
-            elif pizza_quantity > i +6  and pizza_quantity <= i + 8:
-                estimated_cooking_time += j*5
-            break
-        print('jloop broken')
-        break
-    print('iloop broken')
+            #for even numbers
+            if pizza_quantity == i and int(i) % 2 == 0:
+                estimated_cooking_time = i*j/2
+                break
+            # for odd numbers
+            elif pizza_quantity == i:
+            
+                estimated_cooking_time = (i*j/2)/5 +3 #margin of error higher at longer cook times 
+        
     return estimated_cooking_time
         
-
 def final_message(finished_order, estimated_cooking_time, reference_number):
     """final message displaying reference number,
     and estimated cooking time. Only runs if finished order is true.
