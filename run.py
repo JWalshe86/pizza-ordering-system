@@ -257,7 +257,7 @@ def calculate_estimated_cooking_time(pizza_quantity):
         for j in range(15, 100, 15):
             if pizza_quantity <= i:
                 estimated_cooking_time += j
-            elif pizza_quantity > i and pizza_quantity < i +2:
+            elif pizza_quantity > i and pizza_quantity <= i +2:
                 estimated_cooking_time += j*2
             elif pizza_quantity > i +2 and pizza_quantity <= i +4:
                 estimated_cooking_time += j*3
