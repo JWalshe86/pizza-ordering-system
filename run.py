@@ -34,7 +34,6 @@ cart_display = []
 
 INITIAL_SCREEN_DISPLAY_HAS_RUN = False
 
-
 def main():
     """Creates a function called main. This function controls the flow of the program
     Also has the benefit of having returned values in the same place and these can contribute
@@ -44,16 +43,14 @@ def main():
     pizza_option = pizza_option_input()
     pizza_quantity = quantity_user_input()
     pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
-    calc_how_many_pizzas(pizza_name, pizza_quantity)
+    quant_pizza_holder = calc_how_many_pizzas(pizza_name, pizza_quantity)
     current_total = total_cost_calculator(pizza_quantity, pizza_price)
     add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
-    estimated_cooking_time = calculate_estimated_cooking_time(pizza_quantity)
-    print('est cook time in main', estimated_cooking_time)
+    estimated_cooking_time = calculate_estimated_cooking_time(quant_pizza_holder)
     shopping_cart(pizza_quantity, pizza_name, current_total)
     finished_order = have_finished_order()
     reference_number = create_order_reference()
     final_message(finished_order, estimated_cooking_time, reference_number)
-
 
 def initial_screen_display():
     """content for initial user interaction with system
@@ -201,6 +198,7 @@ def calc_how_many_pizzas(pizza_name, pizza_quantity):
     pizza_name_by_quantity = [pizza_name] * int(pizza_quantity)
     quant_pizza_holder.append(pizza_name_by_quantity)
     currentOrder.append(pizza_name)
+    return quant_pizza_holder
 
 
 def shopping_cart(pizza_quantity, pizza_name, current_total):
@@ -244,14 +242,20 @@ def create_order_reference():
     # code inspiration from useriasminna
 
 
-def calculate_estimated_cooking_time(pizza_quantity):
+def calculate_estimated_cooking_time(quant_pizza_holder):
     """calculate the estimated cooking time in relation
     to the amount of pizzas ordered. Nags with Notions have
     2 ovens, and each pizza takes 15 mins to cook
     """
+    
+    
+    # code adapted from https://stackoverflow.com/questions/69577262/how-to-count-elements-in-nested-lists
+    quant_pizza_holder = [len(sub_list) for sub_list in quant_pizza_holder]
+    quant_pizza_holder = sum(quant_pizza_holder)
+    
     estimated_cooking_time = 0
 
-    pizza_quantity = int(pizza_quantity)
+    pizza_quantity = int(quant_pizza_holder)
     for i in range(1, 11, 1):
         for j in range(15, 100, 15):
             #for even numbers
@@ -272,7 +276,7 @@ def final_message(finished_order, estimated_cooking_time, reference_number):
     while finished_order in ("yes", "y"):
         print("\033[1m" + "Thank you! Enjoy your meal" + "\033[0m \n")
         print(f"Your reference number is: PZ{reference_number}")
-        print(f"\nEstimated cooking time: {estimated_cooking_time} minutes\n")
+        print(f"\nEstimated cooking time: {int(estimated_cooking_time)} minutes\n")
         break
 
 
