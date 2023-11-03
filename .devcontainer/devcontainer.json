@@ -16,7 +16,8 @@
 			"ms-toolsai.jupyter-keymap",
 			"ms-toolsai.jupyter-renderers",
 			"bierner.markdown-preview-github-styles",
-			"formulahendry.code-runner"
+			"formulahendry.code-runner",
+			"Gruntfuggly.todo-tree"
 		],
         "settings": {
           "files.exclude": {

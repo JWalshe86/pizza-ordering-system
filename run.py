@@ -20,13 +20,12 @@ CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("pizza_ordering_system_data")
-
 # link to order sheet
 MENU = SHEET.worksheet("menu")
-
 # all the order sheet data
 MENU_DATA = MENU.get_all_values()
 
+#Active Global Variables
 CURRENT_ORDER = []
 TOTAL_COST = []
 QUANT_PIZZA_HOLDER = []
@@ -120,21 +119,24 @@ def quantity_user_input():
         _type_: boolean_description_if no errors returns True
     """
 
+    quant_pizza_check = [len(sub_list) for sub_list in QUANT_PIZZA_HOLDER]
+    quant_pizza_check = sum(quant_pizza_check)
+    
     # infinite loop thats only broken if valid input is given
     while True:
         try:
             # code that might crash
             pizza_quantity = input("\033[1m" + "Enter number between 1 and 10 here:\n")
             os.system("cls")
-            if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10:
+            if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10 and int(pizza_quantity) + quant_pizza_check < 10:
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
 
                 break
 
-            raise ValueError
+            raise ValueError 
         except ValueError:
-            not1_10 = "Must be a number between 1 and 10\n"
+            not1_10 = "Quantity must be a number between 1 and 10\n"
             not1_10 = colored(not1_10, "red", attrs=["reverse", "blink"])
             print(not1_10)
 
@@ -251,15 +253,7 @@ def calculate_estimated_cooking_time(total_pizza_sum):
     # code adapted from https://stackoverflow.com/questions/69577262/how-to-count-elements-in-nested-lists\nmp/
     
     estimated_cooking_time = 0
-    while True:   
-        if total_pizza_sum > 10:
-            print('Too many pizzas ordered. Must be below 10. Some items removed from cart\n')
-            QUANT_PIZZA_HOLDER.pop()
-            CART_DISPLAY.pop()
-            break
-        else:
-            break
-        
+
     for i in range(1, 11, 1):
         for j in range(15, 100, 15):
             #for even numbers
