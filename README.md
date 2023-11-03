@@ -49,6 +49,8 @@
 #TODO: add external libraries
 
 ## BUGS OR ERRORS
+
+![Estimated time not calculating after quantity surpassed](./assets/images/bugs_images/Est_cook_time_error_after_pizza_q_surpass.png)
  
 ## TESTING
 

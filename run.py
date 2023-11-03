@@ -68,9 +68,9 @@ def initial_screen_display():
     nags_banner = pyfiglet.figlet_format("Nags with Notions")
     nags_banner = colored(nags_banner, "magenta", attrs=["reverse", "blink"])
     print(nags_banner)
+    #show logo for 3 seconds then clear screen
     time.sleep(3)
     os.system("cls")
-
 
 def pizza_option_input():
     """create a function to get users pizza choice, return it to the calling function
@@ -94,7 +94,7 @@ def pizza_option_input():
             pizza_option = int(
                 input("Which pizza would you like? Enter number 1 - 5:\n")
             )
-
+            # removes pizza_options and displays how many would you like
             time.sleep(1)
             os.system("cls")
 
@@ -177,7 +177,6 @@ def have_finished_order():
 
     return finish_order
 
-
 def get_pizza_name_and_price_ordered(pizza_option):
     """_summary_
 
@@ -234,8 +233,6 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
 
     [print(*x) for x in CART_DISPLAY]
 
-    # code inspiration from useriasminna
-
 
 def create_order_reference():
     """Generate random number between 1- 1000 and set as reference"""
@@ -256,9 +253,11 @@ def calculate_estimated_cooking_time(total_pizza_sum):
     estimated_cooking_time = 0
     while True:   
         if total_pizza_sum > 10:
-            print('Too many pizzas ordered. Must be below 10. Some items removed from cart')
+            print('Too many pizzas ordered. Must be below 10. Some items removed from cart\n')
             QUANT_PIZZA_HOLDER.pop()
             CART_DISPLAY.pop()
+            break
+        else:
             break
         
     for i in range(1, 11, 1):
@@ -279,8 +278,9 @@ def final_message(finished_order, estimated_cooking_time, reference_number):
     and estimated cooking time. Only runs if finished order is true.
     """
     while finished_order in ("yes", "y"):
-        print("\033[1m" + "Thank you! Enjoy your meal" + "\033[0m \n")
-        print(f"Your reference number is: PZ{reference_number}")
+        print("\033[1m" + "                      Thank you! Enjoy your meal!" + "\033[0m \n")
+        [print(*x) for x in CART_DISPLAY]
+        print(f"\n\nYour reference number is: PZ{reference_number}")
         print(f"\nEstimated cooking time: {int(estimated_cooking_time)} minutes\n")
         break
 
