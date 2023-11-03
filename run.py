@@ -127,6 +127,7 @@ def quantity_user_input():
         try:
             # code that might crash
             pizza_quantity = input("\033[1m" + "Enter number between 1 and 10 here:\n")
+            #FIXME: not allowing subsequent user entries after quantity exceeded
             os.system("cls")
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10 and int(pizza_quantity) + quant_pizza_check < 10:
                 # add the quantity order to the add to sheet function
@@ -272,7 +273,10 @@ def final_message(finished_order, estimated_cooking_time, reference_number):
     and estimated cooking time. Only runs if finished order is true.
     """
     while finished_order in ("yes", "y"):
-        print("\033[1m" + "                      Thank you! Enjoy your meal!" + "\033[0m \n")
+        print("\033[1m" + "                      Thank you for choosing Nags with Notions! Enjoy your meal!" + "\033[0m \n")
+        print(
+        f"Quantity               Item                            Price       Overall Price\n"
+    )
         [print(*x) for x in CART_DISPLAY]
         print(f"\n\nYour reference number is: PZ{reference_number}")
         print(f"\nEstimated cooking time: {int(estimated_cooking_time)} minutes\n")
