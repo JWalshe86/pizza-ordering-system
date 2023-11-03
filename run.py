@@ -111,6 +111,13 @@ def pizza_option_input():
     return pizza_option
 
 
+
+# try:
+#     raise FooException("Foo!")
+# except FooException as e:
+#     print e.foo
+
+
 def quantity_user_input():
     """Check if user has inputted valid data & let them know if they have not
     Args:
@@ -118,7 +125,7 @@ def quantity_user_input():
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-
+        
     quant_pizza_check = [len(sub_list) for sub_list in QUANT_PIZZA_HOLDER]
     quant_pizza_check = sum(quant_pizza_check)
     
@@ -127,19 +134,35 @@ def quantity_user_input():
         try:
             # code that might crash
             pizza_quantity = input("\033[1m" + "Enter number between 1 and 10 here:\n")
+            print('pz q + pz check in userinput', int(pizza_quantity) + quant_pizza_check)
+            # time.sleep(10)
+            
+            
             #FIXME: not allowing subsequent user entries after quantity exceeded
             os.system("cls")
             if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10 and int(pizza_quantity) + quant_pizza_check < 10:
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
-
                 break
+            class FooException(Exception):
+                def __init__(self, pizza_quantity):
+                    self.pizza_quantity = pizza_quantity
 
-            raise ValueError 
-        except ValueError:
+            # break
+
+            # raise ValueError
+            raise FooException(pizza_quantity)
+        except FooException as e:
             not1_10 = "Quantity must be a number between 1 and 10\n"
             not1_10 = colored(not1_10, "red", attrs=["reverse", "blink"])
             print(not1_10)
+            quantity = str(e)
+            print('pz q + pz check in userinput in except e', quantity, quant_pizza_check)
+            quant_pizza_check -= int(quantity)
+
+            print('pz q + pz check in userinput in except e', quant_pizza_check)
+
+            
 
     return pizza_quantity
 
