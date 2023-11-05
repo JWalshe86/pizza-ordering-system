@@ -1,4 +1,4 @@
-"""Module used here to clear terminal screen"""
+"""Module used here to cls terminal screen"""
 import os
 import time
 import random
@@ -8,6 +8,8 @@ from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 from termcolor import colored
 
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -71,7 +73,7 @@ def initial_screen_display():
     print(nags_banner)
     # show logo for 3 seconds then clear screen
     time.sleep(3)
-    os.system("clear")
+    cls()
 
 
 def pizza_option_input():
@@ -98,7 +100,7 @@ def pizza_option_input():
             )
             # removes pizza_options and displays how many would you like
             time.sleep(1)
-            os.system("clear")
+            cls()
 
             if 1 <= pizza_option <= 5:
                 print("How many would you like?\n")
@@ -128,7 +130,7 @@ def quantity_user_input():
         try:
             # code that might crash
             pizza_quantity = input("\033[1m" + "Enter number between 1 and 10 here:\n")
-            os.system("clear")
+            cls()
             if (
                 int(pizza_quantity) >= 0
                 and int(pizza_quantity) <= 11
@@ -178,7 +180,7 @@ def have_finished_order():
         try:
             finish_order = input("\nHave you completed your order? (yes/no):  ")
             print("Please enter 'yes or 'no\n")
-            os.system("clear")
+            cls()
 
             # check for variations of yes/no
             # adapted from https://bobbyhadz.com/blog/python-input-yes-no
@@ -299,9 +301,8 @@ def final_message(finished_order, estimated_cooking_time, reference_number):
     while finished_order in ("yes", "y"):
         print(
             (
-                "\033[1m" + "                      "
                 "Thank you for choosing Nags with Notions! Enjoy your meal!"
-                + "\033[0m \n"
+            
             )
         )
         print(

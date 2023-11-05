@@ -67,6 +67,8 @@ that presents the pizza menu.
  * The code to display the cart items: [print(*x) for x in CART_DISPLAY] has been highlighted by Pylint for 
  not being assigned to a variable. This was temporarily ignored as it's working well and I don't know an alternative.
  * After addressing the recommendations the Pylint report reads: Your code has been rated at 9.66/10 (previous run: 9.60/10, +0.06). It's just the above two recommendations to address. 
+
+ * Test run on Heroku 05/11/23. os.system('cls') not recognised by Heroku but os.system('clear') is.
 #TODO: use pep8
 
 ## MODULES IMPORTED
