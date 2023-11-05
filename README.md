@@ -55,6 +55,13 @@
 ## TESTING
 
 [Pylint Actions 261023](./Pylint_actions261023.pdf)
+[Pylint Actions 051123](./testing/pylint_report_051123.txt) Your code has been rated
+ at 8.35/10 (previous run: 8.35/10, +0.00)
+ - The global statement for 'initial screen display' has run was left in the code, despite being
+ highlighted by Pylint. This is because it appears to work well and I don't know another way to prevent the 
+ screen display when the user selects they want to add more items to their order. 
+ - The code to display the cart items: [print(*x) for x in CART_DISPLAY] has been highlighted by Pylint for 
+ not being assigned to a variable. This was temporarily ignored as it's working well and I don't know an alternative.
 #TODO: use pep8
 
 ## MODULES IMPORTED

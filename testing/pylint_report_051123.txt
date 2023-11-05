@@ -1,0 +1,151 @@
+************* Module run
+run.py:121:0: C0303: Trailing whitespace (trailing-whitespace)
+run.py:124:0: C0303: Trailing whitespace (trailing-whitespace)
+run.py:132:0: C0303: Trailing whitespace (trailing-whitespace)
+run.py:133:0: C0303: Trailing whitespace (trailing-whitespace)
+run.py:135:0: C0301: Line too long (119/100) (line-too-long)
+run.py:212:0: C0303: Trailing whitespace (trailing-whitespace)
+run.py:215:0: C0303: Trailing whitespace (trailing-whitespace)
+run.py:218:0: C0303: Trailing whitespace (trailing-whitespace)
+run.py:266:0: C0303: Trailing whitespace (trailing-whitespace)
+run.py:267:0: C0301: Line too long (111/100) (line-too-long)
+run.py:268:0: C0303: Trailing whitespace (trailing-whitespace)
+run.py:279:0: C0303: Trailing whitespace (trailing-whitespace)
+run.py:280:0: C0301: Line too long (108/100) (line-too-long)
+run.py:281:0: C0303: Trailing whitespace (trailing-whitespace)
+run.py:283:0: C0303: Trailing whitespace (trailing-whitespace)
+run.py:289:0: C0301: Line too long (124/100) (line-too-long)
+run.py:57:4: W0603: Using the global statement (global-statement)
+run.py:100:12: R1723: Unnecessary "else" after "break", remove the "else" and de-indent the code inside it (no-else-break)
+run.py:100:15: R1716: Simplify chained comparison between the operands (chained-comparison)
+run.py:101:22: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+run.py:141:12: C0115: Missing class docstring (missing-class-docstring)
+run.py:141:12: C0103: Class name "Pizzaq_Exception" doesn't conform to PascalCase naming style (invalid-name)
+run.py:179:12: R1723: Unnecessary "elif" after "break", remove the leading "el" from "elif" (no-else-break)
+run.py:240:8: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+run.py:250:4: W0106: Expression "[print(*x) for x in CART_DISPLAY]" is assigned to nothing (expression-not-assigned)
+run.py:291:8: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+run.py:293:8: W0106: Expression "[print(*x) for x in CART_DISPLAY]" is assigned to nothing (expression-not-assigned)
+run.py:10:0: C0411: standard import "import random" should be placed before "import gspread" (wrong-import-order)
+run.py:4:0: W0611: Unused Counter imported from collections (unused-import)
+
+
+Report
+======
+176 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |1      |1          |=          |0.00        |100.00   |
++---------+-------+-----------+-----------+------------+---------+
+|method   |1      |1          |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|function |15     |15         |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+External dependencies
+---------------------
+::
+
+    google 
+      \-oauth2 
+        \-service_account (run)
+    gspread (run)
+    pyfiglet (run)
+    tabulate (run)
+    termcolor (run)
+
+
+
+364 lines have been analyzed
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |191    |52.47 |191      |=          |
++----------+-------+------+---------+-----------+
+|docstring |80     |21.98 |80       |=          |
++----------+-------+------+---------+-----------+
+|comment   |30     |8.24  |30       |=          |
++----------+-------+------+---------+-----------+
+|empty     |63     |17.31 |63       |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |0          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |19     |19       |19         |
++-----------+-------+---------+-----------+
+|refactor   |3      |3        |3          |
++-----------+-------+---------+-----------+
+|warning    |7      |7        |7          |
++-----------+-------+---------+-----------+
+|error      |0      |0        |0          |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++-------------------------------+------------+
+|message id                     |occurrences |
++===============================+============+
+|trailing-whitespace            |12          |
++-------------------------------+------------+
+|line-too-long                  |4           |
++-------------------------------+------------+
+|f-string-without-interpolation |3           |
++-------------------------------+------------+
+|no-else-break                  |2           |
++-------------------------------+------------+
+|expression-not-assigned        |2           |
++-------------------------------+------------+
+|wrong-import-order             |1           |
++-------------------------------+------------+
+|unused-import                  |1           |
++-------------------------------+------------+
+|missing-class-docstring        |1           |
++-------------------------------+------------+
+|invalid-name                   |1           |
++-------------------------------+------------+
+|global-statement               |1           |
++-------------------------------+------------+
+|chained-comparison             |1           |
++-------------------------------+------------+
+
+
+
+
+------------------------------------------------------------------
+Your code has been rated at 8.35/10 (previous run: 8.35/10, +0.00)
+

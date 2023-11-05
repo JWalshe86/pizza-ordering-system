@@ -1,14 +1,12 @@
 """Module used here to clear terminal screen"""
 import os
 import time
-from collections import Counter
+import random
 import gspread
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 from termcolor import colored
 import pyfiglet
-import random
-
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -25,13 +23,14 @@ MENU = SHEET.worksheet("menu")
 # all the order sheet data
 MENU_DATA = MENU.get_all_values()
 
-#Active Global Variables
+# Active Global Variables
 CURRENT_ORDER = []
 TOTAL_COST = []
 QUANT_PIZZA_HOLDER = []
 CART_DISPLAY = []
 
 INITIAL_SCREEN_DISPLAY_HAS_RUN = False
+
 
 def main():
     """Creates a function called main. This function controls the flow of the program
@@ -51,9 +50,11 @@ def main():
     reference_number = create_order_reference()
     final_message(finished_order, estimated_cooking_time, reference_number)
 
+
 def initial_screen_display():
     """content for initial user interaction with system
     display table with menu to user"""
+    # TODO: find alternative to global variable here
     global INITIAL_SCREEN_DISPLAY_HAS_RUN
     # code adapted from bobbyhadz.com so initial screen display only ever runs once
     # and does not re-run when user selects no to finished order
@@ -67,9 +68,10 @@ def initial_screen_display():
     nags_banner = pyfiglet.figlet_format("Nags with Notions")
     nags_banner = colored(nags_banner, "magenta", attrs=["reverse", "blink"])
     print(nags_banner)
-    #show logo for 3 seconds then clear screen
+    # show logo for 3 seconds then clear screen
     time.sleep(3)
     os.system("cls")
+
 
 def pizza_option_input():
     """create a function to get users pizza choice, return it to the calling function
@@ -97,25 +99,18 @@ def pizza_option_input():
             time.sleep(1)
             os.system("cls")
 
-            if pizza_option >= 1 and pizza_option <= 5:
-                print(f"How many would you like?\n")
+            if 1 <= pizza_option <= 5:
+                print("How many would you like?\n")
 
                 break
 
-            else:
-                raise ValueError
+            raise ValueError
         except ValueError:
             not1_5 = "not a number between 1 and 5"
             not1_5 = colored(not1_5, "red", attrs=["reverse", "blink"])
             print(not1_5)
+            time.sleep(3)
     return pizza_option
-
-
-
-# try:
-#     raise FooException("Foo!")
-# except FooException as e:
-#     print e.foo
 
 
 def quantity_user_input():
@@ -125,44 +120,49 @@ def quantity_user_input():
     Returns:
         _type_: boolean_description_if no errors returns True
     """
-        
     quant_pizza_check = [len(sub_list) for sub_list in QUANT_PIZZA_HOLDER]
     quant_pizza_check = sum(quant_pizza_check)
-    
     # infinite loop thats only broken if valid input is given
     while True:
         try:
             # code that might crash
             pizza_quantity = input("\033[1m" + "Enter number between 1 and 10 here:\n")
-            print('pz q + pz check in userinput', int(pizza_quantity) + quant_pizza_check)
-            # time.sleep(10)
-            
-            
-            #FIXME: not allowing subsequent user entries after quantity exceeded
+            print(
+                "pz q + pz check in userinput", int(pizza_quantity) + quant_pizza_check
+            )
             os.system("cls")
-            if int(pizza_quantity) >= 1 and int(pizza_quantity) <= 10 and int(pizza_quantity) + quant_pizza_check < 10:
+            if (
+                int(pizza_quantity) >= 0
+                and int(pizza_quantity) <= 11
+                and int(pizza_quantity) + quant_pizza_check < 10
+            ):
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
                 break
-            class FooException(Exception):
+
+            # https://stackoverflow.com/questions/7075200/converting-exception-to-a-string-in-python-3
+            # pass pizza q to except through exception class
+            class PizzaqException(Exception):
+                """_summary_class that raises exception and passes pizza quantity as the second argument
+
+                Args:
+                    Exception (_type_):string _description_passes pizza quantity as string to except statement
+                """
+
                 def __init__(self, pizza_quantity):
                     self.pizza_quantity = pizza_quantity
 
-            # break
-
-            # raise ValueError
-            raise FooException(pizza_quantity)
-        except FooException as e:
+            # raise Error
+            raise PizzaqException(pizza_quantity)
+        except PizzaqException as e:
             not1_10 = "Quantity must be a number between 1 and 10\n"
             not1_10 = colored(not1_10, "red", attrs=["reverse", "blink"])
             print(not1_10)
             quantity = str(e)
-            print('pz q + pz check in userinput in except e', quantity, quant_pizza_check)
             quant_pizza_check -= int(quantity)
-
-            print('pz q + pz check in userinput in except e', quant_pizza_check)
-
-            
+            # covers if first no. smaller than second
+            if quant_pizza_check <= 0:
+                quant_pizza_check += int(quantity)
 
     return pizza_quantity
 
@@ -188,12 +188,12 @@ def have_finished_order():
             # lower() function used in case user inputs capitals
             if finish_order.lower() in yes_choices:
                 break
-            elif finish_order.lower() in no_choices:
+            if finish_order.lower() in no_choices:
                 print("You said no")
                 main()
                 break
-            else:
-                print("Type yes or no")
+
+            print("Type yes or no")
 
             raise ValueError
         except ValueError:
@@ -202,6 +202,7 @@ def have_finished_order():
             print(notyes_no)
 
     return finish_order
+
 
 def get_pizza_name_and_price_ordered(pizza_option):
     """_summary_
@@ -215,19 +216,19 @@ def get_pizza_name_and_price_ordered(pizza_option):
     pizza_price = MENU.cell(i, 3).value
     return pizza_name, pizza_price
 
+
 def calc_how_many_pizzas(pizza_name, pizza_quantity):
     """_summary_calculate the users total cost as items are
     added to the list. Returns this to main()
     """
-    
     pizza_name_by_quantity = [pizza_name] * int(pizza_quantity)
     QUANT_PIZZA_HOLDER.append(pizza_name_by_quantity)
-    
+
     total_pizza_sum = [len(sub_list) for sub_list in QUANT_PIZZA_HOLDER]
     total_pizza_sum = sum(total_pizza_sum)
-        
     CURRENT_ORDER.append(pizza_name)
     return total_pizza_sum
+
 
 def shopping_cart(pizza_quantity, pizza_name, current_total):
     """_summary_presents total order as x: pizza names. Continually
@@ -247,7 +248,7 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
     CART_DISPLAY.append([pizza_quantity, pizza_name, current_total, total_cost])
 
     print(
-        f"Quantity               Item                            Price       Overall Price\n"
+        "Quantity               Item                            Price       Overall Price\n"
     )
 
     while len(CART_DISPLAY[0]) <= 6:
@@ -256,7 +257,7 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
             CART_DISPLAY[i].insert(b * 1, "           ")
             CART_DISPLAY[i].insert(b * -1, "   ")
         break
-
+    # TODO: find alternative way to display cart here
     [print(*x) for x in CART_DISPLAY]
 
 
@@ -273,33 +274,38 @@ def calculate_estimated_cooking_time(total_pizza_sum):
     to the amount of pizzas ordered. Nags with Notions have
     2 ovens, and each pizza takes 15 mins to cook
     """
-    
-    # code adapted from https://stackoverflow.com/questions/69577262/how-to-count-elements-in-nested-lists\nmp/
-    
+    # code adapted from
+    # https://stackoverflow.com/questions/69577262/how-to-count-elements-in-nested-lists\nmp/
     estimated_cooking_time = 0
 
     for i in range(1, 11, 1):
         for j in range(15, 100, 15):
-            #for even numbers
+            # for even numbers
             if total_pizza_sum == i and int(i) % 2 == 0:
-                estimated_cooking_time = i*j/2
+                estimated_cooking_time = i * j / 2
                 break
             # for odd numbers
             if total_pizza_sum == i:
-            
-                estimated_cooking_time = (i*j/2)/5 +3 #margin of error higher at longer cook times of 5+ min
-        
+                # margin of error higher at longer cook times of 5+ min
+                estimated_cooking_time = (i * j / 2) / 5 + 3
     return estimated_cooking_time
-        
+
+
 def final_message(finished_order, estimated_cooking_time, reference_number):
     """final message displaying reference number,
     and estimated cooking time. Only runs if finished order is true.
     """
     while finished_order in ("yes", "y"):
-        print("\033[1m" + "                      Thank you for choosing Nags with Notions! Enjoy your meal!" + "\033[0m \n")
         print(
-        f"Quantity               Item                            Price       Overall Price\n"
-    )
+            (
+                "\033[1m" + "                      "
+                "Thank you for choosing Nags with Notions! Enjoy your meal!"
+                + "\033[0m \n"
+            )
+        )
+        print(
+            "Quantity               Item                            Price       Overall Price\n"
+        )
         [print(*x) for x in CART_DISPLAY]
         print(f"\n\nYour reference number is: PZ{reference_number}")
         print(f"\nEstimated cooking time: {int(estimated_cooking_time)} minutes\n")
