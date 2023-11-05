@@ -3,10 +3,11 @@ import os
 import time
 import random
 import gspread
+import pyfiglet
 from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 from termcolor import colored
-import pyfiglet
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -54,7 +55,7 @@ def main():
 def initial_screen_display():
     """content for initial user interaction with system
     display table with menu to user"""
-    # TODO: find alternative to global variable here
+    # FIXME: find alternative to global variable here
     global INITIAL_SCREEN_DISPLAY_HAS_RUN
     # code adapted from bobbyhadz.com so initial screen display only ever runs once
     # and does not re-run when user selects no to finished order
@@ -143,10 +144,12 @@ def quantity_user_input():
             # https://stackoverflow.com/questions/7075200/converting-exception-to-a-string-in-python-3
             # pass pizza q to except through exception class
             class PizzaqException(Exception):
-                """_summary_class that raises exception and passes pizza quantity as the second argument
+                """_summary_class that raises exception and
+                passes pizza quantity as the second argument
 
                 Args:
-                    Exception (_type_):string _description_passes pizza quantity as string to except statement
+                    Exception (_type_):string _description_passes 
+                    pizza quantity as string to except statement
                 """
 
                 def __init__(self, pizza_quantity):
@@ -257,7 +260,8 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
             CART_DISPLAY[i].insert(b * 1, "           ")
             CART_DISPLAY[i].insert(b * -1, "   ")
         break
-    # TODO: find alternative way to display cart here
+    # FIXME: find alternative way to display cart here
+    # https://stackoverflow.com/questions/48053979/print-2-lists-side-by-side
     [print(*x) for x in CART_DISPLAY]
 
 
