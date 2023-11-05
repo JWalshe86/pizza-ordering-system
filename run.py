@@ -71,7 +71,7 @@ def initial_screen_display():
     print(nags_banner)
     # show logo for 3 seconds then clear screen
     time.sleep(3)
-    os.system("cls")
+    os.system("clear")
 
 
 def pizza_option_input():
@@ -98,7 +98,7 @@ def pizza_option_input():
             )
             # removes pizza_options and displays how many would you like
             time.sleep(1)
-            os.system("cls")
+            os.system("clear")
 
             if 1 <= pizza_option <= 5:
                 print("How many would you like?\n")
@@ -128,10 +128,7 @@ def quantity_user_input():
         try:
             # code that might crash
             pizza_quantity = input("\033[1m" + "Enter number between 1 and 10 here:\n")
-            print(
-                "pz q + pz check in userinput", int(pizza_quantity) + quant_pizza_check
-            )
-            os.system("cls")
+            os.system("clear")
             if (
                 int(pizza_quantity) >= 0
                 and int(pizza_quantity) <= 11
@@ -181,7 +178,7 @@ def have_finished_order():
         try:
             finish_order = input("\nHave you completed your order? (yes/no):  ")
             print("Please enter 'yes or 'no\n")
-            os.system("cls")
+            os.system("clear")
 
             # check for variations of yes/no
             # adapted from https://bobbyhadz.com/blog/python-input-yes-no
