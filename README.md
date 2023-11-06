@@ -27,24 +27,36 @@
 
 ## UX/UI
 ### STRATEGY
+
 #### Goals<br>
 
+* To create a Pizza ordering system that allows users to order their pizzas online
+* It should improve customer experience and reduce staff workload by not having to take phone orders.
+It will also reduce queue sizes.
+* This system will increase customer satisfaction by providing a detailed confirmation of the order.
+* Nags with Notions aims to increase its sales by providing customers with an online ordering system
+where they can see the options on offer. 
 
 #### User Stories<br>
+
+* I want to be able to easily browse the menu and select the pizzas I want.
+* I want to be able to see the prices of the pizzas on offer
+* I want to be given a warning if I've entered something incorrectly.
+* I want a cart displayed that updates the price and items, as I add to it
+* I want a reference number for my order and the total price at the end.
+* I want to know roughly how long I need to wait for my order. 
 
 ### SCOPE<br>
 
 ### STRUCTURE<br>
 
-<details><summary>Project Wireframe</summary>
-<img src="/assets/images/readme_images/pizza_order_system_wireframe.pdf">
-</details>
+[Project Wireframe](./assets/images/readme_images/pizza_order_system_wireframe.pdf)
+
+### FLOWCHARTS<br>
 
 <details><summary>Project Flow Chart</summary>
 <img src="/assets/images/readme_images/features_images/flow_chart.png">
 </details>
-
-### FLOWCHARTS<br>
 
 ### SURFACE/DESIGN<br>
 
@@ -128,8 +140,26 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 
 ### FORK THE REPOSITORY 
 
+If you would like to contribute to the project. You can:
+1. Open the pizza ordering system repository on my account and 
+press the fork button on the top right of the screen.
+2. Click create a new fork.
+3. Navigate to your fork of the original repository.
+4. Copy the URL for the repository.
+5. Type git clone into your terminal and paste the repository.
+6. You can then create a pull request which I will review. 
 
 ### CLONE THE REPOSITORY
+
+You can clone the repository to use locally by following these steps:
+1. Navigate to the GitHub Repository you want to clone
+2. Click on the code drop-down button
+3. Click on HTTPS
+4. Copy the repository link to the clipboard
+5. Open your IDE of choice (git must be installed for the next steps)
+6. Type git clone copied-git-url into the IDE terminal
+
+The project will now be cloned locally for you to use.
 
 
 ## CREDITS
