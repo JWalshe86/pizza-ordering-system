@@ -8,9 +8,6 @@ from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 from termcolor import colored
 
-def cls():
-    os.system('cls' if os.name=='nt' else 'clear')
-
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -34,21 +31,33 @@ CART_DISPLAY = []
 
 INITIAL_SCREEN_DISPLAY_HAS_RUN = False
 
+# Taken from https://stackoverflow.com/
+# questions/517970/how-to-clear-the-interpreter-console
+
+
+def cls():
+    """function which allows os clear function to work on both vscode
+    and heroku. os.system('cls') only works in vscode and os.system('clear')
+    only works in heroku. Thus the following if else
+    expression is required for inter dependence.
+    """
+    os.system("cls" if os.name == "nt" else "clear")
+
 
 def main():
-    """Creates a function called main. This function controls the flow of the program
-    Also has the benefit of having returned values in the same place and these can contribute
+    """Creates a function called main. This function controls the flow
+    of the program. Also has the benefit of having returned values
+    in the same place and these can contribute
     to other, more complex functions, as the project progresses"""
-    # present Nags with notions welcome & pizza menu
     initial_screen_display()
     pizza_option = pizza_option_input()
     pizza_quantity = quantity_user_input()
     pizza_name, pizza_price = get_pizza_name_and_price_ordered(pizza_option)
     total_pizza_sum = calc_how_many_pizzas(pizza_name, pizza_quantity)
-    current_total = total_cost_calculator(pizza_quantity, pizza_price)
+    current_tot = total_cost_calculator(pizza_quantity, pizza_price)
     add_pizza_choice_and_name_to_order_sheet(pizza_name, pizza_price)
     estimated_cooking_time = calculate_estimated_cooking_time(total_pizza_sum)
-    shopping_cart(pizza_quantity, pizza_name, current_total)
+    shopping_cart(pizza_quantity, pizza_name, current_tot)
     finished_order = have_finished_order()
     reference_number = create_order_reference()
     final_message(finished_order, estimated_cooking_time, reference_number)
@@ -59,11 +68,11 @@ def initial_screen_display():
     display table with menu to user"""
     # FIXME: find alternative to global variable here
     global INITIAL_SCREEN_DISPLAY_HAS_RUN
-    # code adapted from bobbyhadz.com so initial screen display only ever runs once
-    # and does not re-run when user selects no to finished order
-    # as long as its true it returns before inner codes executed,
-    # when it's executed it turns true from false,
-    # so it's only false the first time
+    # code adapted from bobbyhadz.com so initial screen display
+    # only ever runs once and does not re-run when user selects
+    # no to finished order as long as its true it returns before
+    # inner codes executed, when it's executed it turns true from false,
+    # so it's only false the first time.
     if INITIAL_SCREEN_DISPLAY_HAS_RUN:
         return
     INITIAL_SCREEN_DISPLAY_HAS_RUN = True
@@ -77,7 +86,8 @@ def initial_screen_display():
 
 
 def pizza_option_input():
-    """create a function to get users pizza choice, return it to the calling function
+    """create a function to get users pizza choice,
+    return it to the calling function
     which is called in main()
     """
     # infinite loop thats only broken if valid input is given
@@ -129,7 +139,7 @@ def quantity_user_input():
     while True:
         try:
             # code that might crash
-            pizza_quantity = input("\033[1m" + "Enter number between 1 and 10 here:\n")
+            pizza_quantity = input("Enter number between 1 and 10:\n")
             cls()
             if (
                 int(pizza_quantity) >= 0
@@ -140,14 +150,15 @@ def quantity_user_input():
                 add_quantity_to_order_sheet(pizza_quantity)
                 break
 
-            # https://stackoverflow.com/questions/7075200/converting-exception-to-a-string-in-python-3
+            # https://stackoverflow.com/questions/7075200/
+            # converting-exception-to-a-string-in-python-3
             # pass pizza q to except through exception class
             class PizzaqException(Exception):
                 """_summary_class that raises exception and
                 passes pizza quantity as the second argument
 
                 Args:
-                    Exception (_type_):string _description_passes 
+                    Exception (_type_):string _description_passes
                     pizza quantity as string to except statement
                 """
 
@@ -178,7 +189,7 @@ def have_finished_order():
     """
     while True:
         try:
-            finish_order = input("\nHave you completed your order? (yes/no):  ")
+            finish_order = input(("\nHave you completed your order? (yes/no):  "))
             print("Please enter 'yes or 'no\n")
             cls()
 
@@ -232,7 +243,7 @@ def calc_how_many_pizzas(pizza_name, pizza_quantity):
     return total_pizza_sum
 
 
-def shopping_cart(pizza_quantity, pizza_name, current_total):
+def shopping_cart(pizza_quantity, pizza_name, current_tot):
     """_summary_presents total order as x: pizza names. Continually
     updates as user selects more pizzas
 
@@ -240,17 +251,16 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
         pizza_name (_type_): _description_string
         pizza_quantity (_type_): _description_string
 
-    Returns:
-        _type_: _description_dictionary with brackets removed to show quantity & type of pizza
     """
 
     total_cost = sum(TOTAL_COST)
     print("                   ---------- YOUR CART ---------\n")
 
-    CART_DISPLAY.append([pizza_quantity, pizza_name, current_total, total_cost])
+    CART_DISPLAY.append([pizza_quantity, pizza_name, current_tot, total_cost])
 
     print(
-        "Quantity               Item                            Price       Overall Price\n"
+        "Quantity              Item           "
+        "                 Price       Total Price\n"
     )
 
     while len(CART_DISPLAY[0]) <= 6:
@@ -259,9 +269,16 @@ def shopping_cart(pizza_quantity, pizza_name, current_total):
             CART_DISPLAY[i].insert(b * 1, "           ")
             CART_DISPLAY[i].insert(b * -1, "   ")
         break
-    # FIXME: find alternative way to display cart here
-    # https://stackoverflow.com/questions/48053979/print-2-lists-side-by-side
-    [print(*x) for x in CART_DISPLAY]
+    #  adapted from https://stackoverflow.com/questions/30521975/
+    # print-a-nested-list-line-by-line-python
+    # for loop and " ".join() mapping each item in the
+    # nested list to a str with map()
+    # map used to manipulate all the items
+    # here it converts each item to a string,
+    # which is joined with " " so
+    # each item can be printed on seperate lines
+    for item in CART_DISPLAY:
+        print(" ".join(map(str, item)))
 
 
 def create_order_reference():
@@ -299,18 +316,15 @@ def final_message(finished_order, estimated_cooking_time, reference_number):
     and estimated cooking time. Only runs if finished order is true.
     """
     while finished_order in ("yes", "y"):
+        print(("Thank you for choosing Nags with Notions! Enjoy your meal!/n"))
         print(
-            (
-                "Thank you for choosing Nags with Notions! Enjoy your meal!"
-            
-            )
+            "Quantity               Item       "
+            "                     Price       Overall Price\n"
         )
-        print(
-            "Quantity               Item                            Price       Overall Price\n"
-        )
-        [print(*x) for x in CART_DISPLAY]
+        for xs in CART_DISPLAY:
+            print(" ".join(map(str, xs)))
         print(f"\n\nYour reference number is: PZ{reference_number}")
-        print(f"\nEstimated cooking time: {int(estimated_cooking_time)} minutes\n")
+        print(f"\nEst cooking time: {int(estimated_cooking_time)} minutes\n")
         break
 
 
@@ -342,7 +356,8 @@ def add_quantity_to_order_sheet(pizza_quantity):
 
 
 def total_cost_calculator(quantity: str, pizza_price) -> int:
-    """function to calculate total price. Quantity taken from add values function. Quantity argument
+    """function to calculate total price. Quantity taken from add
+    values function. Quantity argument
     then multiplied with corresponding price in excel sheet.
     Total price then added to total price column in excel
 
@@ -351,10 +366,10 @@ def total_cost_calculator(quantity: str, pizza_price) -> int:
     """
     order = SHEET.worksheet("order")
     i = len(order.col_values(1))
-    current_total = int(quantity[0]) * int(pizza_price)
-    order.update_cell(i, 4, f"{current_total}")
-    TOTAL_COST.append(int(current_total))
-    return current_total
+    current_tot = int(quantity[0]) * int(pizza_price)
+    order.update_cell(i, 4, f"{current_tot}")
+    TOTAL_COST.append(int(current_tot))
+    return current_tot
 
 
 def stock_checker(pizza_option, quantity):
@@ -363,8 +378,9 @@ def stock_checker(pizza_option, quantity):
     and to try something else
 
     Args:
-        quantity (int): take from user_order_quantity request function
-        pizza_name (int): _description_ taken from user_order_quantity request function
+    quantity (int): take from user_order_quantity request function
+    pizza_name (int): _description_ taken from
+    user_order_quantity request function
 
     Returns:
         int: an identifer for which pizza needs to have its stock reduced

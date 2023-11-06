@@ -1,4 +1,4 @@
-# AMERICAN PIZZA - ORDER SYSTEM
+# PIZZA ORDER SYSTEM
   - [OVERVIEW](#overview)
   - [UX/UI](#uxui)
     - [STRATEGY](#strategy)
@@ -50,8 +50,6 @@
 that presents the pizza menu.
 - The termcolor library was used to import colored to highlight some text
 
-#TODO: add external libraries
-
 ## BUGS OR ERRORS
 
 ![Estimated time not calculated after quantity surpassed](./assets/images/bugs_images/Est_cook_time_error_after_pizza_q_surpass.png)
@@ -64,12 +62,11 @@ that presents the pizza menu.
  * The global statement for 'initial screen display' has run was left in the code, despite being
  highlighted by Pylint. This is because it appears to work well and I don't know another way to prevent the 
  screen display when the user selects they want to add more items to their order. 
- * The code to display the cart items: [print(*x) for x in CART_DISPLAY] has been highlighted by Pylint for 
- not being assigned to a variable. This was temporarily ignored as it's working well and I don't know an alternative.
+ * The code to display the cart items: [print(*x) for x in CART_DISPLAY] has been highlighted by Pylint for not being assigned to a variable. This was temporarily ignored as it's working well and I don't know an alternative. Eventually, thanks to StackOverflow, I found a resolution by using a for loop and " ".join() mapping each item in the nested list to a string with map(). Map was used to manipulate all the items and convert each item to a string which is then joined with " " so each item can be printed on separate lines.
  * After addressing the recommendations the Pylint report reads: Your code has been rated at 9.66/10 (previous run: 9.60/10, +0.06). It's just the above two recommendations to address. 
-
- * Test run on Heroku 05/11/23. os.system('cls') not recognised by Heroku but os.system('clear') is.
-#TODO: use pep8
+ * [Code Institute Pylinter 051123](./testing/Code_Institute_Pylinter_051123.pdf)
+ * [Code Institute Pylinter cleared](./testing/CI_Pylinter_cleared.png)
+ * Test run on Heroku 05/11/23. os.system('cls') not recognised by Heroku but os.system('clear') is. Solved with the following if statement: os.system('cls' if os.name=='nt' else 'clear'). I also had to run pyfiglet to my requirement.txt, so Heroku could recognize it as a dependency.
 
 ## MODULES IMPORTED
  * The os module was used for its ability to manipulate the operating system, particularly to clear
