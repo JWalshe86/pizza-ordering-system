@@ -22,6 +22,8 @@
   - [TOOLS](#tools)
   - [ACKNOWLEDGEMENTS](#acknowledgements)
 ## OVERVIEW
+[Live Site](https://pizza-ordering-system-b873de0bec0c.herokuapp.com/)
+
 
 ## UX/UI
 ### STRATEGY
@@ -46,23 +48,23 @@
 The program was designed primarily to help the user but elements can help the client [nagswithnotions](nagswithnotions.ie). To give real data to the client, the system is linked to
 a Google Spreadsheet: [Pizza Order Google Spreadsheet] (https://docs.google.com/spreadsheets/d/14eg7Jg65BIRgRaMwWoeuFZHibci230T1KNaDBDSYRrE/edit#gid=819050592)
 
-[Welcome Banner](./assets/images/readme_images/features_images/inital_screen_display.png)
+![Welcome Banner](./assets/images/readme_images/features_images/inital_screen_display.png)
 
-[Menu Display](./assets/images/readme_images/features_images/menu_display.png)
+![Menu Display](./assets/images/readme_images/features_images/menu_display.png)
 
-[Error display pizza option](./assets/images/readme_images/features_images/error_display_pizza_option.png)
+![Error display pizza option](./assets/images/readme_images/features_images/error_display_pizza_option.png)
 
-[Quantity Order Display](./assets/images/readme_images/features_images/quantity_order_display.png)
+![Quantity Order Display](./assets/images/readme_images/features_images/quantity_order_display.png)
 
-[Quantity Order Error](./assets/images/readme_images/features_images/quantity_order_error.png)
+![Quantity Order Error](./assets/images/readme_images/features_images/quantity_order_error.png)
 
-[Cart Display 1](./assets/images/readme_images/features_images/cart_display_1.png)
+![Cart Display 1](./assets/images/readme_images/features_images/cart_display_1.png)
 
-[Quantity Order Error 2](./assets/images/readme_images/features_images/quantity_order_err2.png)
+![Quantity Order Error 2](./assets/images/readme_images/features_images/quantity_order_err2.png)
 
-[Cart Display 2](./assets/images/readme_images/features_images/cart_display_2.png)
+![Cart Display 2](./assets/images/readme_images/features_images/cart_display_2.png)
 
-[Final Display](./assets/images/readme_images/features_images/final_display.png)
+![Final Display](./assets/images/readme_images/features_images/final_display.png)
 
 
 ### FUTURE FEATURES
@@ -126,7 +128,7 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 ## CREDITS
 * Readme template adapted from [useriasminna](https://github.com/useriasminna/american_pizza_order_system/blob/main/README.md)
 * Inspiration for the large title heading from [LauraMaynock]
-* Manipulating Google Sheets [Gspread](https://docs.Gspread.org/en/latest/user-guide.html)](https://docs.Gspread.org/en/latest/user-guide.html)
+* Manipulating Google Sheets [Gspread](https://docs.Gspread.org/en/latest/user-guide.html)
 * Try catch with loop [Paul Miskew](https://youtu.be/b0q9vVgAMq8?si=U_UnqDxHyZegVnsX)
 * [How to pass data between functions](https://www.youtube.com/watch?v=GsKDtSHRHdI) this video was used as a means to get over the issue of wishing to pass data to one function from 2 different functions
 * [Print two lists side by side on Stackoverflow ](https://stackoverflow.com/questions/48053979/print-2-lists-side-by-side)
@@ -138,6 +140,8 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 [Google Drive API](https://developers.google.com/drive/api)- to develop apps that integrate with Drive
 [Google Sheets API](https://developers.google.com/sheets/api/guides/concepts) - to read and modify Google Sheets data
 [Google Auth](https://developers.google.com/identity/protocols/oauth2) - allows access to Google APIs
-[Gspread](https://docs.Gspread.org/en/v5.10.0/) - Python API for Google Sheets [Lucid Chart](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign=_chart_en_tier1_mixed_search_brand_exact_&km_CPC_CampaignId=1490375427&km_CPC_AdGroupID=55688909257&km_CPC_Keyword=lucid%20chart&km_CPC_MatchType=e&km_CPC_ExtensionID=&km_CPC_Network=g&km_CPC_AdPosition=&km_CPC_Creative=442433236001&km_CPC_TargetID=kwd-55720648523&km_CPC_Country=1007872&km_CPC_Device=c&km_CPC_placement=&km_CPC_target=&gad_source=1&gclid=Cj0KCQjwj5mpBhDJARIsAOVjBdpyfLPu38m7pDBye0tpLWTp5UQgTyONWR-mthQQ3mR1Iy3LiHHuXm4aArNSEALw_wcB)](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign=_chart_en_tier1_mixed_search_brand_exact_&km_CPC_CampaignId=1490375427&km_CPC_AdGroupID=55688909257&km_CPC_Keyword=lucid%20chart&km_CPC_MatchType=e&km_CPC_ExtensionID=&km_CPC_Network=g&km_CPC_AdPosition=&km_CPC_Creative=442433236001&km_CPC_TargetID=kwd-55720648523&km_CPC_Country=1007872&km_CPC_Device=c&km_CPC_placement=&km_CPC_target=&gad_source=1&gclid=Cj0KCQjwj5mpBhDJARIsAOVjBdpyfLPu38m7pDBye0tpLWTp5UQgTyONWR-mthQQ3mR1Iy3LiHHuXm4aArNSEALw_wcB) - to create flow chart outlining the project.
+[Gspread](https://docs.Gspread.org/en/v5.10.0/) - Python API for Google Sheets
+
+[Lucid Chart](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign) - to create a flow chart outlining the project.
 
 ## ACKNOWLEDGEMENTS
