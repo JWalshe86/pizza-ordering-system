@@ -94,7 +94,7 @@ def pizza_option_input():
     while True:
         try:
             # code that might crash
-            print("\nPlease select one of the 5 number options below")
+            print("\n Please select one of the 5 number options below")
 
             print(
                 tabulate(
@@ -106,14 +106,14 @@ def pizza_option_input():
             )
 
             pizza_option = int(
-                input("Which pizza would you like? Enter number 1 - 5:\n")
+                input(" Which pizza would you like? Enter number 1 - 5:\n")
             )
             # removes pizza_options and displays how many would you like
             time.sleep(1)
             cls()
 
             if 1 <= pizza_option <= 5:
-                print("How many would you like?\n")
+                print("How many would you like? (order max of 10)\n")
 
                 break
 
@@ -139,12 +139,13 @@ def quantity_user_input():
     while True:
         try:
             # code that might crash
-            pizza_quantity = input("Enter number between 1 and 10:\n")
+            print('Quantity must be a number between 1 and 10\n')
+            pizza_quantity = input(f"Enter number here:\n")
             cls()
             if (
                 int(pizza_quantity) >= 0
                 and int(pizza_quantity) <= 11
-                and int(pizza_quantity) + quant_pizza_check < 10
+                and int(pizza_quantity) + quant_pizza_check < 11
             ):
                 # add the quantity order to the add to sheet function
                 add_quantity_to_order_sheet(pizza_quantity)
@@ -172,6 +173,13 @@ def quantity_user_input():
             not1_10 = colored(not1_10, "red", attrs=["reverse", "blink"])
             print(not1_10)
             quantity = str(e)
+            
+            # from https://peps.python.org/pep-0008/ 
+            # wrap long code and seperate with f strings
+            too_much = (f'Your current quantity is: {quant_pizza_check}.\n'
+                f'You can select {10 - quant_pizza_check} more pizzas\n')
+            too_much = colored(too_much, "red", attrs=["reverse", "blink"])
+            print(too_much)
             quant_pizza_check -= int(quantity)
             # covers if first no. smaller than second
             if quant_pizza_check <= 0:
@@ -316,7 +324,7 @@ def final_message(finished_order, estimated_cooking_time, reference_number):
     and estimated cooking time. Only runs if finished order is true.
     """
     while finished_order in ("yes", "y"):
-        print(("Thank you for choosing Nags with Notions! Enjoy your meal!/n"))
+        print(("      Thank you for choosing Nags with Notions! Enjoy your meal!\n"))
         print(
             "Quantity               Item       "
             "                     Price       Overall Price\n"

@@ -40,7 +40,11 @@
 ### SURFACE/DESIGN<br>
 
 ## FEATURES
+
 ### EXISTING FEATURES
+
+The program was designed primarily to help the user but elements can help the client [nagswithnotions](nagswithnotions.ie). To give real data to the client, the system is linked to
+a Google Spreadsheet: [Pizza Order Google Spreadsheet] (https://docs.google.com/spreadsheets/d/14eg7Jg65BIRgRaMwWoeuFZHibci230T1KNaDBDSYRrE/edit#gid=819050592)
 
 ### FUTURE FEATURES
 
@@ -66,7 +70,7 @@ that presents the pizza menu.
  * After addressing the recommendations the Pylint report reads: Your code has been rated at 9.66/10 (previous run: 9.60/10, +0.06). It's just the above two recommendations to address. 
  * [Code Institute Pylinter 051123](./testing/Code_Institute_Pylinter_051123.pdf)
  * [Code Institute Pylinter cleared](./testing/CI_Pylinter_cleared.png)
- * Test run on Heroku 05/11/23. os.system('cls') not recognised by Heroku but os.system('clear') is. Solved with the following if statement: os.system('cls' if os.name=='nt' else 'clear'). I also had to run pyfiglet to my requirement.txt, so Heroku could recognize it as a dependency.
+ * Test run on Heroku 05/11/23. os.system('cls') not recognised by Heroku but os.system('clear') is. Solved with the following if statement: 'os.system('cls' if os.name=='nt' else 'clear')'. I also had to run pyfiglet to my requirement.txt, so Heroku could recognize it as a dependency.
 
 ## MODULES IMPORTED
  * The os module was used for its ability to manipulate the operating system, particularly to clear
