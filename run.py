@@ -141,6 +141,10 @@ def quantity_user_input():
             # code that might crash
             print('Quantity must be a number between 1 and 10\n')
             pizza_quantity = input(f"Enter number here:\n")
+            if pizza_quantity.isdigit():
+                pass
+            else:
+                pizza_quantity = "-1"
             cls()
             if (
                 int(pizza_quantity) >= 0
