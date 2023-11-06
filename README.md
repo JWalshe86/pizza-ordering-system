@@ -112,6 +112,42 @@ that presents the pizza menu.
  * [Code Institute Pylinter cleared](./testing/CI_Pylinter_cleared.png)
  * Test run on Heroku 05/11/23. os.system('cls') not recognised by Heroku but os.system('clear') is. Solved with the following if statement: 'os.system('cls' if os.name=='nt' else 'clear')'. I also had to run pyfiglet to my requirement.txt, so Heroku could recognize it as a dependency.
 
+ ### Feature Testing 061123
+
+ All tests took place on the [deployed Heroku site]((https://pizza-ordering-system-b873de0bec0c.herokuapp.com/))
+
+  1. Welcome Banner
+    * Upon entering the site expect the Nags with Notions Banner to display in large purple writing for 3 seconds and then disappear.
+    * Outcome: displayed as expected. [Welcome Banner](./assets/images/readme_images/features_images/inital_screen_display.png).
+
+  2. Menu Display
+    * Expected menu to display after the banner disappeared. Expected all 5 pizzas to be displayed with their prices. Expected a table with a user input option underneath. 
+    * Outcome: Displayed as expected. [Menu Display](./assets/images/readme_images/features_images/menu_display.png)
+
+  3. Error handling display pizza option
+    * Expected red error message to arise with characters outside 1-5. Tested with 0, f, ';', and 6. The user should then be brought back to the option of entering 1-5 again.  
+    * Outcome: As expected a red warning sign appeared for all the invalid entries and the user
+    was brought back to the option of entering 1-5 every time. With a valid entry '2', the user was asked to input the amount of pizzas they would like. [Error display pizza option](./assets/images/readme_images/features_images/error_display_pizza_option.png)
+
+  4. Quantity order error handling
+    * Expected red error message to arise with characters outside 1-10. Tested with -1, f, ';', and 11. The user should then be brought back to the option of entering quantity again.
+    * While it worked for -1, unexpectedly for 'f' I got the following warning message: ![Traceback](./testing/Feature_Quantity_testing_error.png)
+
+
+![Quantity Order Display](./assets/images/readme_images/features_images/quantity_order_display.png)
+
+![Quantity Order Error](./assets/images/readme_images/features_images/quantity_order_error.png)
+
+![Cart Display 1](./assets/images/readme_images/features_images/cart_display_1.png)
+
+![Quantity Order Error 2](./assets/images/readme_images/features_images/quantity_order_err2.png)
+
+![Cart Display 2](./assets/images/readme_images/features_images/cart_display_2.png)
+
+![Final Display](./assets/images/readme_images/features_images/final_display.png)
+
+
+
 ## MODULES IMPORTED
  * The os module was used for its ability to manipulate the operating system, particularly to clear
  the terminal screen. 
