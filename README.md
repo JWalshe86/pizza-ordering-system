@@ -46,6 +46,25 @@
 The program was designed primarily to help the user but elements can help the client [nagswithnotions](nagswithnotions.ie). To give real data to the client, the system is linked to
 a Google Spreadsheet: [Pizza Order Google Spreadsheet] (https://docs.google.com/spreadsheets/d/14eg7Jg65BIRgRaMwWoeuFZHibci230T1KNaDBDSYRrE/edit#gid=819050592)
 
+[Welcome Banner](./assets/images/readme_images/features_images/inital_screen_display.png)
+
+[Menu Display](./assets/images/readme_images/features_images/menu_display.png)
+
+[Error display pizza option](./assets/images/readme_images/features_images/error_display_pizza_option.png)
+
+[Quantity Order Display](./assets/images/readme_images/features_images/quantity_order_display.png)
+
+[Quantity Order Error](./assets/images/readme_images/features_images/quantity_order_error.png)
+
+[Cart Display 1](./assets/images/readme_images/features_images/cart_display_1.png)
+
+[Quantity Order Error 2](./assets/images/readme_images/features_images/quantity_order_err2.png)
+
+[Cart Display 2](./assets/images/readme_images/features_images/cart_display_2.png)
+
+[Final Display](./assets/images/readme_images/features_images/final_display.png)
+
+
 ### FUTURE FEATURES
 
 ## Technologies used

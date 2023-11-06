@@ -177,7 +177,7 @@ def quantity_user_input():
             # from https://peps.python.org/pep-0008/ 
             # wrap long code and seperate with f strings
             too_much = (f'Your current quantity is: {quant_pizza_check}.\n'
-                f'You can select {10 - quant_pizza_check} more pizzas\n')
+                f'You can only select {10 - quant_pizza_check} more pizzas\n')
             too_much = colored(too_much, "red", attrs=["reverse", "blink"])
             print(too_much)
             quant_pizza_check -= int(quantity)
