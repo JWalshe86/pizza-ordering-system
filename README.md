@@ -37,7 +37,11 @@
 ### STRUCTURE<br>
 
 <details><summary>Project Wireframe</summary>
-<img src="./assets/images/readme_images/pizza_order_system_wireframe.pdf">
+<img src="/assets/images/readme_images/pizza_order_system_wireframe.pdf">
+</details>
+
+<details><summary>Project Flow Chart</summary>
+<img src="/assets/images/readme_images/features_images/flow_chart.png">
 </details>
 
 ### FLOWCHARTS<br>
@@ -130,7 +134,7 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 
 ## CREDITS
 * Readme template adapted from [useriasminna](https://github.com/useriasminna/american_pizza_order_system/blob/main/README.md)
-* Inspiration for the large title heading from [LauraMaynock]
+* Inspiration for the large title heading from [Laura Mayock](https://github.com/LauraMayock/)
 * Manipulating Google Sheets [Gspread](https://docs.Gspread.org/en/latest/user-guide.html)
 * Try catch with loop [Paul Miskew](https://youtu.be/b0q9vVgAMq8?si=U_UnqDxHyZegVnsX)
 * [How to pass data between functions](https://www.youtube.com/watch?v=GsKDtSHRHdI) this video was used as a means to get over the issue of wishing to pass data to one function from 2 different functions
