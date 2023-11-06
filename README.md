@@ -35,7 +35,10 @@
 ### SCOPE<br>
 
 ### STRUCTURE<br>
-#TODO: need a wireframe
+
+<details><summary>Project Wireframe</summary>
+<img src="./assets/images/readme_images/pizza_order_system_wireframe.pdf">
+</details>
 
 ### FLOWCHARTS<br>
 
@@ -136,6 +139,7 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 * [Switching keys and values in a dictionary from Stackoverflow](https://stackoverflow.com/questions/8305518/switching-keys-and-values-in-a-dictionary-in-python)
 
 ## TOOLS
+[Balsamiq Wireframes](https://balsamiq.com/wireframes/) were used to create a wireframe.
 [GitHub](https://GitHub.com/) - used for hosting the source code of the program
 [Google Drive API](https://developers.google.com/drive/api)- to develop apps that integrate with Drive
 [Google Sheets API](https://developers.google.com/sheets/api/guides/concepts) - to read and modify Google Sheets data
