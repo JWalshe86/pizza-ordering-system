@@ -8,6 +8,8 @@ from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 from termcolor import colored
 
+# TODO: Add favicon
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
