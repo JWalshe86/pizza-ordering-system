@@ -32,7 +32,7 @@
 
 * To create a Pizza ordering system that allows users to order their pizzas online
 * It should improve customer experience and reduce staff workload by not having to take phone orders.
-It will also reduce queue sizes.
+* It will also reduce queue sizes.
 * This system will increase customer satisfaction by providing a detailed confirmation of the order.
 * Nags with Notions aims to increase its sales by providing customers with an online ordering system
 where they can see the options on offer. 
@@ -79,6 +79,8 @@ a Google Spreadsheet: [Pizza Order Google Spreadsheet] (https://docs.google.com/
 
 ![Cart Display 1](./assets/images/readme_images/features_images/cart_display_1.png)
 
+![yes no error message](./assets/images/readme_images/bugs_images/yes_no_error_msg.png)
+
 ![Quantity Order Error 2](./assets/images/readme_images/features_images/quantity_order_err2.png)
 
 ![Cart Display 2](./assets/images/readme_images/features_images/cart_display_2.png)
@@ -112,39 +114,60 @@ that presents the pizza menu.
  * [Code Institute Pylinter cleared](./testing/CI_Pylinter_cleared.png)
  * Test run on Heroku 05/11/23. os.system('cls') not recognised by Heroku but os.system('clear') is. Solved with the following if statement: 'os.system('cls' if os.name=='nt' else 'clear')'. I also had to run pyfiglet to my requirement.txt, so Heroku could recognize it as a dependency.
 
- ### Feature Testing 061123
+ ### Feature Testing 061123/071123
 
  All tests took place on the [deployed Heroku site]((https://pizza-ordering-system-b873de0bec0c.herokuapp.com/))
 
   1. Welcome Banner
+
     * Upon entering the site expect the Nags with Notions Banner to display in large purple writing for 3 seconds and then disappear.
     * Outcome: displayed as expected. [Welcome Banner](./assets/images/readme_images/features_images/inital_screen_display.png).
 
   2. Menu Display
+
     * Expected menu to display after the banner disappeared. Expected all 5 pizzas to be displayed with their prices. Expected a table with a user input option underneath. 
     * Outcome: Displayed as expected. [Menu Display](./assets/images/readme_images/features_images/menu_display.png)
 
-  3. Error handling display pizza option
+  3. Error handling for 'display pizza option'
+
     * Expected red error message to arise with characters outside 1-5. Tested with 0, f, ';', and 6. The user should then be brought back to the option of entering 1-5 again.  
     * Outcome: As expected a red warning sign appeared for all the invalid entries and the user
     was brought back to the option of entering 1-5 every time. With a valid entry '2', the user was asked to input the amount of pizzas they would like. [Error display pizza option](./assets/images/readme_images/features_images/error_display_pizza_option.png)
 
   4. Quantity order error handling
+
     * Expected red error message to arise with characters outside 1-10. Tested with -1, f, ';', and 11. The user should then be brought back to the option of entering quantity again.
-    * While it worked for -1, unexpectedly for 'f' I got the following warning message: ![Traceback](./testing/Feature_Quantity_testing_error.png)
+    * While it worked for -1, unexpectedly for 'f' I got the following warning message: ![Traceback](./testing/Feature_Quantity_testing_error.png). The issue was that the exception wouldn't accept non-integers. Using the isDigit() function, by converting anything that wasn't an integer to -1, I was able to resolve this issue. 
 
+  5. Cart Display (first time)
 
-![Quantity Order Display](./assets/images/readme_images/features_images/quantity_order_display.png)
+    * Expected cart to show correct quantity, name price, and total price. 
+    * Outcome: As expected the cart displayed information correctly. [Cart Display 1](./assets/images/readme_images/features_images/cart_display_1.png)
 
-![Quantity Order Error](./assets/images/readme_images/features_images/quantity_order_error.png)
+  6. Continue order Error Handler
 
-![Cart Display 1](./assets/images/readme_images/features_images/cart_display_1.png)
+    * Expected red warning message saying input must be yes or no for incorrect input. Tested 1, ';'  cat, and *. 
+    * Outcome: As expected the red error msg arose for all tests. [yes no error message](./assets/images/readme_images/bugs_images/yes_no_error_msg.png)
 
-![Quantity Order Error 2](./assets/images/readme_images/features_images/quantity_order_err2.png)
+  7. Quantity Order 2 Error Handling
 
-![Cart Display 2](./assets/images/readme_images/features_images/cart_display_2.png)
+    * Expected. Red warning saying how too many pizzas were ordered & the number of options the user
+    has left.
+    * Outcome: As expected red warning sign, stating the amount of pizzas the user can still
+    choose from. [Quantity Order Error 2](./assets/images/readme_images/features_images/quantity_order_err2.png)
+  
+  8. Cart Display 2
 
-![Final Display](./assets/images/readme_images/features_images/final_display.png)
+    Expected: Cart to display subsequent order entries with the correct total price.
+    Outcome: As expected the extra orders were included in the cart and the total prices
+    were correct. [Cart Display 2](./assets/images/readme_images/features_images/cart_display_2.png)
+
+  9. Final Display
+
+    Expected. Upon the user clicking yes, to 'have you completed your order'; The cart shows the correct information. A receipt number and an 
+    estimated wait time which relates to the number of pizzas being cooked.
+    Outcome: As expected the correct cart information is shown. A unique reference number
+    is present and the estimated cooking time relates to the quantity of pizzas being ordered.[Final Display](./assets/images/readme_images/features_images/final_display.png)
 
 
 
