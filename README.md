@@ -65,7 +65,7 @@ or the input they have provided isn't correct
 * The user will receive a unique receipt
 * Information will be presented neatly in tables/lists
 
-### STRUCTURE<br> ☠
+### STRUCTURE☠<br> 
 
 This [Project Wireframe](./assets/images/readme_images/pizza_order_system_wireframe.pdf) 
 shows the overall structure of the program. It was written using Python. The terminal was
@@ -94,7 +94,7 @@ a Google Spreadsheet: [Pizza Order Google Spreadsheet](https://docs.google.com/s
 
 ![Menu Display](./assets/images/readme_images/features_images/menu_display.png)
 
-![Error display pizza option](./assets/images/readme_images/features_images/error_display_pizza_option.png) 😵
+![Error display pizza option](./assets/images/readme_images/features_images/error_display_pizza_option.png) 
 
 ![Quantity Order Display](./assets/images/readme_images/features_images/quantity_order_display.png)
 
@@ -219,27 +219,26 @@ that presents the pizza menu.
 #### User Stories Testing<br>
 
 * Need: I want to be able to easily browse the menu and select the pizzas I want.
-* Outcome: Achieved. A clear menu is present displaying an up-to-date list of available
-pizzas.
+* _Outcome_: _Achieved_. _A_ _clear_ _menu_ _is_ _present_ _displaying_ _an_ _up-to-date_ _list_ _of_ _available_ _pizzas_.
 
 * Need: I want to be able to see the prices of the pizzas on offer.
-* Outcome: Achieved. The menu displays the prices adjacent to the relevant pizza.
+* _Outcome_: _Achieved_. _The_ _menu_ _displays_ _the_ _prices_ _adjacent_ _to_ _the_ _relevant_ _pizza_.
 
 * Need: I want to be given a warning if I've entered something incorrectly.
-* Outcome: Achieved: Red warning messages highlight incorrect 
-user input and explain what to
-do correctly.
+* _Outcome_: _Achieved_: _Red_ _warning_ _messages_ _highlight_ _incorrect_ 
+_user_ _input_ _and_ _explain_ _what_ _to_ _do_ _correctly_.
 
 * Need: I want a cart displayed that updates the price and items, as I add to it.
-* Outcome: Achieved: Cart updates with correct information, 
-as user adds items. The overall total is correct. 
+* _Outcome_: _Achieved_: _Cart_ _updates_ _with_ _correct_ _information_, 
+_as_ _user_ _adds_ _items_. _The_ _overall_ _total_ _is_ _correct_. 
 
 * Need: I want a reference number for my order and the total price at the end.
-* Outcome: Achieved. A unique reference number is displayed for every order.
+* _Outcome_: _Achieved_. _A_ _unique_ _reference_ _number_ _is_ _displayed_ _for_ 
+_every_ _order_.
 
 * Need: I want to know roughly how long I need to wait for my order.
-* Outcome: Achieved. The estimated wait time relates to the quantity of pizzas being
-ordered. 
+* _Outcome_: _Achieved_. _The_ _estimated_ _wait_ _time_ _relates_
+ _to_ _the_ _quantity_ _of_ _pizzas_ _being_ _ordered_. 
 
 ## MODULES IMPORTED 👽
 
@@ -269,7 +268,7 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 - Click deploy branch
 - When the project has been successfully deployed, click view.
 
-### FORK THE REPOSITORY 
+### FORK THE REPOSITORY 🍴
 
 If you would like to contribute to the project. You can:
 1. Open the pizza ordering system repository on my account and 
@@ -280,7 +279,7 @@ press the fork button on the top right of the screen.
 5. Type git clone into your terminal and paste the repository.
 6. You can then create a pull request which I will review. 
 
-### CLONE THE REPOSITORY
+### CLONE THE REPOSITORY ©
 
 You can clone the repository to use locally by following these steps:
 1. Navigate to the GitHub Repository you want to clone
