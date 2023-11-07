@@ -81,6 +81,10 @@ found on my [GitHub account](https://github.com/JWalshe86).
 
 ### SURFACE/DESIGN<br>
 
+Each page contains information to inform the user about the pizzas on offer and let them
+decide what they would like. Each page leads into the next and culminates with a final display
+message showing the user's purchase, overall cost, estimated wait time and a unique reference number.
+
 ## FEATURES
 
 ### EXISTING FEATURES
@@ -137,58 +141,79 @@ that presents the pizza menu.
 
  ### Feature Testing 061123/071123
 
- All tests took place on the [deployed Heroku site]((https://pizza-ordering-system-b873de0bec0c.herokuapp.com/))
+ All tests took place on the [deployed Heroku site]((https://pizza-ordering-system-b873de0bec0c.herokuapp.com/)) 
 
   1. Welcome Banner
 
-    * Expected: Upon entering the site expect the Nags with Notions Banner to display in large purple writing for 3 seconds and then disappear.
-    * Outcome: displayed as expected. [Welcome Banner](./assets/images/readme_images/features_images/inital_screen_display.png).
+  [Welcome Banner](./assets/images/readme_images/features_images/inital_screen_display.png). 
+
+
+    * Expected: Upon entering the site expect the Nags with Notions Banner to display in large purple writing for 3 seconds and then disappear. 
+    * Outcome: displayed as expected. 
 
   2. Menu Display
 
+   [Menu Display](./assets/images/readme_images/features_images/menu_display.png)
+
+
     * Expected: menu to display after the banner disappears. Expected all 5 pizzas to be displayed with their prices respectively. Expected a table with a user input option underneath. 
-    * Outcome: Displayed as expected. [Menu Display](./assets/images/readme_images/features_images/menu_display.png)
+    * Outcome: Displayed as expected.
 
   3. Error handling for 'display pizza option'
 
+  [Error display pizza option](/assets/images/readme_images/features_images/error_display_pizza_option.png)
+
     * Expected red error message to arise with characters outside 1-5. Tested with 0, f, ';', and 6. The user should then be brought back to the option of entering 1-5 again.  
     * Outcome: As expected a red warning sign appeared for all the invalid entries and the user
-    was brought back to the option of entering 1-5 every time. With a valid entry '2', the user was asked to input the amount of pizzas they would like. [Error display pizza option](./assets/images/readme_images/features_images/error_display_pizza_option.png)
+    was brought back to the option of entering 1-5 every time. With a valid entry '2', the user was asked to input the amount of pizzas they would like. 
 
   4. Quantity order error handling
 
+  [Traceback](/testing/Feature_Quantity_testing_error.png).
+
     * Expected: red error message to arise with characters outside 1-10. Tested with -1, f, ';', and 11. The user should then be brought back to the option of entering quantity again.
-    * Outcome: While it worked for -1, unexpectedly for 'f' I got the following warning message: ![Traceback](./testing/Feature_Quantity_testing_error.png). The issue was that the exception wouldn't accept non-integers. Using the isDigit() function, by converting anything that wasn't an integer to -1, I was able to resolve this issue. 
+    * Outcome: While it worked for -1, unexpectedly for 'f' I got a warning message in the terminal. The issue was that the exception wouldn't accept non-integers. Using the isDigit() function, by converting anything that wasn't an integer to -1, I was able to resolve this issue. 
 
   5. Cart Display (first time)
 
+  [Cart Display 1](/assets/images/readme_images/features_images/cart_display_1.png)
+
     * Expected: cart to show correct quantity, name price, and total price. 
-    * Outcome: As expected the cart displayed information correctly. [Cart Display 1](./assets/images/readme_images/features_images/cart_display_1.png)
+    * Outcome: As expected the cart displayed information correctly. 
 
   6. Continue order Error Handler
 
+   [yes no error message](/assets/images/readme_images/bugs_images/yes_no_error_msg.png)
+
     * Expected: red warning message saying input must be yes or no for incorrect input. Tested 1, ';'  cat, and *. 
-    * Outcome: As expected the red error msg arose for all tests. [yes no error message](./assets/images/readme_images/bugs_images/yes_no_error_msg.png)
+    * Outcome: As expected the red error msg arose for all tests.
 
   7. Quantity Order 2 Error Handling
+
+[Quantity Order Error 2](/assets/images/readme_images/features_images/quantity_order_err2.png)
+
 
     * Expected. Red warning saying how too many pizzas were ordered & the number of options the user
     has left.
     * Outcome: As expected red warning sign, stating the amount of pizzas the user can still
-    choose from. [Quantity Order Error 2](./assets/images/readme_images/features_images/quantity_order_err2.png)
+    choose from. 
   
   8. Cart Display 2
 
+  [Cart Display 2](/assets/images/readme_images/features_images/cart_display_2.png)
+
     Expected: Cart to display subsequent order entries with the correct total price.
     Outcome: As expected the extra orders were included in the cart and the total prices
-    were correct. [Cart Display 2](./assets/images/readme_images/features_images/cart_display_2.png)
+    were correct. 
 
   9. Final Display
+
+  [Final Display](/assets/images/readme_images/features_images/final_display.png)
 
     Expected: Upon the user clicking yes, to 'have you completed your order'; The cart shows the correct information. A receipt number and an 
     estimated wait time which relates to the number of pizzas being cooked.
     Outcome: As expected the correct cart information is shown. A unique reference number
-    is present and the estimated cooking time relates to the quantity of pizzas being ordered.[Final Display](./assets/images/readme_images/features_images/final_display.png)
+    is present and the estimated cooking time relates to the quantity of pizzas being ordered.
 
 #### User Stories Testing<br>
 
@@ -279,22 +304,23 @@ The project will now be cloned locally for you to use.
 
 ## TOOLS
 
-[Balsamiq Wireframes](https://balsamiq.com/wireframes/) were used to create a wireframe.
-[GitHub](https://GitHub.com/) - used for hosting the source code of the program
-[Google Drive API](https://developers.google.com/drive/api)- to develop apps that integrate with Drive
-[Google Sheets API](https://developers.google.com/sheets/api/guides/concepts) - to read and modify Google Sheets data
-[Google Auth](https://developers.google.com/identity/protocols/oauth2) - allows access to Google APIs
-[Gspread](https://docs.Gspread.org/en/v5.10.0/) - Python API for Google Sheets
-
-[Lucid Chart](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign) - to create a flow chart outlining the project.
-[Code Institute Pylinter](https://pep8ci.herokuapp.com/)
+* [Balsamiq Wireframes](https://balsamiq.com/wireframes/) were used to create a wireframe.
+* [GitHub](https://GitHub.com/) - used for hosting the source code of the program
+* [Google Drive API](https://developers.google.com/drive/api)- to develop apps that integrate with Drive
+* [Google Sheets API](https://developers.google.com/sheets/api/guides/concepts) - to read and modify Google Sheets data
+* [Google Auth](https://developers.google.com/identity/protocols/oauth2) - allows access to Google APIs
+* [Gspread](https://docs.Gspread.org/en/v5.10.0/) - Python API for Google Sheets
+* [Lucid Chart](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign) - to create a flow chart outlining the project.
+* [Code Institute Pylinter](https://pep8ci.herokuapp.com/)
 
 ## ACKNOWLEDGEMENTS
 
-I would like to thank my family for supporting me on this journey
-Thank you Code Institute for this course
-Special thanks to the government for funding my course
-Special thanks to Iris Smok for the weekly meetings
-Shout out to my colleagues for their feedback and support
-Also special thanks to all those who contributed to slack, stackoverflow 
+* I would like to thank my family for supporting me on this journey
+* Thank you Code Institute for this course
+* Special thanks to the government for funding my course
+* Special thanks to Iris Smok for the weekly meetings. Iris also recommended
+that I consider doing something like this pizza ordering system, as it complemented
+my first project, which was also on pizzas. 
+* Shout out to my colleagues for their feedback and support
+* Also special thanks to all those who contributed to slack, stackoverflow 
 and those who explained coding content on Youtube. 
