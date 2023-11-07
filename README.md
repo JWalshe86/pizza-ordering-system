@@ -21,11 +21,15 @@
   - [CREDITS](#credits)
   - [TOOLS](#tools)
   - [ACKNOWLEDGEMENTS](#acknowledgements)
-## OVERVIEW
-[Live Site](https://pizza-ordering-system-b873de0bec0c.herokuapp.com/)
 
+## OVERVIEW
+
+I have created a fully function pizza ordering system to meet the needs of customers for a real pizza service, Nags With Notions. You can find their website here, which I also created as part of my PP1 requirements and is now online: [Nags With Notions](nagswithnotions.ie). The main function of the system is to allow customers to purchase items through the Nags with Notions website. Additionally, order information is updated to a spreadsheet, so Nags With Notions can make more informed decisions regarding the amount of product they require and can also keep users up-to-date on what's available. The program was created entirely using Python and the intention was to keep all aspects of the design in line with the Nags with Notions style. 
+
+The [Live Site](https://pizza-ordering-system-b873de0bec0c.herokuapp.com/) is fully accessible on Heroku. 
 
 ## UX/UI
+
 ### STRATEGY
 
 #### Goals<br>
@@ -34,8 +38,7 @@
 * It should improve customer experience and reduce staff workload by not having to take phone orders.
 * It will also reduce queue sizes.
 * This system will increase customer satisfaction by providing a detailed confirmation of the order.
-* Nags with Notions aims to increase its sales by providing customers with an online ordering system
-where they can see the options on offer. 
+* Nags with Notions aims to increase its sales by providing customers with an online ordering system where they can see the options on offer. 
 
 #### User Stories<br>
 
@@ -48,9 +51,27 @@ where they can see the options on offer.
 
 ### SCOPE<br>
 
+The following features have been planned:
+
+* Information about the current pizzas and their prices will be taken from a 
+spreadsheet and presented to the user
+* Users can select any pizzas, up to a maximum of ten
+* The program will display warnings if the user has chosen too many pizzas
+or the input they have provided isn't correct
+* The user options will be presented on-screen
+* The user will be updated on their current purchases and the exact overall price
+* The user will be asked to proceed to checkout or continue updating their order
+* A program will estimate the likely cooking time
+* The user will receive a unique receipt
+* Information will be presented neatly in tables/lists
+
 ### STRUCTURE<br>
 
-[Project Wireframe](./assets/images/readme_images/pizza_order_system_wireframe.pdf)
+This [Project Wireframe](./assets/images/readme_images/pizza_order_system_wireframe.pdf) 
+shows the overall structure of the program. It was written using Python. The terminal was
+created using the Code Institute template. All the coding can be found in run.py; which is
+found on my [GitHub account](https://github.com/JWalshe86).
+
 
 ### FLOWCHARTS<br>
 
@@ -120,12 +141,12 @@ that presents the pizza menu.
 
   1. Welcome Banner
 
-    * Upon entering the site expect the Nags with Notions Banner to display in large purple writing for 3 seconds and then disappear.
+    * Expected: Upon entering the site expect the Nags with Notions Banner to display in large purple writing for 3 seconds and then disappear.
     * Outcome: displayed as expected. [Welcome Banner](./assets/images/readme_images/features_images/inital_screen_display.png).
 
   2. Menu Display
 
-    * Expected menu to display after the banner disappeared. Expected all 5 pizzas to be displayed with their prices. Expected a table with a user input option underneath. 
+    * Expected: menu to display after the banner disappears. Expected all 5 pizzas to be displayed with their prices respectively. Expected a table with a user input option underneath. 
     * Outcome: Displayed as expected. [Menu Display](./assets/images/readme_images/features_images/menu_display.png)
 
   3. Error handling for 'display pizza option'
@@ -136,17 +157,17 @@ that presents the pizza menu.
 
   4. Quantity order error handling
 
-    * Expected red error message to arise with characters outside 1-10. Tested with -1, f, ';', and 11. The user should then be brought back to the option of entering quantity again.
-    * While it worked for -1, unexpectedly for 'f' I got the following warning message: ![Traceback](./testing/Feature_Quantity_testing_error.png). The issue was that the exception wouldn't accept non-integers. Using the isDigit() function, by converting anything that wasn't an integer to -1, I was able to resolve this issue. 
+    * Expected: red error message to arise with characters outside 1-10. Tested with -1, f, ';', and 11. The user should then be brought back to the option of entering quantity again.
+    * Outcome: While it worked for -1, unexpectedly for 'f' I got the following warning message: ![Traceback](./testing/Feature_Quantity_testing_error.png). The issue was that the exception wouldn't accept non-integers. Using the isDigit() function, by converting anything that wasn't an integer to -1, I was able to resolve this issue. 
 
   5. Cart Display (first time)
 
-    * Expected cart to show correct quantity, name price, and total price. 
+    * Expected: cart to show correct quantity, name price, and total price. 
     * Outcome: As expected the cart displayed information correctly. [Cart Display 1](./assets/images/readme_images/features_images/cart_display_1.png)
 
   6. Continue order Error Handler
 
-    * Expected red warning message saying input must be yes or no for incorrect input. Tested 1, ';'  cat, and *. 
+    * Expected: red warning message saying input must be yes or no for incorrect input. Tested 1, ';'  cat, and *. 
     * Outcome: As expected the red error msg arose for all tests. [yes no error message](./assets/images/readme_images/bugs_images/yes_no_error_msg.png)
 
   7. Quantity Order 2 Error Handling
@@ -164,14 +185,37 @@ that presents the pizza menu.
 
   9. Final Display
 
-    Expected. Upon the user clicking yes, to 'have you completed your order'; The cart shows the correct information. A receipt number and an 
+    Expected: Upon the user clicking yes, to 'have you completed your order'; The cart shows the correct information. A receipt number and an 
     estimated wait time which relates to the number of pizzas being cooked.
     Outcome: As expected the correct cart information is shown. A unique reference number
     is present and the estimated cooking time relates to the quantity of pizzas being ordered.[Final Display](./assets/images/readme_images/features_images/final_display.png)
 
+#### User Stories Testing<br>
 
+* Need: I want to be able to easily browse the menu and select the pizzas I want.
+* Outcome: Achieved. A clear menu is present displaying an up-to-date list of available
+pizzas.
+
+* Need: I want to be able to see the prices of the pizzas on offer.
+* Outcome: Achieved. The menu displays the prices adjacent to the relevant pizza.
+
+* Need: I want to be given a warning if I've entered something incorrectly.
+* Outcome: Achieved: Red warning messages highlight incorrect user input and explain what to
+do correctly.
+
+* Need: I want a cart displayed that updates the price and items, as I add to it.
+* Outcome: Achieved: Cart updates with correct information, as user adds items. The overall
+total is correct. 
+
+* Need: I want a reference number for my order and the total price at the end.
+* Outcome: Achieved. A unique reference number is displayed for every order.
+
+* Need: I want to know roughly how long I need to wait for my order.
+* Outcome: Achieved. The estimated wait time relates to the quantity of pizzas being
+ordered. 
 
 ## MODULES IMPORTED
+
  * The os module was used for its ability to manipulate the operating system, particularly to clear
  the terminal screen. 
  * The time module was used to complement the os module and delay when items were displayed or 
@@ -188,6 +232,7 @@ I have used the [Code Institute Python Essentials Template](https://github.com/C
 
   
 ### DEPLOYING ON HEROKU
+
 - Install Gspread using pip install Gspread in the terminal
 - Ensure the requirement.txt file in the virtual working environment contains Gspread
 - Enter [Heroku](https://id.heroku.com/login) and click 'Create new App'.
@@ -222,6 +267,7 @@ The project will now be cloned locally for you to use.
 
 
 ## CREDITS
+
 * Readme template adapted from [useriasminna](https://github.com/useriasminna/american_pizza_order_system/blob/main/README.md)
 * Inspiration for the large title heading from [Laura Mayock](https://github.com/LauraMayock/)
 * Manipulating Google Sheets [Gspread](https://docs.Gspread.org/en/latest/user-guide.html)
@@ -232,6 +278,7 @@ The project will now be cloned locally for you to use.
 * [Switching keys and values in a dictionary from Stackoverflow](https://stackoverflow.com/questions/8305518/switching-keys-and-values-in-a-dictionary-in-python)
 
 ## TOOLS
+
 [Balsamiq Wireframes](https://balsamiq.com/wireframes/) were used to create a wireframe.
 [GitHub](https://GitHub.com/) - used for hosting the source code of the program
 [Google Drive API](https://developers.google.com/drive/api)- to develop apps that integrate with Drive
@@ -240,5 +287,14 @@ The project will now be cloned locally for you to use.
 [Gspread](https://docs.Gspread.org/en/v5.10.0/) - Python API for Google Sheets
 
 [Lucid Chart](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign) - to create a flow chart outlining the project.
+[Code Institute Pylinter](https://pep8ci.herokuapp.com/)
 
 ## ACKNOWLEDGEMENTS
+
+I would like to thank my family for supporting me on this journey
+Thank you Code Institute for this course
+Special thanks to the government for funding my course
+Special thanks to Iris Smok for the weekly meetings
+Shout out to my colleagues for their feedback and support
+Also special thanks to all those who contributed to slack, stackoverflow 
+and those who explained coding content on Youtube. 
