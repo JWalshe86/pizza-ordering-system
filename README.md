@@ -75,9 +75,7 @@ found on my [GitHub account](https://github.com/JWalshe86).
 
 ### FLOWCHARTS<br>
 
-<details><summary>Project Flow Chart</summary>
-<img src="/assets/images/readme_images/features_images/flow_chart.png">
-</details>
+! [Project Flow Chart](/assets/images/readme_images/features_images/flow_chart.png)
 
 ### SURFACE/DESIGN<br>
 
@@ -90,7 +88,7 @@ message showing the user's purchase, overall cost, estimated wait time and a uni
 ### EXISTING FEATURES
 
 The program was designed primarily to help the user but elements can help the client [nagswithnotions](nagswithnotions.ie). To give real data to the client, the system is linked to
-a Google Spreadsheet: [Pizza Order Google Spreadsheet] (https://docs.google.com/spreadsheets/d/14eg7Jg65BIRgRaMwWoeuFZHibci230T1KNaDBDSYRrE/edit#gid=819050592)
+a Google Spreadsheet: [Pizza Order Google Spreadsheet](https://docs.google.com/spreadsheets/d/14eg7Jg65BIRgRaMwWoeuFZHibci230T1KNaDBDSYRrE/edit#gid=819050592)
 
 ![Welcome Banner](./assets/images/readme_images/features_images/inital_screen_display.png)
 
@@ -145,23 +143,27 @@ that presents the pizza menu.
 
   1. Welcome Banner
 
-  [Welcome Banner](./assets/images/readme_images/features_images/inital_screen_display.png). 
-
+  <details><summary>Welcome Banner</summary>
+<img src="./assets/images/readme_images/features_images/inital_screen_display.png">
+</details>
 
     * Expected: Upon entering the site expect the Nags with Notions Banner to display in large purple writing for 3 seconds and then disappear. 
     * Outcome: displayed as expected. 
 
   2. Menu Display
 
-   [Menu Display](./assets/images/readme_images/features_images/menu_display.png)
-
+  <details><summary>Menu Display</summary>
+<img src="./assets/images/readme_images/features_images/menu_display.png">
+</details>
 
     * Expected: menu to display after the banner disappears. Expected all 5 pizzas to be displayed with their prices respectively. Expected a table with a user input option underneath. 
     * Outcome: Displayed as expected.
 
   3. Error handling for 'display pizza option'
 
-  [Error display pizza option](/assets/images/readme_images/features_images/error_display_pizza_option.png)
+ <details><summary>Error handling for 'display pizza option'</summary>
+<img src="./assets/images/readme_images/features_images/error_display_pizza_option.png">
+</details>
 
     * Expected red error message to arise with characters outside 1-5. Tested with 0, f, ';', and 6. The user should then be brought back to the option of entering 1-5 again.  
     * Outcome: As expected a red warning sign appeared for all the invalid entries and the user
@@ -169,29 +171,37 @@ that presents the pizza menu.
 
   4. Quantity order error handling
 
-  [Traceback](/testing/Feature_Quantity_testing_error.png).
+  <details><summary>Quantity order error handling</summary>
+<img src="./testing/Feature_Quantity_testing_error.png">
+</details>
 
     * Expected: red error message to arise with characters outside 1-10. Tested with -1, f, ';', and 11. The user should then be brought back to the option of entering quantity again.
     * Outcome: While it worked for -1, unexpectedly for 'f' I got a warning message in the terminal. The issue was that the exception wouldn't accept non-integers. Using the isDigit() function, by converting anything that wasn't an integer to -1, I was able to resolve this issue. 
 
   5. Cart Display (first time)
 
-  [Cart Display 1](/assets/images/readme_images/features_images/cart_display_1.png)
+  <details><summary>Cart Display (first time)</summary>
+<img src="./assets/images/readme_images/features_images/cart_display_1.png">
+</details>
 
     * Expected: cart to show correct quantity, name price, and total price. 
     * Outcome: As expected the cart displayed information correctly. 
 
   6. Continue order Error Handler
 
-   [yes no error message](/assets/images/readme_images/bugs_images/yes_no_error_msg.png)
+
+ <details><summary> Continue order Error Handler</summary>
+<img src="./assets/images/readme_images/bugs_images/yes_no_error_msg.png">
+</details>
 
     * Expected: red warning message saying input must be yes or no for incorrect input. Tested 1, ';'  cat, and *. 
     * Outcome: As expected the red error msg arose for all tests.
 
   7. Quantity Order 2 Error Handling
 
-[Quantity Order Error 2](/assets/images/readme_images/features_images/quantity_order_err2.png)
-
+  <details><summary> Quantity Order 2 Error Handling</summary>
+<img src="./assets/images/readme_images/features_images/quantity_order_err2.png">
+</details>
 
     * Expected. Red warning saying how too many pizzas were ordered & the number of options the user
     has left.
@@ -200,7 +210,9 @@ that presents the pizza menu.
   
   8. Cart Display 2
 
-  [Cart Display 2](/assets/images/readme_images/features_images/cart_display_2.png)
+  <details><summary> Cart Display 2</summary>
+<img src="./assets/images/readme_images/features_images/cart_display_2.png">
+</details>
 
     Expected: Cart to display subsequent order entries with the correct total price.
     Outcome: As expected the extra orders were included in the cart and the total prices
@@ -208,12 +220,15 @@ that presents the pizza menu.
 
   9. Final Display
 
-  [Final Display](/assets/images/readme_images/features_images/final_display.png)
+  <details><summary> Final Display </summary>
+<img src="./assets/images/readme_images/features_images/final_display.png">
+</details>
 
     Expected: Upon the user clicking yes, to 'have you completed your order'; The cart shows the correct information. A receipt number and an 
     estimated wait time which relates to the number of pizzas being cooked.
-    Outcome: As expected the correct cart information is shown. A unique reference number
-    is present and the estimated cooking time relates to the quantity of pizzas being ordered.
+    Outcome: As expected the correct cart information is shown. 
+    A unique reference number is present and the estimated cooking time
+    relates to the amount of pizzas being ordered.
 
 #### User Stories Testing<br>
 
@@ -225,12 +240,13 @@ pizzas.
 * Outcome: Achieved. The menu displays the prices adjacent to the relevant pizza.
 
 * Need: I want to be given a warning if I've entered something incorrectly.
-* Outcome: Achieved: Red warning messages highlight incorrect user input and explain what to
+* Outcome: Achieved: Red warning messages highlight incorrect 
+user input and explain what to
 do correctly.
 
 * Need: I want a cart displayed that updates the price and items, as I add to it.
-* Outcome: Achieved: Cart updates with correct information, as user adds items. The overall
-total is correct. 
+* Outcome: Achieved: Cart updates with correct information, 
+as user adds items. The overall total is correct. 
 
 * Need: I want a reference number for my order and the total price at the end.
 * Outcome: Achieved. A unique reference number is displayed for every order.
