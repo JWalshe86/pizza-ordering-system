@@ -22,7 +22,7 @@
   - [TOOLS](#tools)
   - [ACKNOWLEDGEMENTS](#acknowledgements)
 
-## OVERVIEW
+## OVERVIEW 🚠
 
 I have created a fully function pizza ordering system to meet the needs of customers for a real pizza service, Nags With Notions. You can find their website here, which I also created as part of my PP1 requirements and is now online: [Nags With Notions](nagswithnotions.ie). The main function of the system is to allow customers to purchase items through the Nags with Notions website. Additionally, order information is updated to a spreadsheet, so Nags With Notions can make more informed decisions regarding the amount of product they require and can also keep users up-to-date on what's available. The program was created entirely using Python and the intention was to keep all aspects of the design in line with the Nags with Notions style. 
 
@@ -32,7 +32,7 @@ The [Live Site](https://pizza-ordering-system-b873de0bec0c.herokuapp.com/) is fu
 
 ### STRATEGY
 
-#### Goals<br>
+#### Goals 🥅<br> 
 
 * To create a Pizza ordering system that allows users to order their pizzas online
 * It should improve customer experience and reduce staff workload by not having to take phone orders.
@@ -40,7 +40,7 @@ The [Live Site](https://pizza-ordering-system-b873de0bec0c.herokuapp.com/) is fu
 * This system will increase customer satisfaction by providing a detailed confirmation of the order.
 * Nags with Notions aims to increase its sales by providing customers with an online ordering system where they can see the options on offer. 
 
-#### User Stories<br>
+#### User Stories 📖<br>
 
 * I want to be able to easily browse the menu and select the pizzas I want.
 * I want to be able to see the prices of the pizzas on offer
@@ -49,7 +49,7 @@ The [Live Site](https://pizza-ordering-system-b873de0bec0c.herokuapp.com/) is fu
 * I want a reference number for my order and the total price at the end.
 * I want to know roughly how long I need to wait for my order. 
 
-### SCOPE<br>
+### SCOPE 🔭<br>
 
 The following features have been planned:
 
@@ -65,7 +65,7 @@ or the input they have provided isn't correct
 * The user will receive a unique receipt
 * Information will be presented neatly in tables/lists
 
-### STRUCTURE<br>
+### STRUCTURE<br> ☠
 
 This [Project Wireframe](./assets/images/readme_images/pizza_order_system_wireframe.pdf) 
 shows the overall structure of the program. It was written using Python. The terminal was
@@ -73,9 +73,9 @@ created using the Code Institute template. All the coding can be found in run.py
 found on my [GitHub account](https://github.com/JWalshe86).
 
 
-### FLOWCHARTS<br>
+### FLOWCHARTS 📈<br>
 
-! [Project Flow Chart](/assets/images/readme_images/features_images/flow_chart.png)
+![Project Flow Chart](/assets/images/readme_images/features_images/flow_chart.png)
 
 ### SURFACE/DESIGN<br>
 
@@ -94,7 +94,7 @@ a Google Spreadsheet: [Pizza Order Google Spreadsheet](https://docs.google.com/s
 
 ![Menu Display](./assets/images/readme_images/features_images/menu_display.png)
 
-![Error display pizza option](./assets/images/readme_images/features_images/error_display_pizza_option.png)
+![Error display pizza option](./assets/images/readme_images/features_images/error_display_pizza_option.png) 😵
 
 ![Quantity Order Display](./assets/images/readme_images/features_images/quantity_order_display.png)
 
@@ -111,19 +111,24 @@ a Google Spreadsheet: [Pizza Order Google Spreadsheet](https://docs.google.com/s
 ![Final Display](./assets/images/readme_images/features_images/final_display.png)
 
 
-### FUTURE FEATURES
+### FUTURE FEATURES 🚀
 
-## Technologies used
+## Technologies used 🧑‍💻
 - HeroKu - Used to host and deploy website.
 - The Tabulate library was used to import tabulate to create the table 
 that presents the pizza menu.
 - The termcolor library was used to import colored to highlight some text
+- [webfx.com](https://www.webfx.com/tools/emoji-cheat-sheet/) for emoji's
 
-## BUGS OR ERRORS
+## Languages used
+
+- Python 🐍
+
+## BUGS OR ERRORS 🐛 😵
 
 ![Estimated time not calculated after quantity surpassed](./assets/images/bugs_images/Est_cook_time_error_after_pizza_q_surpass.png)
  
-## TESTING
+## TESTING 🧪
 
 [Pylint Actions 261023](./Pylint_actions261023.pdf)
 [Pylint Actions 051123](./testing/pylint_report_051123.txt) Your code has been rated
@@ -141,8 +146,6 @@ that presents the pizza menu.
 
  All tests took place on the [deployed Heroku site]((https://pizza-ordering-system-b873de0bec0c.herokuapp.com/)) 
 
-  1. Welcome Banner
-
   <details><summary>Welcome Banner</summary>
 <img src="./assets/images/readme_images/features_images/inital_screen_display.png">
 </details>
@@ -150,16 +153,12 @@ that presents the pizza menu.
     * Expected: Upon entering the site expect the Nags with Notions Banner to display in large purple writing for 3 seconds and then disappear. 
     * Outcome: displayed as expected. 
 
-  2. Menu Display
-
   <details><summary>Menu Display</summary>
 <img src="./assets/images/readme_images/features_images/menu_display.png">
 </details>
 
     * Expected: menu to display after the banner disappears. Expected all 5 pizzas to be displayed with their prices respectively. Expected a table with a user input option underneath. 
     * Outcome: Displayed as expected.
-
-  3. Error handling for 'display pizza option'
 
  <details><summary>Error handling for 'display pizza option'</summary>
 <img src="./assets/images/readme_images/features_images/error_display_pizza_option.png">
@@ -169,16 +168,12 @@ that presents the pizza menu.
     * Outcome: As expected a red warning sign appeared for all the invalid entries and the user
     was brought back to the option of entering 1-5 every time. With a valid entry '2', the user was asked to input the amount of pizzas they would like. 
 
-  4. Quantity order error handling
-
   <details><summary>Quantity order error handling</summary>
 <img src="./testing/Feature_Quantity_testing_error.png">
 </details>
 
     * Expected: red error message to arise with characters outside 1-10. Tested with -1, f, ';', and 11. The user should then be brought back to the option of entering quantity again.
     * Outcome: While it worked for -1, unexpectedly for 'f' I got a warning message in the terminal. The issue was that the exception wouldn't accept non-integers. Using the isDigit() function, by converting anything that wasn't an integer to -1, I was able to resolve this issue. 
-
-  5. Cart Display (first time)
 
   <details><summary>Cart Display (first time)</summary>
 <img src="./assets/images/readme_images/features_images/cart_display_1.png">
@@ -187,17 +182,12 @@ that presents the pizza menu.
     * Expected: cart to show correct quantity, name price, and total price. 
     * Outcome: As expected the cart displayed information correctly. 
 
-  6. Continue order Error Handler
-
-
  <details><summary> Continue order Error Handler</summary>
 <img src="./assets/images/readme_images/bugs_images/yes_no_error_msg.png">
 </details>
 
     * Expected: red warning message saying input must be yes or no for incorrect input. Tested 1, ';'  cat, and *. 
     * Outcome: As expected the red error msg arose for all tests.
-
-  7. Quantity Order 2 Error Handling
 
   <details><summary> Quantity Order 2 Error Handling</summary>
 <img src="./assets/images/readme_images/features_images/quantity_order_err2.png">
@@ -208,8 +198,6 @@ that presents the pizza menu.
     * Outcome: As expected red warning sign, stating the amount of pizzas the user can still
     choose from. 
   
-  8. Cart Display 2
-
   <details><summary> Cart Display 2</summary>
 <img src="./assets/images/readme_images/features_images/cart_display_2.png">
 </details>
@@ -217,8 +205,6 @@ that presents the pizza menu.
     Expected: Cart to display subsequent order entries with the correct total price.
     Outcome: As expected the extra orders were included in the cart and the total prices
     were correct. 
-
-  9. Final Display
 
   <details><summary> Final Display </summary>
 <img src="./assets/images/readme_images/features_images/final_display.png">
@@ -255,7 +241,7 @@ as user adds items. The overall total is correct.
 * Outcome: Achieved. The estimated wait time relates to the quantity of pizzas being
 ordered. 
 
-## MODULES IMPORTED
+## MODULES IMPORTED 👽
 
  * The os module was used for its ability to manipulate the operating system, particularly to clear
  the terminal screen. 
@@ -266,7 +252,7 @@ ordered.
  * The pyfiglet module was imported to style the Nags with Notions banner. 
 
 
-## DEPLOYMENT
+## DEPLOYMENT 🚀
 
 ### CREATING THE WEBSITE
 I have used the [Code Institute Python Essentials Template](https://github.com/Code-Institute-Org/python-essentials-template) to create a terminal where my Python code will generate its output.
@@ -307,7 +293,7 @@ You can clone the repository to use locally by following these steps:
 The project will now be cloned locally for you to use.
 
 
-## CREDITS
+## CREDITS 💛
 
 * Readme template adapted from [useriasminna](https://github.com/useriasminna/american_pizza_order_system/blob/main/README.md)
 * Inspiration for the large title heading from [Laura Mayock](https://github.com/LauraMayock/)
@@ -318,7 +304,7 @@ The project will now be cloned locally for you to use.
 * [How to flatten a list from bobbyhadz blog](https://bobbyhadz.com/blog/python-remove-square-brackets-from-list)
 * [Switching keys and values in a dictionary from Stackoverflow](https://stackoverflow.com/questions/8305518/switching-keys-and-values-in-a-dictionary-in-python)
 
-## TOOLS
+## TOOLS 🧰
 
 * [Balsamiq Wireframes](https://balsamiq.com/wireframes/) were used to create a wireframe.
 * [GitHub](https://GitHub.com/) - used for hosting the source code of the program
@@ -329,7 +315,7 @@ The project will now be cloned locally for you to use.
 * [Lucid Chart](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign) - to create a flow chart outlining the project.
 * [Code Institute Pylinter](https://pep8ci.herokuapp.com/)
 
-## ACKNOWLEDGEMENTS
+## ACKNOWLEDGEMENTS 👏
 
 * I would like to thank my family for supporting me on this journey
 * Thank you Code Institute for this course
