@@ -155,21 +155,21 @@ that presents the pizza menu.
  All tests took place on the [deployed Heroku site]((https://pizza-ordering-system-b873de0bec0c.herokuapp.com/)) 
 
   <details><summary>Welcome Banner</summary>
-<img src="./assets/images/readme_images/features_images/inital_screen_display.png">
+<!-- <img src="./assets/images/readme_images/features_images/inital_screen_display.png"> -->
 </details>
 
     * Expected: Upon entering the site expect the Nags with Notions Banner to display in large purple writing for 3 seconds and then disappear. 
     * Outcome: displayed as expected. 
 
   <details><summary>Menu Display</summary>
-<img src="./assets/images/readme_images/features_images/menu_display.png">
+<!-- <img src="./assets/images/readme_images/features_images/menu_display.png"> -->
 </details>
 
     * Expected: menu to display after the banner disappears. Expected all 5 pizzas to be displayed with their prices respectively. Expected a table with a user input option underneath. 
     * Outcome: Displayed as expected.
 
  <details><summary>Error handling for 'display pizza option'</summary>
-<img src="./assets/images/readme_images/features_images/error_display_pizza_option.png">
+<!-- <img src="./assets/images/readme_images/features_images/error_display_pizza_option.png"> -->
 </details>
 
     * Expected red error message to arise with characters outside 1-5. Tested with 0, f, ';', and 6. The user should then be brought back to the option of entering 1-5 again.  
@@ -177,28 +177,28 @@ that presents the pizza menu.
     was brought back to the option of entering 1-5 every time. With a valid entry '2', the user was asked to input the amount of pizzas they would like. 
 
   <details><summary>Quantity order error handling</summary>
-<img src="./testing/Feature_Quantity_testing_error.png">
+<!-- <img src="./testing/Feature_Quantity_testing_error.png"> -->
 </details>
 
     * Expected: red error message to arise with characters outside 1-10. Tested with -1, f, ';', and 11. The user should then be brought back to the option of entering quantity again.
     * Outcome: While it worked for -1, unexpectedly for 'f' I got a warning message in the terminal. The issue was that the exception wouldn't accept non-integers. Using the isDigit() function, by converting anything that wasn't an integer to -1, I was able to resolve this issue. 
 
   <details><summary>Cart Display (first time)</summary>
-<img src="./assets/images/readme_images/features_images/cart_display_1.png">
+<!-- <img src="./assets/images/readme_images/features_images/cart_display_1.png"> -->
 </details>
 
     * Expected: cart to show correct quantity, name price, and total price. 
     * Outcome: As expected the cart displayed information correctly. 
 
  <details><summary> Continue order Error Handler</summary>
-<img src="./assets/images/readme_images/bugs_images/yes_no_error_msg.png">
+<!-- <img src="./assets/images/readme_images/bugs_images/yes_no_error_msg.png"> -->
 </details>
 
     * Expected: red warning message saying input must be yes or no for incorrect input. Tested 1, ';'  cat, and *. 
     * Outcome: As expected the red error msg arose for all tests.
 
   <details><summary> Quantity Order 2 Error Handling</summary>
-<img src="./assets/images/readme_images/features_images/quantity_order_err2.png">
+<!-- <img src="./assets/images/readme_images/features_images/quantity_order_err2.png"> -->
 </details>
 
     * Expected. Red warning saying how too many pizzas were ordered & the number of options the user
@@ -207,7 +207,7 @@ that presents the pizza menu.
     choose from. 
   
   <details><summary> Cart Display 2</summary>
-<img src="./assets/images/readme_images/features_images/cart_display_2.png">
+<!-- <img src="./assets/images/readme_images/features_images/cart_display_2.png"> -->
 </details>
 
     Expected: Cart to display subsequent order entries with the correct total price.
@@ -215,7 +215,7 @@ that presents the pizza menu.
     were correct. 
 
   <details><summary> Final Display </summary>
-<img src="./assets/images/readme_images/features_images/final_display.png">
+<!-- < src="./assets/images/readme_images/features_images/final_display.png"> -->
 </details>
 
     Expected: Upon the user clicking yes, to 'have you completed your order'; The cart shows the correct information. A receipt number and an 
