@@ -8,8 +8,6 @@ from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 from termcolor import colored
 
-# TODO: Add favicon
-
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -31,7 +29,8 @@ TOTAL_COST = []
 QUANT_PIZZA_HOLDER = []
 CART_DISPLAY = []
 
-INITIAL_SCREEN_DISPLAY_HAS_RUN = False
+# INITIAL_SCREEN_DISPLAY_HAS_RUN = False
+INITIAL_SCREEN_DISPLAY = []
 
 # Taken from https://stackoverflow.com/
 # questions/517970/how-to-clear-the-interpreter-console
@@ -67,17 +66,14 @@ def main():
 
 def initial_screen_display():
     """content for initial user interaction with system
-    display table with menu to user"""
-    # FIXME: find alternative to global variable here
-    global INITIAL_SCREEN_DISPLAY_HAS_RUN
-    # code adapted from bobbyhadz.com so initial screen display
-    # only ever runs once and does not re-run when user selects
-    # no to finished order as long as its true it returns before
-    # inner codes executed, when it's executed it turns true from false,
-    # so it's only false the first time.
-    if INITIAL_SCREEN_DISPLAY_HAS_RUN:
+    display table with menu to user"""    
+    # to prevent the initial screen displaying when the user wants
+    # to add more to the order, a list is appended after the banner is 
+    # run once. Once this list has one entry the function is subsequently
+    # exited.
+    if len(INITIAL_SCREEN_DISPLAY) > 0:
         return
-    INITIAL_SCREEN_DISPLAY_HAS_RUN = True
+    INITIAL_SCREEN_DISPLAY.append(1)
 
     nags_banner = pyfiglet.figlet_format("Nags with Notions")
     nags_banner = colored(nags_banner, "magenta", attrs=["reverse", "blink"])
@@ -158,7 +154,7 @@ def quantity_user_input():
         try:
             # code that might crash
             print("Quantity must be a number between 1 and 10\n")
-            pizza_quantity = input(f"Enter number here:\n")
+            pizza_quantity = input("Enter number here:\n")
             if pizza_quantity.isdigit():
                 pass
             else:
