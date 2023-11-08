@@ -2,7 +2,7 @@
 run.py:99:38: C0303: Trailing whitespace (trailing-whitespace)
 run.py:129:70: C0303: Trailing whitespace (trailing-whitespace)
 run.py:137:0: C0301: Line too long (104/100) (line-too-long)
-run.py:140:0: C0301: Line too long (110/100) (line-too-long)
+run.py:140:0: C0301: Line too long (110/100) (line-too-long
 run.py:141:19: C0303: Trailing whitespace (trailing-whitespace)
 run.py:185:0: C0303: Trailing whitespace (trailing-whitespace)
 run.py:55:5: W0511: TODO: find alternative to global variable here (fixme)
