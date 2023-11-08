@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "prepare": "husky install"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -16,14 +17,11 @@
   },
   "homepage": "https://github.com/lechien73/terminal#readme",
   "dependencies": {
-    "node-pty": "^0.10.1",
     "node-static": "^0.7.11",
+    "node-pty": "^0.10.1",
     "total4": "^0.0.45"
   },
-  "description": "",
-  "devDependencies": {
-    "@commitlint/cli": "^17.7.2",
-    "@commitlint/config-conventional": "^17.7.0",
-    "husky": "^8.0.3"
-  }
+  "engines": {
+  "node": "16.x"
+}
 }
