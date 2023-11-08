@@ -1,6 +1,6 @@
 // ===================================================
 // Total.js start script
-https://www.totaljs.com
+// https://www.totaljs.com
 // ===================================================
 
 const options = {};
