@@ -81,7 +81,7 @@ found on my [GitHub account](https://github.com/JWalshe86).
 
 Each page contains information to inform the user about the pizzas on offer and let them
 decide what they would like. Each page leads into the next and culminates with a final display
-message showing the user's purchase, overall cost, estimated wait time and a unique reference number.
+message showing the user's purchase, overall cost, estimated wait time, and a unique reference number.
 
 ## FEATURES
 
@@ -134,9 +134,13 @@ that presents the pizza menu.
 [Pylint Actions 051123](./testing/pylint_report_051123.txt) Your code has been rated
  at 8.35/10 (previous run: 8.35/10, +0.00)
  * The global statement for 'initial screen display' has run was left in the code, despite being
- highlighted by Pylint. This is because it appears to work well and I don't know another way to prevent the 
- screen display when the user selects they want to add more items to their order. 
+ highlighted by Pylint. This is because it appears to work well and I don't know another way to prevent the screen display when the user selects they want to add more items to their order. 081123 This issue 
+ was resolved by using the fact that, unlike variables, lists can be manipulated regardless of scope. A 
+ list was appended after the initial function was run. Once this lists length was >0 the function didn't
+ run again. 
  * The code to display the cart items: [print(*x) for x in CART_DISPLAY] has been highlighted by Pylint for not being assigned to a variable. This was temporarily ignored as it's working well and I don't know an alternative. Eventually, thanks to StackOverflow, I found a resolution by using a for loop and " ".join() mapping each item in the nested list to a string with map(). Map was used to manipulate all the items and convert each item to a string which is then joined with " " so each item can be printed on separate lines.
+ * The except PizzaException as e was showing as possibly unbound, despite working. By moving the 
+ PizzaException class into the global scope this issue was resolved.
  * After addressing the recommendations the Pylint report reads: Your code has been rated at 9.66/10 (previous run: 9.60/10, +0.06). It's just the above two recommendations to address. 
  * [Code Institute Pylinter 051123](./testing/Code_Institute_Pylinter_051123.pdf)
  * [Code Institute Pylinter cleared](./testing/CI_Pylinter_cleared.png)
@@ -323,5 +327,5 @@ The project will now be cloned locally for you to use.
 that I consider doing something like this pizza ordering system, as it complemented
 my first project, which was also on pizzas. 
 * Shout out to my colleagues for their feedback and support
-* Also special thanks to all those who contributed to slack, stackoverflow 
+* Also special thanks to all those who contributed to Slack and Stackoverflow 
 and those who explained coding content on Youtube. 
