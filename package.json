@@ -1,112 +1,116 @@
 {
-  
-
+  
+
   "name": "terminal",
-  
-
+  
+
   "version": "1.0.0",
-  
-
+  
+
   "main": "server.js",
-  
-
+  
+
   "scripts": {
-  
-
-    
-
+  
+
+    
+
   "prepare": "husky install",
-  
-
-    
-
+  
+
+    
+
   "start": "node index.js",
+  
+
+    
+
   "test": "jest --coverage --forceExit"
-  
-
+  
+
   },
-  
-
+  
+
   "repository": {
-  
-
-    
-
+  
+
+    
+
   "type": "git",
-  
-
-    
-
+  
+
+    
+
   "url": "git+https://github.com/lechien73/terminal.git"
-  
-
+  
+
   },
-  
-
+  
+
   "author": "",
-  
-
+  
+
   "license": "ISC",
-  
-
+  
+
   "bugs": {
-  
-
-    
-
+  
+
+    
+
   "url": "https://github.com/lechien73/terminal/issues"
-  
-
+  
+
   },
-  
-
+  
+
   "homepage": "https://github.com/lechien73/terminal#readme",
-  
-
+  
+
   "dependencies": {
-  
-
-    
-
+  
+
+    
+
   "node-pty": "^0.10.1",
-  
-
-    
-
+  
+
+    
+
   "node-static": "^0.7.11",
-  
-
-    
-
+  
+
+    
+
   "server": "^1.0.38",
-  
-
-    
-
-  "total4": "^0.0.45"
-  
-
+  
+
+    
+
+  "total4": "^0.0.91"
+  
+
   },
-  
-
+  
+
   "engines": {
-  
-
-    
-
+  
+
+    
+
   "node": "16.x"
-  
-
+  
+
   },
-  
-
+  
+
   "devDependencies": {
-  
-
-    
-
+  
+
+    
+
   "husky": "^8.0.3"
-  
-
+  
+
   }
 }
