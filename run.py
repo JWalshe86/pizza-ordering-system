@@ -128,6 +128,22 @@ def pizza_option_input():
     return pizza_option
 
 
+# https://stackoverflow.com/questions/7075200/
+# converting-exception-to-a-string-in-python-3
+# pass pizza q to except through exception class
+class PizzaqException(Exception):
+    """_summary_class that raises exception and
+    passes pizza quantity as the second argument
+
+    Args:
+        Exception (_type_):string _description_passes
+        pizza quantity as string to except statement
+    """
+
+    def __init__(self, pizza_quantity):
+        self.pizza_quantity = pizza_quantity
+
+
 def quantity_user_input():
     """Check if user has inputted valid data & let them know if they have not
     Args:
@@ -141,7 +157,7 @@ def quantity_user_input():
     while True:
         try:
             # code that might crash
-            print('Quantity must be a number between 1 and 10\n')
+            print("Quantity must be a number between 1 and 10\n")
             pizza_quantity = input(f"Enter number here:\n")
             if pizza_quantity.isdigit():
                 pass
@@ -157,21 +173,6 @@ def quantity_user_input():
                 add_quantity_to_order_sheet(pizza_quantity)
                 break
 
-            # https://stackoverflow.com/questions/7075200/
-            # converting-exception-to-a-string-in-python-3
-            # pass pizza q to except through exception class
-            class PizzaqException(Exception):
-                """_summary_class that raises exception and
-                passes pizza quantity as the second argument
-
-                Args:
-                    Exception (_type_):string _description_passes
-                    pizza quantity as string to except statement
-                """
-
-                def __init__(self, pizza_quantity):
-                    self.pizza_quantity = pizza_quantity
-
             # raise Error
             raise PizzaqException(pizza_quantity)
         except PizzaqException as e:
@@ -179,13 +180,16 @@ def quantity_user_input():
             not1_10 = colored(not1_10, "red", attrs=["reverse", "blink"])
             print(not1_10)
             quantity = str(e)
-            
-            # from https://peps.python.org/pep-0008/ 
+
+            # from https://peps.python.org/pep-0008/
             # wrap long code and seperate with f strings
-            too_much = (f'Your current quantity is: {quant_pizza_check}.\n'
-                f'You can only select {10 - quant_pizza_check} more pizzas\n')
+            too_much = (
+                f"Your current quantity is: {quant_pizza_check}.\n"
+                f"You can only select {10 - quant_pizza_check} more pizzas\n"
+            )
             too_much = colored(too_much, "red", attrs=["reverse", "blink"])
             print(too_much)
+
             quant_pizza_check -= int(quantity)
             # covers if first no. smaller than second
             if quant_pizza_check <= 0:
@@ -338,7 +342,7 @@ def final_message(finished_order, estimated_cooking_time, reference_number):
         for xs in CART_DISPLAY:
             print(" ".join(map(str, xs)))
         print(f"\n\nYour reference number is: PZ{reference_number}")
-        print(f"\nEst cooking time: {int(estimated_cooking_time)} minutes\n")
+        print(f"\nEstimated cooking time: {int(estimated_cooking_time)} minutes\n")
         break
 
 
