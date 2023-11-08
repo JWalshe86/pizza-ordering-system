@@ -1,133 +1,222 @@
 {
-  
-
+  
+
+
+
   "name": "terminal",
-  
-
+  
+
+
+
   "version": "1.0.0",
-  
-
+  
+
+
+
   "main": "server.js",
-  
-
+  
+
+
+
   "scripts": {
-  
-
-    
-
+  
+
+
+
+    
+
+
+
   "prepare": "husky install",
-  
-
-    
-
+  
+
+
+
+    
+
+
+
   "start": "node index.js",
-  
-
-    
-
+  
+
+
+
+    
+
+
+
   "test": "jest --coverage --forceExit"
-  
-
+  
+
+
+
   },
-  
-
+  
+
+
+
   "repository": {
-  
-
-    
-
+  
+
+
+
+    
+
+
+
   "type": "git",
-  
-
-    
-
+  
+
+
+
+    
+
+
+
   "url": "git+https://github.com/lechien73/terminal.git"
-  
-
+  
+
+
+
   },
-  
-
+  
+
+
+
   "author": "",
-  
-
+  
+
+
+
   "license": "ISC",
-  
-
+  
+
+
+
   "bugs": {
-  
-
-    
-
+  
+
+
+
+    
+
+
+
   "url": "https://github.com/lechien73/terminal/issues"
-  
-
+  
+
+
+
   },
-  
-
+  
+
+
+
   "homepage": "https://github.com/lechien73/terminal#readme",
-  
-
+  
+
+
+
   "dependencies": {
-  
-
-    
-
-<<<<<<< HEAD
+  
+
+
+
+    
+
+
+
   "es6-promise": "^4.2.8",
-  
-
-    
-
+  
+
+
+
+    
+
+
+
   "isomorphic-fetch": "^3.0.0",
-  
-
-    
-
-=======
->>>>>>> 375c6c9b3573b2845b2b9205f0d0cc1a547a1b96
+  
+
+
+
+    
+
+
+
   "node-pty": "^0.10.1",
-  
-
-    
-
+  
+
+
+
+    
+
+
+
   "node-static": "^0.7.11",
-  
-
-    
-
+  
+
+
+
+    
+
+
+
   "server": "^1.0.38",
-  
-
-    
-
+  
+
+
+
+    
+
+
+
 <<<<<<< HEAD
   "total4": "^0.0.45"
 =======
   "total4": "^0.0.91"
 >>>>>>> 375c6c9b3573b2845b2b9205f0d0cc1a547a1b96
-  
-
+  
+
+
+
   },
-  
-
+  
+
+
+
   "engines": {
-  
-
-    
-
+  
+
+
+
+    
+
+
+
   "node": "16.x"
-  
-
+  
+
+
+
   },
-  
-
+  
+
+
+
   "devDependencies": {
-  
-
-    
-
+  
+
+
+
+    
+
+
+
   "husky": "^8.0.3"
-  
-
+  
+
+
+
   }
 }
