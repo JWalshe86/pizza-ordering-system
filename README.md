@@ -96,7 +96,7 @@ the user with a warm welcome.
 
 ![Welcome Banner](./assets/images/readme_images/features_images/inital_screen_display.png)
 
-The user is then presented with a menu. The menu is the same as
+The user is then presented with a menu. The menu is the same as the
 Nags with Notions menu. The table makes the information easy to
 read and all the prices are there. The user simply has to select
 which pizza they want. 
@@ -105,12 +105,12 @@ which pizza they want.
 
 If the user inputs invalid data they are presented with a red 
 warning. This highlights that it must be a number between 1 and
-5. The user is then brought back to enter correct data. 
+5. The user is then brought back to enter the correct data. 
 
 ![Error display pizza option](./assets/images/readme_images/features_images/error_display_pizza_option.png) 
 
-The user is then asked how many of the pizza they want. A limit
-of ten is given. This reflects Nags with Notions order limit.
+The user is then asked how many of the pizzas they want. A limit
+of ten is given. This reflects the Nags with Notions order limit.
 
 ![Quantity Order Display](./assets/images/readme_images/features_images/quantity_order_display.png)
 
@@ -120,7 +120,7 @@ a red warning is presented. The user can then re-choose.
 ![Quantity Order Error](./assets/images/readme_images/features_images/quantity_order_error.png)
 
 The user is then presented with a table labeled 'Your Cart'. The
-user is then presented with their order, the price and total price.
+user is then presented with their order, the price, and the total price.
 The user is then given the option to go to checkout or add more 
 items. 
 
@@ -170,7 +170,6 @@ that presents the pizza menu.
 - Python 🐍
 
 ## BUGS OR ERRORS 🐛 😵
-
  * I needed to display the welcome Banner only once when the user opened the site and not each time the
  user wanted to add a new item. This was tricky because it meant re-rerunning all the other functions but 
  not the specific initial display function. To get around this I used the fact that lists are mutable and aren't influenced by a function's local scope. When the first item is added to a global list its length changes, I could use this to tell the computer not to run the initial screen display again after its length had increased to one. 
@@ -190,14 +189,10 @@ that presents the pizza menu.
 [Pylint Actions 051123](./testing/pylint_report_051123.txt) Your code has been rated
  at 8.35/10 (previous run: 8.35/10, +0.00)
  * The global statement for 'initial screen display' has run was left in the code, despite being
-<<<<<<< HEAD
  highlighted by Pylint. This is because it appears to work well and I don't know another way to prevent the screen display when the user selects they want to add more items to their order. 081123 This issue 
  was resolved by using the fact that, unlike variables, lists can be manipulated regardless of scope. A 
  list was appended after the initial function was run. Once this lists length was >0 the function didn't
  run again. 
-=======
- highlighted by Pylint. This is because it appears to work well and I don't know another way to prevent the screen display when the user selects they want to add more items to their order. 
->>>>>>> 9bf492dea4518d6c28059afe302d28675f3d631a
  * The code to display the cart items: [print(*x) for x in CART_DISPLAY] has been highlighted by Pylint for not being assigned to a variable. This was temporarily ignored as it's working well and I don't know an alternative. Eventually, thanks to StackOverflow, I found a resolution by using a for loop and " ".join() mapping each item in the nested list to a string with map(). Map was used to manipulate all the items and convert each item to a string which is then joined with " " so each item can be printed on separate lines.
  * The except PizzaException as e was showing as possibly unbound, despite working. By moving the 
  PizzaException class into the global scope this issue was resolved.
