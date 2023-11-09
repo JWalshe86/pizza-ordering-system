@@ -26,7 +26,7 @@
 
 I have created a fully function pizza ordering system to meet the needs of customers for a real pizza service, Nags With Notions. You can find their website here, which I also created as part of my PP1 requirements and is now online: [Nags With Notions](nagswithnotions.ie). The main function of the system is to allow customers to purchase items through the Nags with Notions website. Additionally, order information is updated to a spreadsheet, so Nags With Notions can make more informed decisions regarding the amount of product they require and can also keep users up-to-date on what's available. The program was created entirely using Python and the intention was to keep all aspects of the design in line with the Nags with Notions style. 
 
-The [Live Site](https://pizza-ordering-system-b873de0bec0c.herokuapp.com/) is fully accessible on Heroku. 
+The [Live Site](https://pizza-ordering-system-b873de0bec0c.herokuapp.com/) is fully accessible on Heroku. Data for the site is stored on [Google Sheets] (https://docs.google.com/spreadsheets/d/14eg7Jg65BIRgRaMwWoeuFZHibci230T1KNaDBDSYRrE/edit#gid=0)
 
 ## UX/UI
 
@@ -110,6 +110,10 @@ a Google Spreadsheet: [Pizza Order Google Spreadsheet](https://docs.google.com/s
 
 ![Final Display](./assets/images/readme_images/features_images/final_display.png)
 
+![Google Sheets Menu](./assets/images/readme_images/gsheet_menu.png)
+
+![Google Sheets Order](./assets/images/readme_images/ghseet_orders.png)
+
 
 ### FUTURE FEATURES 🚀
 
@@ -149,6 +153,10 @@ that presents the pizza menu.
  * [Code Institute Pylinter 051123](./testing/Code_Institute_Pylinter_051123.pdf)
  * [Code Institute Pylinter cleared](./testing/CI_Pylinter_cleared.png)
  * Test run on Heroku 05/11/23. os.system('cls') not recognised by Heroku but os.system('clear') is. Solved with the following if statement: 'os.system('cls' if os.name=='nt' else 'clear')'. I also had to run pyfiglet to my requirement.txt, so Heroku could recognize it as a dependency.
+  * The day before deployment I tried using a lot of code from another project to get a background image,
+  on this project. I ended up with a bug I couldn't find. Heroku would no longer deploy this project. I spent hours searching the web. Eventually, I found another project that deployed on Heroku, and I had to add all the information from this project into that one and just keep adding and deleting items until
+  it successfully deployed again. I've learnt adopting lots of code at once into your project is high risk
+  because if something goes wrong, you don't understand the code and it can be really hard to fix. 
 
  ### Feature Testing 061123/071123
 
@@ -295,7 +303,7 @@ You can clone the repository to use locally by following these steps:
 3. Click on HTTPS
 4. Copy the repository link to the clipboard
 5. Open your IDE of choice (git must be installed for the next steps)
-6. Type git clone copied-git-url into the IDE terminal
+6. Type git clone copied-git-URL into the IDE terminal
 
 The project will now be cloned locally for you to use.
 
