@@ -146,11 +146,11 @@ presented with all their purchases, the prices, a unique reference number, and a
 
 ![Final Display](./assets/images/readme_images/features_images/final_display.png)
 
-The current items on the menu are taken from Google sheets.
+The current items on the menu are taken from Google Sheets.
 
 ![Google Sheets Menu](./assets/images/readme_images/gsheet_menu.png)
 
-All purchases are updated to an order sheet on Google sheets. This 
+All purchases are updated to an order sheet on Google Sheets. This 
 allows Nags with Notions to quickly track their sales. 
 
 ![Google Sheets Order](./assets/images/readme_images/ghseet_orders.png)
@@ -171,8 +171,19 @@ that presents the pizza menu.
 
 ## BUGS OR ERRORS 🐛 😵
 
-![Estimated time not calculated after quantity surpassed](./assets/images/bugs_images/Est_cook_time_error_after_pizza_q_surpass.png)
- 
+ * I needed to display the welcome Banner only once when the user opened the site and not each time the
+ user wanted to add a new item. This was tricky because it meant re-rerunning all the other functions but 
+ not the specific initial display function. To get around this I used the fact that lists are mutable and aren't influenced by a function's local scope. When the first item is added to a global list its length changes, I could use this to tell the computer not to run the initial screen display again after its length had increased to one. 
+ * I wanted the user to be given feedback as to how many pizzas they could still choose out of ten when
+ they were adding their items to the menu. This meant having a pizza quantity variable in the except scope. The pizza quantity variable was unbounded here. To get around this I passed the pizza quantity 
+ through an exception error class. 
+ * I found it challenging to get an estimated wait time using a loop: I wanted to keep to the DRY philosophy and not have lots of if-else statements. With the loop, the even numbers worked fine for 
+ estimating wait times but not the odd ones. Through trial and error, I figured out a formula that gave a pretty accurate response for the odd numbers too, regarding wait time. 
+ * The day before deployment I tried using a lot of code from another project to get a background image,
+  on this project. I ended up with a bug I couldn't find. Heroku would no longer deploy this project. I spent hours searching the web. Eventually, I found another project that deployed on Heroku, and I had to add all the information from this project into that one and just keep adding and deleting items until
+  it successfully deployed again. I learned adopting lots of code at once into your project is high risk
+  because if something goes wrong, you don't understand the code and it can be really hard to fix. 
+
 ## TESTING 🧪
 
 [Pylint Actions 261023](./Pylint_actions261023.pdf)
@@ -194,10 +205,6 @@ that presents the pizza menu.
  * [Code Institute Pylinter 051123](./testing/Code_Institute_Pylinter_051123.pdf)
  * [Code Institute Pylinter cleared](./testing/CI_Pylinter_cleared.png)
  * Test run on Heroku 05/11/23. os.system('cls') not recognised by Heroku but os.system('clear') is. Solved with the following if statement: 'os.system('cls' if os.name=='nt' else 'clear')'. I also had to run pyfiglet to my requirement.txt, so Heroku could recognize it as a dependency.
-  * The day before deployment I tried using a lot of code from another project to get a background image,
-  on this project. I ended up with a bug I couldn't find. Heroku would no longer deploy this project. I spent hours searching the web. Eventually, I found another project that deployed on Heroku, and I had to add all the information from this project into that one and just keep adding and deleting items until
-  it successfully deployed again. I've learnt adopting lots of code at once into your project is high risk
-  because if something goes wrong, you don't understand the code and it can be really hard to fix. 
 
  ### Feature Testing 061123/071123
 
