@@ -29,11 +29,10 @@ TOTAL_COST = []
 QUANT_PIZZA_HOLDER = []
 CART_DISPLAY = []
 
-INITIAL_SCREEN_DISPLAY_HAS_RUN = False
+INITIAL_SCREEN_DISPLAY = []
 
 # Taken from https://stackoverflow.com/
 # questions/517970/how-to-clear-the-interpreter-console
-
 
 def cls():
     """function which allows os clear function to work on both vscode
@@ -65,17 +64,14 @@ def main():
 
 def initial_screen_display():
     """content for initial user interaction with system
-    display table with menu to user"""
-    # FIXME: find alternative to global variable here
-    global INITIAL_SCREEN_DISPLAY_HAS_RUN
-    # code adapted from bobbyhadz.com so initial screen display
-    # only ever runs once and does not re-run when user selects
-    # no to finished order as long as its true it returns before
-    # inner codes executed, when it's executed it turns true from false,
-    # so it's only false the first time.
-    if INITIAL_SCREEN_DISPLAY_HAS_RUN:
+    display table with menu to user"""    
+    # to prevent the initial screen displaying when the user wants
+    # to add more to the order, a list is appended after the banner is 
+    # run once. Once this list has one entry the function is subsequently
+    # exited.
+    if len(INITIAL_SCREEN_DISPLAY) > 0:
         return
-    INITIAL_SCREEN_DISPLAY_HAS_RUN = True
+    INITIAL_SCREEN_DISPLAY.append(1)
 
     nags_banner = pyfiglet.figlet_format("Nags with Notions")
     nags_banner = colored(nags_banner, "magenta", attrs=["reverse", "blink"])
@@ -126,6 +122,22 @@ def pizza_option_input():
     return pizza_option
 
 
+# https://stackoverflow.com/questions/7075200/
+# converting-exception-to-a-string-in-python-3
+# pass pizza q to except through exception class
+class PizzaqException(Exception):
+    """_summary_class that raises exception and
+    passes pizza quantity as the second argument
+
+    Args:
+        Exception (_type_):string _description_passes
+        pizza quantity as string to except statement
+    """
+
+    def __init__(self, pizza_quantity):
+        self.pizza_quantity = pizza_quantity
+
+
 def quantity_user_input():
     """Check if user has inputted valid data & let them know if they have not
     Args:
@@ -139,8 +151,8 @@ def quantity_user_input():
     while True:
         try:
             # code that might crash
-            print('Quantity must be a number between 1 and 10\n')
-            pizza_quantity = input(f"Enter number here:\n")
+            print("Quantity must be a number between 1 and 10\n")
+            pizza_quantity = input("Enter number here:\n")
             if pizza_quantity.isdigit():
                 pass
             else:
@@ -155,21 +167,6 @@ def quantity_user_input():
                 add_quantity_to_order_sheet(pizza_quantity)
                 break
 
-            # https://stackoverflow.com/questions/7075200/
-            # converting-exception-to-a-string-in-python-3
-            # pass pizza q to except through exception class
-            class PizzaqException(Exception):
-                """_summary_class that raises exception and
-                passes pizza quantity as the second argument
-
-                Args:
-                    Exception (_type_):string _description_passes
-                    pizza quantity as string to except statement
-                """
-
-                def __init__(self, pizza_quantity):
-                    self.pizza_quantity = pizza_quantity
-
             # raise Error
             raise PizzaqException(pizza_quantity)
         except PizzaqException as e:
@@ -177,13 +174,16 @@ def quantity_user_input():
             not1_10 = colored(not1_10, "red", attrs=["reverse", "blink"])
             print(not1_10)
             quantity = str(e)
-            
-            # from https://peps.python.org/pep-0008/ 
+
+            # from https://peps.python.org/pep-0008/
             # wrap long code and seperate with f strings
-            too_much = (f'Your current quantity is: {quant_pizza_check}.\n'
-                f'You can only select {10 - quant_pizza_check} more pizzas\n')
+            too_much = (
+                f"Your current quantity is: {quant_pizza_check}.\n"
+                f"You can only select {10 - quant_pizza_check} more pizzas\n"
+            )
             too_much = colored(too_much, "red", attrs=["reverse", "blink"])
             print(too_much)
+
             quant_pizza_check -= int(quantity)
             # covers if first no. smaller than second
             if quant_pizza_check <= 0:
@@ -336,7 +336,7 @@ def final_message(finished_order, estimated_cooking_time, reference_number):
         for xs in CART_DISPLAY:
             print(" ".join(map(str, xs)))
         print(f"\n\nYour reference number is: PZ{reference_number}")
-        print(f"\nEst cooking time: {int(estimated_cooking_time)} minutes\n")
+        print(f"\nEstimated cooking time: {int(estimated_cooking_time)} minutes\n")
         break
 
 
@@ -403,6 +403,5 @@ def stock_checker(pizza_option, quantity):
         print("Margherita here", pizza_option)
     print("Pony", stock.cell(2, 1).value)
     print("stock_checker", pizza_option, quantity, stock.acell("A2"))
-
 
 main()

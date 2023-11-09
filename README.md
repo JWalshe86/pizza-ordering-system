@@ -173,6 +173,8 @@ that presents the pizza menu.
  * I needed to display the welcome Banner only once when the user opened the site and not each time the
  user wanted to add a new item. This was tricky because it meant re-rerunning all the other functions but 
  not the specific initial display function. To get around this I used the fact that lists are mutable and aren't influenced by a function's local scope. When the first item is added to a global list its length changes, I could use this to tell the computer not to run the initial screen display again after its length had increased to one. 
+ * The clear function would not work on Heroku. Having 'clear' as the argument in the clear function worked on Heroku but not in vscode. Only the keyword 'clr' worked in vscode. I had to use a function that
+ changed the word from clear to 'clr' depending on the context. 
  * I wanted the user to be given feedback as to how many pizzas they could still choose out of ten when
  they were adding their items to the menu. This meant having a pizza quantity variable in the except scope. The pizza quantity variable was unbounded here. To get around this I passed the pizza quantity 
  through an exception error class. 
