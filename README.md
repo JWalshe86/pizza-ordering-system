@@ -26,7 +26,7 @@
 
 I have created a fully function pizza ordering system to meet the needs of customers for a real pizza service, Nags With Notions. You can find their website here, which I also created as part of my PP1 requirements and is now online: [Nags With Notions](nagswithnotions.ie). The main function of the system is to allow customers to purchase items through the Nags with Notions website. Additionally, order information is updated to a spreadsheet, so Nags With Notions can make more informed decisions regarding the amount of product they require and can also keep users up-to-date on what's available. The program was created entirely using Python and the intention was to keep all aspects of the design in line with the Nags with Notions style. 
 
-The [Live Site](https://pizza-ordering-system-b873de0bec0c.herokuapp.com/) is fully accessible on Heroku. Data for the site is stored on [Google Sheets] (https://docs.google.com/spreadsheets/d/14eg7Jg65BIRgRaMwWoeuFZHibci230T1KNaDBDSYRrE/edit#gid=0)
+The [Live Site](https://pizza-ordering-system-b873de0bec0c.herokuapp.com/) is fully accessible on Heroku. Data for the site is stored on [Google Sheets](https://docs.google.com/spreadsheets/d/14eg7Jg65BIRgRaMwWoeuFZHibci230T1KNaDBDSYRrE/edit#gid=0)
 
 ## UX/UI
 
@@ -90,27 +90,68 @@ message showing the user's purchase, overall cost, estimated wait time, and a un
 The program was designed primarily to help the user but elements can help the client [nagswithnotions](nagswithnotions.ie). To give real data to the client, the system is linked to
 a Google Spreadsheet: [Pizza Order Google Spreadsheet](https://docs.google.com/spreadsheets/d/14eg7Jg65BIRgRaMwWoeuFZHibci230T1KNaDBDSYRrE/edit#gid=819050592)
 
+A welcome Banner with the Nags with Notions colors is presented
+to the user initially. This adds to the user experience and presents 
+the user with a warm welcome. 
+
 ![Welcome Banner](./assets/images/readme_images/features_images/inital_screen_display.png)
+
+The user is then presented with a menu. The menu is the same as
+Nags with Notions menu. The table makes the information easy to
+read and all the prices are there. The user simply has to select
+which pizza they want. 
 
 ![Menu Display](./assets/images/readme_images/features_images/menu_display.png)
 
+If the user inputs invalid data they are presented with a red 
+warning. This highlights that it must be a number between 1 and
+5. The user is then brought back to enter correct data. 
+
 ![Error display pizza option](./assets/images/readme_images/features_images/error_display_pizza_option.png) 
+
+The user is then asked how many of the pizza they want. A limit
+of ten is given. This reflects Nags with Notions order limit.
 
 ![Quantity Order Display](./assets/images/readme_images/features_images/quantity_order_display.png)
 
+If the user doesn't input a number between one and ten, then
+a red warning is presented. The user can then re-choose.
+
 ![Quantity Order Error](./assets/images/readme_images/features_images/quantity_order_error.png)
+
+The user is then presented with a table labeled 'Your Cart'. The
+user is then presented with their order, the price and total price.
+The user is then given the option to go to checkout or add more 
+items. 
 
 ![Cart Display 1](./assets/images/readme_images/features_images/cart_display_1.png)
 
+If the user does not enter 'yes' or 'no' a warning prompt is given. 
+
 ![yes no error message](./assets/images/readme_images/bugs_images/yes_no_error_msg.png)
+
+When adding more items, if the user exceeds 10 items a warning is given. These items are not added to the cart and the user is told
+how many items they've already ordered and how many they can still
+choose. 
 
 ![Quantity Order Error 2](./assets/images/readme_images/features_images/quantity_order_err2.png)
 
+As items more items are purchased that cart is updated accordingly
+the total price is updated. 
+
 ![Cart Display 2](./assets/images/readme_images/features_images/cart_display_2.png)
+
+When the user presses yes to complete their order, they are 
+presented with all their purchases, the prices, a unique reference number, and an estimated wait time. 
 
 ![Final Display](./assets/images/readme_images/features_images/final_display.png)
 
+The current items on the menu are taken from Google sheets.
+
 ![Google Sheets Menu](./assets/images/readme_images/gsheet_menu.png)
+
+All purchases are updated to an order sheet on Google sheets. This 
+allows Nags with Notions to quickly track their sales. 
 
 ![Google Sheets Order](./assets/images/readme_images/ghseet_orders.png)
 
